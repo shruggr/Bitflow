@@ -2,8 +2,8 @@ syntax = "proto3";
 
 message Schema {
     enum Type {
-        Text = 1;
-        Image = 2;
+        Text = 0;
+        Image = 1;
     }
 
     message Field {
@@ -39,9 +39,9 @@ message Workflow {
 
 message WorkflowState {
     enum Status {
-        Pending = 1;
-        Error = 2;
-        Complete = 3;
+        Pending = 0;
+        Error = 1;
+        Complete = 2;
     }
 
     message UTXO {
