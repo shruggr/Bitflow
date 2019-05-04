@@ -16,7 +16,7 @@ message Schema {
     repeated Field fields = 2;
 }
 
-message Workflow {
+message Step {
     message Handler {
         string processScriptTxn = 1;
         int32 createTaskStepIdx = 2;
@@ -24,14 +24,14 @@ message Workflow {
         int32 funds = 4;
     }
 
-    message Step {
-        string name = 1;
-        string schemaTxn = 2;
-        int32 fundsRequired = 3;
-        string validationScriptTxn = 4;
-        repeated Handler onComplete = 5;
-    }
+    string name = 1;
+    string schemaTxn = 2;
+    int32 fundsRequired = 3;
+    string validationScriptTxn = 4;
+    repeated Handler onComplete = 5;
+}
 
+message Workflow {
     string id = 1;
     string owner = 2;
     repeated Step steps = 3;
@@ -53,7 +53,7 @@ message WorkflowState {
     }
 
     message Task {
-        int32 stepIdx = 1;
+        Step step = 1;
         Status status = 2;
         UTXO utxo = 3;
     }
