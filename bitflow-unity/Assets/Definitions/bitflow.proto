@@ -13,7 +13,8 @@ message Schema {
     }
 
     string id = 1;
-    repeated Field fields = 2;
+    string name = 2;
+    repeated Field fields = 3;
 }
 
 message Step {
