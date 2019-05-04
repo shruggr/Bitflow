@@ -4,6 +4,8 @@ message Schema {
     enum Type {
         Text = 0;
         Image = 1;
+        File = 2;
+        Number = 3;
     }
 
     message Field {
@@ -41,7 +43,7 @@ message Workflow {
 
 message WorkflowState {
     enum Status {
-        Pending = 0;
+        Open = 0;
         Error = 1;
         Complete = 2;
     }

@@ -1,6 +1,15 @@
 # Bitflow OP_RETURN transaction schemas
 
-## Complete Task
+## Requst Job
+### Output - OP_RETURN
+1. 1F5zgLnSvS6px1QJnZkJpALJpEoGyWm4vC
+2. Workflow Txn
+3. Schema data
+
+### Output Payment
+If Step.fundsRequired > 0, pay Step.fundsRequired to Step.payee
+
+## Submit Task
 ### Input UTXO
 If completing a task assigned to user, spend UTXO from WorkflowState.Task
 For a Create task, spend from requestor's funds.
@@ -14,12 +23,14 @@ For a Create task, spend from requestor's funds.
 If Step.fundsRequired > 0, pay Step.fundsRequired to Step.payee
 
 
-## Create Task
-### OP_RETURN
+## Assign Task
+### Output - OP_RETURN
 1. 179jCPdUp1vTndNHa57RUQNghU8CYtX8aZ
 2. Workflow Txn
+3. Step Index
 
-### Output UTXO
+### Output Payment
 If Handler.funds, pay Handler.funds to Handler.assignee
+
 
 
