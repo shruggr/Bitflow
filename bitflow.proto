@@ -61,5 +61,6 @@ message WorkflowState {
     string workflowTxn = 2;
     string description = 3;
     Status status = 4;
-    string state = 5; // JSON representation of state values
+    repeated Task tasks = 5;
+    string state = 6; // JSON representation of state values
 }
