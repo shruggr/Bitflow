@@ -28,8 +28,9 @@ message Step {
     string name = 1;
     string schemaTxn = 2;
     int32 fundsRequired = 3;
-    string validationScriptTxn = 4;
-    repeated Handler onComplete = 5;
+    string payee = 4;
+    string validationScriptTxn = 5;
+    repeated Handler onComplete = 6;
 }
 
 message Workflow {
