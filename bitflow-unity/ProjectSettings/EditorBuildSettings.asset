@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/QueryBitIndex.unity
+    path: Assets/Bitflow/Scenes/Main.unity
+    guid: e6cdfa697ce957f49aa0adf26f9cf32b
+  - enabled: 1
+    path: Assets/Bitflow/Scenes/QueryBitIndex.unity
     guid: 30b78ae5f976ccb48b46f0995c243214
   m_configObjects: {}
