@@ -21,7 +21,7 @@ public class Identity : ScriptableObject
     public string Address;
 
     public const string filename = "identity.json";
-    public const string PersistanceSubdirectory = @"/CryptoFights.io/Networking/Identities/";
+    public const string PersistanceSubdirectory = @"/Bitflow/Networking/Identities/";
 
     public bool Exists => File.Exists( path + filename );
 
