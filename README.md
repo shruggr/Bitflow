@@ -1,3 +1,5 @@
-# Bitflow
-![Bitflow](https://github.com/shruggr/Bitflow/bitflow.png "Bitflow")
-Layout schema workflows that process payouts
+<p align="center">
+	<img src="https://raw.githubusercontent.com/shruggr/Bitflow/master/bitflow.png" width="250" height="250"></br>
+Layout schema workflows that process payouts  
+</p>
+
