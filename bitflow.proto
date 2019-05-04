@@ -7,8 +7,9 @@ message Schema {
     }
 
     message Field {
-        string label = 1;
-        Type type = 2;
+        string key = 1;
+        string label = 2;
+        Type type = 3;
     }
 
     string id = 1;
@@ -18,7 +19,7 @@ message Schema {
 message Workflow {
     message Handler {
         string processScriptTxn = 1;
-        int32 stepIndex = 2;
+        int32 createTaskStepIdx = 2;
         string assignee = 3;
         int32 funds = 4;
     }
@@ -52,7 +53,7 @@ message WorkflowState {
     }
 
     message Task {
-        int32 stepIndex = 1;
+        int32 stepIdx = 1;
         Status status = 2;
         UTXO utxo = 3;
     }
