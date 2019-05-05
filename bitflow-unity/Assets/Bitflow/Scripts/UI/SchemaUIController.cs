@@ -25,7 +25,7 @@ public class SchemaUIController : MonoBehaviour
 
     Dictionary<string, ISchemaFieldGetter> FieldGetterMap = new Dictionary<string, ISchemaFieldGetter>();
 
-    public void Build( Schema schema )
+    public void Build( Stage.Types.Schema schema )
     {
         var schemaName = Instantiate( SchemaNameTextPrefab, Parent );
         schemaName.GetComponent<Text>().text = schema.Name.ToUpper();
