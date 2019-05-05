@@ -27,10 +27,9 @@ public class SchemaUIController : MonoBehaviour
 
     public void Build( Schema schema )
     {
-        var name = Instantiate( SchemaNameTextPrefab, Parent );
-        name.GetComponent<Text>().text = schema.Name.ToUpper();
+        var schemaName = Instantiate( SchemaNameTextPrefab, Parent );
+        schemaName.GetComponent<Text>().text = schema.Name.ToUpper();
 
-        // Instanciar tudo
         foreach ( var field in schema.Fields )
         {
             switch ( field.Type )
@@ -47,16 +46,18 @@ public class SchemaUIController : MonoBehaviour
                     break;
                 case Schema.Types.Type.Image:
                     var image = Instantiate(ImageUploadWidgetPrefab, Parent);
+                    image.GetComponentsInChildren<Text>()[5].text = field.Label;
                     FieldGetterMap.Add(field.Key, image.GetComponent<ISchemaFieldGetter>());
                     break;
                 case Schema.Types.Type.File:
                     var file = Instantiate(FileUploadWidgetPrefab, Parent);
+                    file.GetComponentsInChildren<Text>()[5].text = field.Label;
                     FieldGetterMap.Add(field.Key, file.GetComponent<ISchemaFieldGetter>());
                     break;
                 case Schema.Types.Type.Bool:
-                    var bol = Instantiate(FileUploadWidgetPrefab, Parent);
-                    bol.GetComponentInChildren<Text>().text = field.Label;
-                    FieldGetterMap.Add(field.Key, bol.GetComponent<ISchemaFieldGetter>());
+                    var boolean = Instantiate(BoolInputPrefab, Parent);
+                    boolean.GetComponentInChildren<Text>().text = field.Label;
+                    FieldGetterMap.Add(field.Key, boolean.GetComponent<ISchemaFieldGetter>());
                     break;
             }
             

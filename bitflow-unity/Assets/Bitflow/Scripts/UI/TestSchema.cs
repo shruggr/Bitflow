@@ -32,6 +32,24 @@ public class TestSchema : MonoBehaviour
                     Key = "2",
                     Label = "Age",
                     Type = Schema.Types.Type.Number
+                },
+                new Schema.Types.Field
+                {
+                    Key = "3",
+                    Label = "Stuff",
+                    Type = Schema.Types.Type.Image
+                },
+                new Schema.Types.Field
+                {
+                    Key = "4",
+                    Label = "Stuff2",
+                    Type = Schema.Types.Type.File
+                },
+                new Schema.Types.Field
+                {
+                    Key = "5",
+                    Label = "Stuff3",
+                    Type = Schema.Types.Type.Bool
                 }
 
             }
