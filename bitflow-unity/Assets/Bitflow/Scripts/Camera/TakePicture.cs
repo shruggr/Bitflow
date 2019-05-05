@@ -68,10 +68,11 @@ public class TakePicture : MonoBehaviour
                         Debug.Log( $"https://bico.media/{txn}" );
                         ModalDialog.Instance.Hide();
                         ModalDialog.Instance.Show( "Image successfully uploaded",
-                            $"Check it out at: https://bico.media/{txn}", "Copy to Clipboard", "Ok" );
+                            $"Check it out at: https://bico.media/{txn}", "View Online", "Ok" );
                         ModalDialog.Instance.CallbackYes.AddListener( () =>
                         {
-                            UniClipboard.SetText( $"https://bico.media/{txn}" );
+                            //UniClipboard.SetText( $"https://bico.media/{txn}" );
+                            Application.OpenURL( $"https://bico.media/{txn}" );
                         } );
                     } );
             } );
