@@ -5,9 +5,14 @@ using System.Text;
 using Newtonsoft.Json;
 using SimpleFileBrowser;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UploadFile : MonoBehaviour
 {
+
+    [SerializeField] Text FileUrl;
+
+
     public void Upload()
     {
         // Set excluded file extensions (optional) (by default, .lnk and .tmp extensions are excluded)
@@ -54,15 +59,18 @@ public class UploadFile : MonoBehaviour
                             OpReturns.MakeBlob( Encoding.UTF8.GetBytes( FileBrowser.Result ) ) )
                         .Spend( txn =>
                         {
-                            Debug.Log( $"https://bico.media/{txn}" );
+                            var value = $"https://bico.media/{txn}";
+                            Debug.Log( value );
                             ModalDialog.Instance.Hide();
                             ModalDialog.Instance.Show( "File successfully uploaded",
-                                $"Check it out at: https://bico.media/{txn}", "View Online", "Ok" );
+                                $"Check it out at: {value}", "View Online", "Ok" );
                             ModalDialog.Instance.CallbackYes.AddListener( () =>
                             {
-                                //UniClipboard.SetText( $"https://bico.media/{txn}" );
-                                Application.OpenURL( $"https://bico.media/{txn}" );
+                                
+                                Application.OpenURL( value);
                             } );
+
+                            FileUrl.text = value;
                         } );
                 } );
             }
