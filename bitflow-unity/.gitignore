@@ -68,3 +68,12 @@ Assets/StreamingAssets/google-services-desktop.json.meta
 Assets/StreamingAssets/google-services-desktop.json
 Assets/Plugins/Android/Firebase/res/values/google-services.xml.meta
 Assets/Plugins/Android/Firebase/res/values/google-services.xml
+
+# This is a proprietary helper to facilitate web requests.
+# It can be replaced with unity's own (free) UnityWebRequest or WWW classes.
+# I was going to do that (check Assets/Bitflow/Scripts/TaskWebRequest.cs)
+# but was running low on time so I just used this.
+#
+# https://assetstore.unity.com/packages/tools/network/best-http-10872
+Assets/Best HTTP (Pro)
+Assets/Best HTTP (Pro).meta
