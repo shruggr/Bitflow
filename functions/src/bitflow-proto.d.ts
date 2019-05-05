@@ -214,127 +214,235 @@ export namespace Schema {
     }
 }
 
-/** Properties of a Step. */
-export interface IStep {
+/** Properties of a UTXO. */
+export interface IUTXO {
 
-    /** Step name */
-    name?: (string|null);
+    /** UTXO txId */
+    txId?: (string|null);
 
-    /** Step schemaTxn */
-    schemaTxn?: (string|null);
+    /** UTXO vout */
+    vout?: (number|null);
 
-    /** Step fundsRequired */
-    fundsRequired?: (number|null);
+    /** UTXO script */
+    script?: (string|null);
 
-    /** Step payee */
-    payee?: (string|null);
-
-    /** Step validationScriptTxn */
-    validationScriptTxn?: (string|null);
-
-    /** Step onComplete */
-    onComplete?: (Step.IHandler[]|null);
+    /** UTXO satoshis */
+    satoshis?: (number|null);
 }
 
-/** Represents a Step. */
-export class Step implements IStep {
+/** Represents a UTXO. */
+export class UTXO implements IUTXO {
 
     /**
-     * Constructs a new Step.
+     * Constructs a new UTXO.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IStep);
+    constructor(properties?: IUTXO);
 
-    /** Step name. */
-    public name: string;
+    /** UTXO txId. */
+    public txId: string;
 
-    /** Step schemaTxn. */
-    public schemaTxn: string;
+    /** UTXO vout. */
+    public vout: number;
 
-    /** Step fundsRequired. */
-    public fundsRequired: number;
+    /** UTXO script. */
+    public script: string;
 
-    /** Step payee. */
-    public payee: string;
-
-    /** Step validationScriptTxn. */
-    public validationScriptTxn: string;
-
-    /** Step onComplete. */
-    public onComplete: Step.IHandler[];
+    /** UTXO satoshis. */
+    public satoshis: number;
 
     /**
-     * Creates a new Step instance using the specified properties.
+     * Creates a new UTXO instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns Step instance
+     * @returns UTXO instance
      */
-    public static create(properties?: IStep): Step;
+    public static create(properties?: IUTXO): UTXO;
 
     /**
-     * Encodes the specified Step message. Does not implicitly {@link Step.verify|verify} messages.
-     * @param message Step message or plain object to encode
+     * Encodes the specified UTXO message. Does not implicitly {@link UTXO.verify|verify} messages.
+     * @param message UTXO message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IUTXO, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified Step message, length delimited. Does not implicitly {@link Step.verify|verify} messages.
-     * @param message Step message or plain object to encode
+     * Encodes the specified UTXO message, length delimited. Does not implicitly {@link UTXO.verify|verify} messages.
+     * @param message UTXO message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IUTXO, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a Step message from the specified reader or buffer.
+     * Decodes a UTXO message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns Step
+     * @returns UTXO
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Step;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): UTXO;
 
     /**
-     * Decodes a Step message from the specified reader or buffer, length delimited.
+     * Decodes a UTXO message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns Step
+     * @returns UTXO
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Step;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): UTXO;
 
     /**
-     * Verifies a Step message.
+     * Verifies a UTXO message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a Step message from a plain object. Also converts values to their respective internal types.
+     * Creates a UTXO message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns Step
+     * @returns UTXO
      */
-    public static fromObject(object: { [k: string]: any }): Step;
+    public static fromObject(object: { [k: string]: any }): UTXO;
 
     /**
-     * Creates a plain object from a Step message. Also converts values to other types if specified.
-     * @param message Step
+     * Creates a plain object from a UTXO message. Also converts values to other types if specified.
+     * @param message UTXO
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: Step, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: UTXO, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this Step to JSON.
+     * Converts this UTXO to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-export namespace Step {
+/** Properties of a Stage. */
+export interface IStage {
+
+    /** Stage name */
+    name?: (string|null);
+
+    /** Stage schemaTxn */
+    schemaTxn?: (string|null);
+
+    /** Stage fundsRequired */
+    fundsRequired?: (number|null);
+
+    /** Stage payee */
+    payee?: (string|null);
+
+    /** Stage validationScriptTxn */
+    validationScriptTxn?: (string|null);
+
+    /** Stage onComplete */
+    onComplete: Stage.IHandler;
+}
+
+/** Represents a Stage. */
+export class Stage implements IStage {
+
+    /**
+     * Constructs a new Stage.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IStage);
+
+    /** Stage name. */
+    public name: string;
+
+    /** Stage schemaTxn. */
+    public schemaTxn: string;
+
+    /** Stage fundsRequired. */
+    public fundsRequired: number;
+
+    /** Stage payee. */
+    public payee: string;
+
+    /** Stage validationScriptTxn. */
+    public validationScriptTxn: string;
+
+    /** Stage onComplete. */
+    public onComplete: Stage.IHandler;
+
+    /**
+     * Creates a new Stage instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Stage instance
+     */
+    public static create(properties?: IStage): Stage;
+
+    /**
+     * Encodes the specified Stage message. Does not implicitly {@link Stage.verify|verify} messages.
+     * @param message Stage message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Stage message, length delimited. Does not implicitly {@link Stage.verify|verify} messages.
+     * @param message Stage message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IStage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a Stage message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Stage
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Stage;
+
+    /**
+     * Decodes a Stage message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Stage
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Stage;
+
+    /**
+     * Verifies a Stage message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a Stage message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Stage
+     */
+    public static fromObject(object: { [k: string]: any }): Stage;
+
+    /**
+     * Creates a plain object from a Stage message. Also converts values to other types if specified.
+     * @param message Stage
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Stage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Stage to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+export namespace Stage {
 
     /** Properties of a Handler. */
     interface IHandler {
@@ -342,8 +450,8 @@ export namespace Step {
         /** Handler processScriptTxn */
         processScriptTxn?: (string|null);
 
-        /** Handler createTaskStepIdx */
-        createTaskStepIdx?: (number|null);
+        /** Handler createTaskStageIdx */
+        createTaskStageIdx?: (number|null);
 
         /** Handler assignee */
         assignee?: (string|null);
@@ -359,13 +467,13 @@ export namespace Step {
          * Constructs a new Handler.
          * @param [properties] Properties to set
          */
-        constructor(properties?: Step.IHandler);
+        constructor(properties?: Stage.IHandler);
 
         /** Handler processScriptTxn. */
         public processScriptTxn: string;
 
-        /** Handler createTaskStepIdx. */
-        public createTaskStepIdx: number;
+        /** Handler createTaskStageIdx. */
+        public createTaskStageIdx: number;
 
         /** Handler assignee. */
         public assignee: string;
@@ -378,23 +486,23 @@ export namespace Step {
          * @param [properties] Properties to set
          * @returns Handler instance
          */
-        public static create(properties?: Step.IHandler): Step.Handler;
+        public static create(properties?: Stage.IHandler): Stage.Handler;
 
         /**
-         * Encodes the specified Handler message. Does not implicitly {@link Step.Handler.verify|verify} messages.
+         * Encodes the specified Handler message. Does not implicitly {@link Stage.Handler.verify|verify} messages.
          * @param message Handler message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: Step.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: Stage.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Handler message, length delimited. Does not implicitly {@link Step.Handler.verify|verify} messages.
+         * Encodes the specified Handler message, length delimited. Does not implicitly {@link Stage.Handler.verify|verify} messages.
          * @param message Handler message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: Step.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: Stage.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a Handler message from the specified reader or buffer.
@@ -404,7 +512,7 @@ export namespace Step {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Step.Handler;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Stage.Handler;
 
         /**
          * Decodes a Handler message from the specified reader or buffer, length delimited.
@@ -413,7 +521,7 @@ export namespace Step {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Step.Handler;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Stage.Handler;
 
         /**
          * Verifies a Handler message.
@@ -427,7 +535,7 @@ export namespace Step {
          * @param object Plain object
          * @returns Handler
          */
-        public static fromObject(object: { [k: string]: any }): Step.Handler;
+        public static fromObject(object: { [k: string]: any }): Stage.Handler;
 
         /**
          * Creates a plain object from a Handler message. Also converts values to other types if specified.
@@ -435,7 +543,7 @@ export namespace Step {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: Step.Handler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: Stage.Handler, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this Handler to JSON.
@@ -448,14 +556,14 @@ export namespace Step {
 /** Properties of a Workflow. */
 export interface IWorkflow {
 
-    /** Workflow id */
-    id?: (string|null);
+    /** Workflow txid */
+    txid?: (string|null);
 
     /** Workflow owner */
     owner?: (string|null);
 
-    /** Workflow steps */
-    steps?: (IStep[]|null);
+    /** Workflow stages */
+    stages?: (IStage[]|null);
 }
 
 /** Represents a Workflow. */
@@ -467,14 +575,14 @@ export class Workflow implements IWorkflow {
      */
     constructor(properties?: IWorkflow);
 
-    /** Workflow id. */
-    public id: string;
+    /** Workflow txid. */
+    public txid: string;
 
     /** Workflow owner. */
     public owner: string;
 
-    /** Workflow steps. */
-    public steps: IStep[];
+    /** Workflow stages. */
+    public stages: IStage[];
 
     /**
      * Creates a new Workflow instance using the specified properties.
@@ -547,121 +655,121 @@ export class Workflow implements IWorkflow {
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a WorkflowState. */
-export interface IWorkflowState {
+/** Properties of a State. */
+export interface IState {
 
-    /** WorkflowState id */
-    id?: (string|null);
+    /** State txid */
+    txid: string;
 
-    /** WorkflowState workflowTxn */
-    workflowTxn?: (string|null);
+    /** State workflow */
+    workflow: IWorkflow;
 
-    /** WorkflowState status */
-    status?: (WorkflowState.Status|null);
+    /** State status */
+    status: State.Status;
 
-    /** WorkflowState state */
-    state?: (string|null);
+    /** State data */
+    data: string;
 
-    /** WorkflowState tasks */
-    tasks?: (WorkflowState.ITask[]|null);
+    /** State tasks */
+    tasks?: (State.ITask[]|null);
 }
 
-/** Represents a WorkflowState. */
-export class WorkflowState implements IWorkflowState {
+/** Represents a State. */
+export class State implements IState {
 
     /**
-     * Constructs a new WorkflowState.
+     * Constructs a new State.
      * @param [properties] Properties to set
      */
-    constructor(properties?: IWorkflowState);
+    constructor(properties?: IState);
 
-    /** WorkflowState id. */
-    public id: string;
+    /** State txid. */
+    public txid: string;
 
-    /** WorkflowState workflowTxn. */
-    public workflowTxn: string;
+    /** State workflow. */
+    public workflow: IWorkflow;
 
-    /** WorkflowState status. */
-    public status: WorkflowState.Status;
+    /** State status. */
+    public status: State.Status;
 
-    /** WorkflowState state. */
-    public state: string;
+    /** State data. */
+    public data: string;
 
-    /** WorkflowState tasks. */
-    public tasks: WorkflowState.ITask[];
+    /** State tasks. */
+    public tasks: State.ITask[];
 
     /**
-     * Creates a new WorkflowState instance using the specified properties.
+     * Creates a new State instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns WorkflowState instance
+     * @returns State instance
      */
-    public static create(properties?: IWorkflowState): WorkflowState;
+    public static create(properties?: IState): State;
 
     /**
-     * Encodes the specified WorkflowState message. Does not implicitly {@link WorkflowState.verify|verify} messages.
-     * @param message WorkflowState message or plain object to encode
+     * Encodes the specified State message. Does not implicitly {@link State.verify|verify} messages.
+     * @param message State message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: IWorkflowState, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: IState, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified WorkflowState message, length delimited. Does not implicitly {@link WorkflowState.verify|verify} messages.
-     * @param message WorkflowState message or plain object to encode
+     * Encodes the specified State message, length delimited. Does not implicitly {@link State.verify|verify} messages.
+     * @param message State message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: IWorkflowState, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: IState, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a WorkflowState message from the specified reader or buffer.
+     * Decodes a State message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns WorkflowState
+     * @returns State
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): WorkflowState;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): State;
 
     /**
-     * Decodes a WorkflowState message from the specified reader or buffer, length delimited.
+     * Decodes a State message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns WorkflowState
+     * @returns State
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): WorkflowState;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): State;
 
     /**
-     * Verifies a WorkflowState message.
+     * Verifies a State message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a WorkflowState message from a plain object. Also converts values to their respective internal types.
+     * Creates a State message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns WorkflowState
+     * @returns State
      */
-    public static fromObject(object: { [k: string]: any }): WorkflowState;
+    public static fromObject(object: { [k: string]: any }): State;
 
     /**
-     * Creates a plain object from a WorkflowState message. Also converts values to other types if specified.
-     * @param message WorkflowState
+     * Creates a plain object from a State message. Also converts values to other types if specified.
+     * @param message State
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: WorkflowState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: State, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this WorkflowState to JSON.
+     * Converts this State to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
 }
 
-export namespace WorkflowState {
+export namespace State {
 
     /** Status enum. */
     enum Status {
@@ -670,131 +778,23 @@ export namespace WorkflowState {
         Complete = 2
     }
 
-    /** Properties of a UTXO. */
-    interface IUTXO {
-
-        /** UTXO txId */
-        txId?: (string|null);
-
-        /** UTXO vout */
-        vout?: (number|null);
-
-        /** UTXO address */
-        address?: (string|null);
-
-        /** UTXO script */
-        script?: (string|null);
-
-        /** UTXO satoshis */
-        satoshis?: (number|null);
-    }
-
-    /** Represents a UTXO. */
-    class UTXO implements IUTXO {
-
-        /**
-         * Constructs a new UTXO.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: WorkflowState.IUTXO);
-
-        /** UTXO txId. */
-        public txId: string;
-
-        /** UTXO vout. */
-        public vout: number;
-
-        /** UTXO address. */
-        public address: string;
-
-        /** UTXO script. */
-        public script: string;
-
-        /** UTXO satoshis. */
-        public satoshis: number;
-
-        /**
-         * Creates a new UTXO instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UTXO instance
-         */
-        public static create(properties?: WorkflowState.IUTXO): WorkflowState.UTXO;
-
-        /**
-         * Encodes the specified UTXO message. Does not implicitly {@link WorkflowState.UTXO.verify|verify} messages.
-         * @param message UTXO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: WorkflowState.IUTXO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UTXO message, length delimited. Does not implicitly {@link WorkflowState.UTXO.verify|verify} messages.
-         * @param message UTXO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: WorkflowState.IUTXO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a UTXO message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns UTXO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): WorkflowState.UTXO;
-
-        /**
-         * Decodes a UTXO message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UTXO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): WorkflowState.UTXO;
-
-        /**
-         * Verifies a UTXO message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a UTXO message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns UTXO
-         */
-        public static fromObject(object: { [k: string]: any }): WorkflowState.UTXO;
-
-        /**
-         * Creates a plain object from a UTXO message. Also converts values to other types if specified.
-         * @param message UTXO
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: WorkflowState.UTXO, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this UTXO to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a Task. */
     interface ITask {
 
-        /** Task step */
-        step?: (IStep|null);
+        /** Task stage */
+        stage: IStage;
 
         /** Task status */
-        status?: (WorkflowState.Status|null);
+        status: State.Status;
 
-        /** Task utxo */
-        utxo?: (WorkflowState.IUTXO|null);
+        /** Task address */
+        address: string;
+
+        /** Task utxos */
+        utxos?: (IUTXO[]|null);
+
+        /** Task txid */
+        txid?: (string|null);
     }
 
     /** Represents a Task. */
@@ -804,39 +804,45 @@ export namespace WorkflowState {
          * Constructs a new Task.
          * @param [properties] Properties to set
          */
-        constructor(properties?: WorkflowState.ITask);
+        constructor(properties?: State.ITask);
 
-        /** Task step. */
-        public step?: (IStep|null);
+        /** Task stage. */
+        public stage: IStage;
 
         /** Task status. */
-        public status: WorkflowState.Status;
+        public status: State.Status;
 
-        /** Task utxo. */
-        public utxo?: (WorkflowState.IUTXO|null);
+        /** Task address. */
+        public address: string;
+
+        /** Task utxos. */
+        public utxos: IUTXO[];
+
+        /** Task txid. */
+        public txid: string;
 
         /**
          * Creates a new Task instance using the specified properties.
          * @param [properties] Properties to set
          * @returns Task instance
          */
-        public static create(properties?: WorkflowState.ITask): WorkflowState.Task;
+        public static create(properties?: State.ITask): State.Task;
 
         /**
-         * Encodes the specified Task message. Does not implicitly {@link WorkflowState.Task.verify|verify} messages.
+         * Encodes the specified Task message. Does not implicitly {@link State.Task.verify|verify} messages.
          * @param message Task message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: WorkflowState.ITask, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: State.ITask, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Task message, length delimited. Does not implicitly {@link WorkflowState.Task.verify|verify} messages.
+         * Encodes the specified Task message, length delimited. Does not implicitly {@link State.Task.verify|verify} messages.
          * @param message Task message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: WorkflowState.ITask, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: State.ITask, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a Task message from the specified reader or buffer.
@@ -846,7 +852,7 @@ export namespace WorkflowState {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): WorkflowState.Task;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): State.Task;
 
         /**
          * Decodes a Task message from the specified reader or buffer, length delimited.
@@ -855,7 +861,7 @@ export namespace WorkflowState {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): WorkflowState.Task;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): State.Task;
 
         /**
          * Verifies a Task message.
@@ -869,7 +875,7 @@ export namespace WorkflowState {
          * @param object Plain object
          * @returns Task
          */
-        public static fromObject(object: { [k: string]: any }): WorkflowState.Task;
+        public static fromObject(object: { [k: string]: any }): State.Task;
 
         /**
          * Creates a plain object from a Task message. Also converts values to other types if specified.
@@ -877,7 +883,7 @@ export namespace WorkflowState {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: WorkflowState.Task, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: State.Task, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this Task to JSON.
