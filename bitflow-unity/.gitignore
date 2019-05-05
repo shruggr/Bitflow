@@ -60,3 +60,11 @@ debug-glsl-error-in-preprocessor.txt
 
 *.csproj.meta
 *.exe.meta
+
+# Firebase API Key files
+Assets/google-services.json
+Assets/google-services.json.meta
+Assets/StreamingAssets/google-services-desktop.json.meta
+Assets/StreamingAssets/google-services-desktop.json
+Assets/Plugins/Android/Firebase/res/values/google-services.xml.meta
+Assets/Plugins/Android/Firebase/res/values/google-services.xml
