@@ -39,7 +39,7 @@ message Stage {
     int32 fundsRequired = 3;
     string payee = 4;
     string validationScriptTxn = 5;
-    required Handler onComplete = 6;
+    Handler onComplete = 6;
 }
 
 message Workflow {
@@ -56,16 +56,16 @@ message State {
     }
 
     message Task {
-        required Stage stage = 1;
-        required Status status = 2;
-        required string address = 3;
+        Stage stage = 1;
+        Status status = 2;
+        string address = 3;
         repeated UTXO utxos = 4;
         string txid = 5;
     }
 
-    required string txid = 1;
-    required Workflow workflow = 2;
-    required Status status = 3;
-    required string data = 4; // JSON representation of state values
+    string txid = 1;
+    Workflow workflow = 2;
+    Status status = 3;
+    string data = 4; // JSON representation of state values
     repeated Task tasks = 5;
 }
