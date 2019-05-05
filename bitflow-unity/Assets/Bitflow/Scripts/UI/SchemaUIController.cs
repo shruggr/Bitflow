@@ -17,6 +17,7 @@ public class SchemaUIController : MonoBehaviour
     [SerializeField] GameObject NumberInputFieldPrefab;
     [SerializeField] GameObject ImageUploadWidgetPrefab;
     [SerializeField] GameObject FileUploadWidgetPrefab;
+    [SerializeField] GameObject BoolInputPrefab;
 
     [SerializeField] GameObject ButtonPrefab;
 
@@ -52,7 +53,11 @@ public class SchemaUIController : MonoBehaviour
                     var file = Instantiate(FileUploadWidgetPrefab, Parent);
                     FieldGetterMap.Add(field.Key, file.GetComponent<ISchemaFieldGetter>());
                     break;
-
+                case Schema.Types.Type.Bool:
+                    var bol = Instantiate(FileUploadWidgetPrefab, Parent);
+                    bol.GetComponentInChildren<Text>().text = field.Label;
+                    FieldGetterMap.Add(field.Key, bol.GetComponent<ISchemaFieldGetter>());
+                    break;
             }
             
         }
