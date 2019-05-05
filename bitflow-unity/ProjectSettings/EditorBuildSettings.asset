@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Bitflow/Scenes/Request Camera.unity
+    guid: ca51bc9499ba01648ad5d33795f45a0b
+  - enabled: 1
     path: Assets/Bitflow/Scenes/Main.unity
     guid: e6cdfa697ce957f49aa0adf26f9cf32b
   - enabled: 1
