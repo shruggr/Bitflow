@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,8 +12,7 @@ public class SchemaUIController : MonoBehaviour
 {
     [SerializeField] Transform Parent;
 
-    [Space(10)]
-    [SerializeField] GameObject TextInputFieldPrefab;
+    [Space( 10 )] [SerializeField] GameObject TextInputFieldPrefab;
     [SerializeField] GameObject SchemaNameTextPrefab;
     [SerializeField] GameObject NumberInputFieldPrefab;
     [SerializeField] GameObject ImageUploadWidgetPrefab;
@@ -26,10 +26,39 @@ public class SchemaUIController : MonoBehaviour
 
     public void Build( Schema schema )
     {
+        var name = Instantiate( SchemaNameTextPrefab, Parent );
+        name.GetComponent<Text>().text = schema.Name.ToUpper();
+
         // Instanciar tudo
-        // No fim de instanciar tudo, o field getter map vai estar populado
+        foreach ( var field in schema.Fields )
+        {
+            switch ( field.Type )
+            {
+                case Schema.Types.Type.Text:
+                    var text = Instantiate(TextInputFieldPrefab, Parent);
+                    text.GetComponentInChildren<Text>().text = field.Label;
+                    FieldGetterMap.Add(field.Key, text.GetComponent<ISchemaFieldGetter>());
+                    break;
+                case Schema.Types.Type.Number:
+                    var number = Instantiate(NumberInputFieldPrefab, Parent);
+                    number.GetComponentInChildren<Text>().text = field.Label;
+                    FieldGetterMap.Add(field.Key, number.GetComponent<ISchemaFieldGetter>());
+                    break;
+                case Schema.Types.Type.Image:
+                    var image = Instantiate(ImageUploadWidgetPrefab, Parent);
+                    FieldGetterMap.Add(field.Key, image.GetComponent<ISchemaFieldGetter>());
+                    break;
+                case Schema.Types.Type.File:
+                    var file = Instantiate(FileUploadWidgetPrefab, Parent);
+                    FieldGetterMap.Add(field.Key, file.GetComponent<ISchemaFieldGetter>());
+                    break;
+
+            }
+            
+        }
 
         var button = Instantiate( ButtonPrefab, Parent );
+        button.GetComponentInChildren<Text>().text = "Submit";
         var b = button.GetComponent<Button>();
         b.onClick.AddListener( Submit );
     }

@@ -26,7 +26,14 @@ public class TestSchema : MonoBehaviour
                     Key = "1",
                     Label = "Surname",
                     Type = Schema.Types.Type.Text
+                },
+                new Schema.Types.Field
+                {
+                    Key = "2",
+                    Label = "Age",
+                    Type = Schema.Types.Type.Number
                 }
+
             }
         } );
         Controller.OnSubmit.AddListener( BuildAndBroadcastTransaction );
