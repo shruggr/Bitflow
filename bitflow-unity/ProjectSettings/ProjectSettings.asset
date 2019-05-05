@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 2800000, guid: a3cfa97d78cccd9439c77ab6e2340b7a, type: 3}
-  AndroidKeystoreName: 
+  AndroidKeystoreName: C:/Users/adantas/Desktop/bitflow keystore/bitflow.keystore
   AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
