@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,17 +17,51 @@ public class TakePicture : MonoBehaviour
 
     void OnCameraShotComplete( Texture2D texture2D, string path )
     {
-        var img = texture2D.Resize( 250, 250 );
-        if ( img )
+        var pix = texture2D.GetPixels32();
+
+        // Copy the reversed image data to a new texture.
+        var tex = new Texture2D( texture2D.width, texture2D.height );
+        tex.SetPixels32( pix );
+        tex.Apply();
+
+        // TODO: Duplicated code with UploadImage.cs
+        var width = 0;
+        var height = 0;
+        var maxSize = 1024;
+        if ( tex.width > tex.height )
         {
-            Debug.Log( "Resize successful" );
+            if ( tex.width > maxSize )
+            {
+                width = maxSize;
+                height = ( tex.height * maxSize ) / tex.width;
+            }
         }
-        Debug.Log( path );
-        Debug.Log( $"width: {texture2D.width}, height: {texture2D.height}" );
+        else
+        {
+            if ( tex.height > maxSize )
+            {
+                height = maxSize;
+                width = ( tex.width * maxSize ) / tex.height;
+            }
+        }
 
-        var buffer = texture2D.GetRawTextureData();
-        Debug.Log( $"buffer length: {buffer.Length}" );
+        TextureScale.Point( tex, width, height );
 
-        var encodedStr = Encoding.UTF8.GetString( buffer, 0, buffer.Length );
+        Debug.Log( $"Texture is {tex.width}x{tex.height}" );
+
+        var buffer = tex.EncodeToJPG();
+        Debug.Log( buffer.Length );
+
+        BitIndexUtils.QueryUtxos( Authenticator.Instance.Identity.Address, utxos =>
+        {
+            var utxo = utxos.First();
+            Debug.Log( JsonConvert.SerializeObject( utxo ) );
+
+            UtxoUtils.BuildTxnFromUtxo(
+                    Authenticator.Instance.Identity.PrivateKey,
+                    utxo.ToUTXO(),
+                    OpReturns.MakeImg( buffer ) )
+                .Spend( txn => { Debug.Log( $"https://bico.media/{txn}" ); } );
+        } );
     }
 }
