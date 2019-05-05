@@ -19,7 +19,7 @@ public class Authenticator : MonoBehaviour
 
     public void Authenticate()
     {
-        if (Application.platform == RuntimePlatform.WindowsEditor && Identity != null && Identity.IsValid)
+        if ( /*Application.platform == RuntimePlatform.WindowsEditor && */Identity != null && Identity.IsValid)
         {
             OnIdentityLoaded();
         }
