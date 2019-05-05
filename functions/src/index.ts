@@ -2,9 +2,10 @@ import axios from 'axios';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT } from './constants';
-import { Workflow, State, Schema, UTXO, IState, ISchema } from './bitflow-proto';
+import { Workflow, State, Schema, UTXO, IState, ISchema, Stage } from './bitflow-proto';
 import { NodeVM } from 'vm2';
 import { Transaction } from '@google-cloud/firestore';
+import { fromTx } from './3rd-party/txo';
 
 const bsv = require('bsv');
 
@@ -25,38 +26,73 @@ for (let i = 0; i < 25; i++) {
 }
 
 export const tx = functions.https.onRequest(async (req, res) => {
-
+    const txnData = await fromTx(req.body.tx);
+    const opRet = txnData.out.find((out: any) => out.b0.op == 106);
+    try {
+        let txid;
+        switch (opRet && opRet.s1) {
+            case REQUEST:
+                if(State.Status.Complete == await processRequest(txnData, true)) {
+                    txid = await sendTxn(req.body.tx);
+                }
+                break;
+            case SUBMIT:
+                if(State.Status.Complete == await processSubmit(txnData, true)) {
+                    txid = await sendTxn(req.body.tx);
+                }
+                break;
+            default:
+                txid = await sendTxn(req.body.tx);
+        }
+        return res.json({success: true, r: txid})
+    }
+    catch(err) {
+        const response: any = {
+            success: false
+        }
+        if(err.response) {
+            response.message = err.response.message;
+            return res.status(err.response.status).json(response);
+        }
+        response.message = err.message;
+        return res.status(500).json(response);
+    }
 });
 
 export const webhook = functions.https.onRequest(async (req, res) => {
-    if (!req.body.txid) {
-        console.error('Missing txid');
-        return res.status(400).send();
-    }
-    console.log(req.body);
+    try {
+        if (!req.body.txid) {
+            console.error('Missing txid');
+            return res.status(400).send();
+        }
+        console.log(req.body);
 
-    const txnDoc = await db.collection('txns').doc(req.body.txid).get();
-    if (txnDoc.exists) {
-        console.log(`Duplicate txn: ${req.body.txid}`);
-        return res.status(200).send();
-    }
+        const txnDoc = await db.collection('txns').doc(req.body.txid).get();
+        if (txnDoc.exists) {
+            console.log(`Duplicate txn: ${req.body.txid}`);
+            return res.status(200).send();
+        }
 
-    const txnData = await getTxn(req.body.txid);
-    const opRet = txnData.out.find((out: any) => out.b0.op == 106);
-    if (!opRet) {
-        console.log('No OP_RETURN');
-        return res.status(200).send();
-    }
+        const txnData = await getTxn(req.body.txid);
+        const opRet = txnData.out.find((out: any) => out.b0.op == 106);
+        if (!opRet) {
+            console.log('No OP_RETURN');
+            return res.status(200).send();
+        }
 
-    switch (opRet.s1) {
-        case REQUEST:
-            await processRequest(txnData);
-            break;
-        case SUBMIT:
-            await processSubmit(txnData);
-            break;
+        switch (opRet.s1) {
+            case REQUEST:
+                await processRequest(txnData);
+                break;
+            case SUBMIT:
+                await processSubmit(txnData);
+                break;
+        }
+        return res.send();
     }
-    return res.json({ success: true });
+    catch(err) {
+        return console.error(err);
+    }
 });
 
 async function initialize() {
@@ -91,7 +127,8 @@ async function initialize() {
     for (let data of schemas) {
         const opRet = data.out.find((out: any) => out.b0.op == 106);
         const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-        db.collection('schema').doc(data.tx.h).set(schema);
+        rtDb.ref(`schemas/${data.tx.h}`).set(schema);
+        // db.collection('schema').doc().set(schema);
     }
 }
 
@@ -126,6 +163,14 @@ async function bitQuery(filter: any = {}): Promise<any> {
     return [...r.data.c, ...r.data.u];
 }
 
+async function getData(path: string) {
+    return new Promise((resolve) => {
+        rtDb.ref(path).once('value', (data) => {
+            resolve(data);
+        })
+    })
+}
+
 async function getWorkflow(workflowTxn: string): Promise<any> {
     return new Promise((resolve, reject) => {
         rtDb.ref(`workflows/${workflowTxn}`).once('value', (snap) => {
@@ -142,9 +187,10 @@ async function getScript(scriptTxn: string): Promise<any> {
 }
 
 async function getSchema(schemaTxn: string): Promise<ISchema> {
-    let doc = await db.collection('schemas').doc(schemaTxn).get();
-    if (!doc.exists) throw new Error(`Invalid Schema: ${schemaTxn}`);
-    return Schema.fromObject(doc.data() || {});
+    const schemaData = getData(`schemas/${schemaTxn}`);
+    // let doc = await db.collection('schemas').doc(schemaTxn).get();
+    // if (!doc.exists) throw new Error(`Invalid Schema: ${schemaTxn}`);
+    return Schema.fromObject(schemaData);
 }
 
 async function processRequest(
@@ -170,7 +216,7 @@ async function processRequest(
 
     const data = JSON.parse(opRet.ls3 || opRet.s3);
 
-    if (task.stage.validationScriptTxn) {
+    if (task.stage && task.stage.validationScriptTxn) {
         const script = await getScript(task.stage.validationScriptTxn);
 
         const validate = vm.run(script.body);
@@ -207,7 +253,7 @@ async function processSubmit(
     const task = State.Task.fromObject(taskDoc.data() || {});
     const data = JSON.parse(opRet.ls3 || opRet.s3);
 
-    if (task.stage.validationScriptTxn) {
+    if (task.stage && task.stage.validationScriptTxn) {
         const script = await getScript(task.stage.validationScriptTxn);
 
         const validate = vm.run(script.body);
@@ -222,7 +268,8 @@ async function processSubmit(
         return task.status;
     }
 
-    db.collection('pendingTasks').doc(taskDoc.id).delete();
+    rtDb.ref(`pendingTasks/${taskDoc.id}`).remove();
+    rtDb.ref(`tasks/${task.address}/${task.txid}`).set(task);
     return processTask(
         state,
         task,
@@ -235,7 +282,7 @@ async function processTask(
     task: State.ITask,
     data: any
 ): Promise<State.Status> {
-    let handler = task.stage.onComplete;
+    let handler = (task.stage && task.stage.onComplete) || Stage.Handler.create();
     const key = privateKeys[keyCounter++ % 25];
     const address = key.toAddress().toString();
 
@@ -243,7 +290,7 @@ async function processTask(
         const { script } = await getScript(handler.processScriptTxn);
         const process = vm.run(script);
         let context = {
-            state: JSON.parse(state.data),
+            state: JSON.parse(state.data || '{}'),
             data
         }
 
@@ -253,7 +300,7 @@ async function processTask(
 
     let nextStage: any;
     let schema: ISchema;
-    if (handler.createTaskStageIdx && state.workflow.stages) {
+    if (handler.createTaskStageIdx && state.workflow && state.workflow.stages) {
         nextStage = state.workflow.stages[handler.createTaskStageIdx];
         schema = await getSchema(nextStage.schemaTxn);
     }
@@ -326,18 +373,19 @@ async function processTask(
         );
 
         if(newTask) {
+            rtDb.ref(`tasks/${newTask.address}/${txn.hash}`).set(newTask);
             t.set(
                 db.collection('pendingTasks').doc(txn.hash),
                 newTask
             );
         }
-
+        if(!state.txid) throw new Error('Missing txid');
         t.set(db.collection('states').doc(state.txid), state);
         return txn;
     });
 
     rtDb.ref(`state/${state.txid}`).set(state);
-    return task.status;
+    return task.status || State.Status.Error;
 }
 
 initialize();
