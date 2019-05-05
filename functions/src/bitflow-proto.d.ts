@@ -335,8 +335,8 @@ export interface IStage {
     /** Stage name */
     name?: (string|null);
 
-    /** Stage schemaTxn */
-    schemaTxn?: (string|null);
+    /** Stage schema */
+    schema?: (ISchema|null);
 
     /** Stage funds */
     funds?: (number|null);
@@ -363,8 +363,8 @@ export class Stage implements IStage {
     /** Stage name. */
     public name: string;
 
-    /** Stage schemaTxn. */
-    public schemaTxn: string;
+    /** Stage schema. */
+    public schema?: (ISchema|null);
 
     /** Stage funds. */
     public funds: number;

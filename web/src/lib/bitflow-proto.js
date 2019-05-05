@@ -826,7 +826,7 @@ $root.Stage = (function() {
      * @exports IStage
      * @interface IStage
      * @property {string|null} [name] Stage name
-     * @property {string|null} [schemaTxn] Stage schemaTxn
+     * @property {ISchema|null} [schema] Stage schema
      * @property {number|null} [funds] Stage funds
      * @property {string|null} [payee] Stage payee
      * @property {string|null} [validationScriptTxn] Stage validationScriptTxn
@@ -857,12 +857,12 @@ $root.Stage = (function() {
     Stage.prototype.name = "";
 
     /**
-     * Stage schemaTxn.
-     * @member {string} schemaTxn
+     * Stage schema.
+     * @member {ISchema|null|undefined} schema
      * @memberof Stage
      * @instance
      */
-    Stage.prototype.schemaTxn = "";
+    Stage.prototype.schema = null;
 
     /**
      * Stage funds.
@@ -922,8 +922,8 @@ $root.Stage = (function() {
             writer = $Writer.create();
         if (message.name != null && message.hasOwnProperty("name"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaTxn);
+        if (message.schema != null && message.hasOwnProperty("schema"))
+            $root.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.funds != null && message.hasOwnProperty("funds"))
             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.funds);
         if (message.payee != null && message.hasOwnProperty("payee"))
@@ -970,7 +970,7 @@ $root.Stage = (function() {
                 message.name = reader.string();
                 break;
             case 2:
-                message.schemaTxn = reader.string();
+                message.schema = $root.Schema.decode(reader, reader.uint32());
                 break;
             case 3:
                 message.funds = reader.int32();
@@ -1022,9 +1022,11 @@ $root.Stage = (function() {
         if (message.name != null && message.hasOwnProperty("name"))
             if (!$util.isString(message.name))
                 return "name: string expected";
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            if (!$util.isString(message.schemaTxn))
-                return "schemaTxn: string expected";
+        if (message.schema != null && message.hasOwnProperty("schema")) {
+            var error = $root.Schema.verify(message.schema);
+            if (error)
+                return "schema." + error;
+        }
         if (message.funds != null && message.hasOwnProperty("funds"))
             if (!$util.isInteger(message.funds))
                 return "funds: integer expected";
@@ -1056,8 +1058,11 @@ $root.Stage = (function() {
         var message = new $root.Stage();
         if (object.name != null)
             message.name = String(object.name);
-        if (object.schemaTxn != null)
-            message.schemaTxn = String(object.schemaTxn);
+        if (object.schema != null) {
+            if (typeof object.schema !== "object")
+                throw TypeError(".Stage.schema: object expected");
+            message.schema = $root.Schema.fromObject(object.schema);
+        }
         if (object.funds != null)
             message.funds = object.funds | 0;
         if (object.payee != null)
@@ -1087,7 +1092,7 @@ $root.Stage = (function() {
         var object = {};
         if (options.defaults) {
             object.name = "";
-            object.schemaTxn = "";
+            object.schema = null;
             object.funds = 0;
             object.payee = "";
             object.validationScriptTxn = "";
@@ -1095,8 +1100,8 @@ $root.Stage = (function() {
         }
         if (message.name != null && message.hasOwnProperty("name"))
             object.name = message.name;
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            object.schemaTxn = message.schemaTxn;
+        if (message.schema != null && message.hasOwnProperty("schema"))
+            object.schema = $root.Schema.toObject(message.schema, options);
         if (message.funds != null && message.hasOwnProperty("funds"))
             object.funds = message.funds;
         if (message.payee != null && message.hasOwnProperty("payee"))
