@@ -30,7 +30,7 @@ public static class TransactionExtensions
                     var hashRegex = new Regex( @"^([A-Fa-f0-9]{64})$" );
                     if ( hashRegex.IsMatch( response.R ) )
                     {
-                        a( txnResponse.DataAsText );
+                        a( response.R );
                     }
                     else
                     {
@@ -51,12 +51,12 @@ public static class TransactionExtensions
                         Debug.LogError( txnR.Exception.Message );
                     }
 
-                    Debug.LogError(JsonConvert.SerializeObject(txn));
-                    Debug.LogError($"{{\"tx\":\"{txn.ToHex()}\"}}");
-
-
                     Debug.LogError( e.GetType() );
                     Debug.LogError( e.Message );
+
+
+                    //Debug.LogError(JsonConvert.SerializeObject(txn));
+                    //Debug.LogError($"{{\"tx\":\"{txn.ToHex()}\"}}");
                 }
             } );
         txnReportRequest.AddHeader( "Content-Type", "application/json" );
