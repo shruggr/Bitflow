@@ -1,2 +1,5 @@
 node_modules
 protocols
+split.js
+populate-data.js
+.env
