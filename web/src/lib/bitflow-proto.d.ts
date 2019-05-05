@@ -119,108 +119,6 @@ export namespace Field {
     }
 }
 
-/** Properties of a Schema. */
-export interface ISchema {
-
-    /** Schema txid */
-    txid?: (string|null);
-
-    /** Schema name */
-    name?: (string|null);
-
-    /** Schema fields */
-    fields?: (IField[]|null);
-}
-
-/** Represents a Schema. */
-export class Schema implements ISchema {
-
-    /**
-     * Constructs a new Schema.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: ISchema);
-
-    /** Schema txid. */
-    public txid: string;
-
-    /** Schema name. */
-    public name: string;
-
-    /** Schema fields. */
-    public fields: IField[];
-
-    /**
-     * Creates a new Schema instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Schema instance
-     */
-    public static create(properties?: ISchema): Schema;
-
-    /**
-     * Encodes the specified Schema message. Does not implicitly {@link Schema.verify|verify} messages.
-     * @param message Schema message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Schema message, length delimited. Does not implicitly {@link Schema.verify|verify} messages.
-     * @param message Schema message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a Schema message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Schema
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Schema;
-
-    /**
-     * Decodes a Schema message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Schema
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Schema;
-
-    /**
-     * Verifies a Schema message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Schema
-     */
-    public static fromObject(object: { [k: string]: any }): Schema;
-
-    /**
-     * Creates a plain object from a Schema message. Also converts values to other types if specified.
-     * @param message Schema
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Schema to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
 /** Properties of a UTXO. */
 export interface IUTXO {
 
@@ -335,8 +233,8 @@ export interface IStage {
     /** Stage name */
     name?: (string|null);
 
-    /** Stage schemaTxn */
-    schemaTxn?: (string|null);
+    /** Stage schema */
+    schema?: (Stage.ISchema|null);
 
     /** Stage funds */
     funds?: (number|null);
@@ -363,8 +261,8 @@ export class Stage implements IStage {
     /** Stage name. */
     public name: string;
 
-    /** Stage schemaTxn. */
-    public schemaTxn: string;
+    /** Stage schema. */
+    public schema?: (Stage.ISchema|null);
 
     /** Stage funds. */
     public funds: number;
@@ -450,6 +348,108 @@ export class Stage implements IStage {
 }
 
 export namespace Stage {
+
+    /** Properties of a Schema. */
+    interface ISchema {
+
+        /** Schema txid */
+        txid?: (string|null);
+
+        /** Schema name */
+        name?: (string|null);
+
+        /** Schema fields */
+        fields?: (IField[]|null);
+    }
+
+    /** Represents a Schema. */
+    class Schema implements ISchema {
+
+        /**
+         * Constructs a new Schema.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: Stage.ISchema);
+
+        /** Schema txid. */
+        public txid: string;
+
+        /** Schema name. */
+        public name: string;
+
+        /** Schema fields. */
+        public fields: IField[];
+
+        /**
+         * Creates a new Schema instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Schema instance
+         */
+        public static create(properties?: Stage.ISchema): Stage.Schema;
+
+        /**
+         * Encodes the specified Schema message. Does not implicitly {@link Stage.Schema.verify|verify} messages.
+         * @param message Schema message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: Stage.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Schema message, length delimited. Does not implicitly {@link Stage.Schema.verify|verify} messages.
+         * @param message Schema message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: Stage.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Schema message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Schema
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Stage.Schema;
+
+        /**
+         * Decodes a Schema message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Schema
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Stage.Schema;
+
+        /**
+         * Verifies a Schema message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Schema
+         */
+        public static fromObject(object: { [k: string]: any }): Stage.Schema;
+
+        /**
+         * Creates a plain object from a Schema message. Also converts values to other types if specified.
+         * @param message Schema
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: Stage.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Schema to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
 
     /** Properties of a Handler. */
     interface IHandler {

@@ -1,3 +1,9 @@
 <p>
   Name: {{ (workflow | async)?.name}}
 </p>
+
+<div *ngIf="workflow">
+  <!-- <div *ngFor="let stage of (workflow | async)?.stages[0]">
+
+  </div> -->
+</div>

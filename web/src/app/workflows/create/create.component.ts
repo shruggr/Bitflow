@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Workflow, IWorkflow } from 'src/lib/bitflow-proto';
+import { IWorkflow } from 'src/lib/bitflow-proto';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,11 +12,10 @@ export class CreateComponent implements OnInit {
   @Input() txid: string;
   workflow: Observable<IWorkflow>;
 
-  constructor(rtDb: AngularFireDatabase) {
-    this.workflow = rtDb.object<IWorkflow>(`workflows/${this.txid}`).valueChanges();
-   }
+  constructor(private rtDb: AngularFireDatabase) {}
 
   ngOnInit() {
+    this.workflow = this.rtDb.object<IWorkflow>(`workflows/${this.txid}`).valueChanges();
   }
 
 }

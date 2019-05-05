@@ -16,12 +16,6 @@ message Field {
     string value = 4;
 }
 
-message Schema {
-    string txid = 1;
-    string name = 2;
-    repeated Field fields = 3;
-}
-
 message UTXO {
     string txId = 1;
     int32 vout = 2;
@@ -30,6 +24,12 @@ message UTXO {
 }
 
 message Stage {
+    message Schema {
+        string txid = 1;
+        string name = 2;
+        repeated Field fields = 3;
+    }
+
     message Handler {
         string processScriptTxn = 1;
         int32 createTaskStageIdx = 2;
@@ -38,7 +38,7 @@ message Stage {
     }
 
     string name = 1;
-    string schemaTxn = 2;
+    Schema schema = 2;
     int32 funds= 3;
     string payee = 4;
     string validationScriptTxn = 5;

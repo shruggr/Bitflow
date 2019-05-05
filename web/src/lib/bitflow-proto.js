@@ -311,260 +311,6 @@ $root.Field = (function() {
     return Field;
 })();
 
-$root.Schema = (function() {
-
-    /**
-     * Properties of a Schema.
-     * @exports ISchema
-     * @interface ISchema
-     * @property {string|null} [txid] Schema txid
-     * @property {string|null} [name] Schema name
-     * @property {Array.<IField>|null} [fields] Schema fields
-     */
-
-    /**
-     * Constructs a new Schema.
-     * @exports Schema
-     * @classdesc Represents a Schema.
-     * @implements ISchema
-     * @constructor
-     * @param {ISchema=} [properties] Properties to set
-     */
-    function Schema(properties) {
-        this.fields = [];
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * Schema txid.
-     * @member {string} txid
-     * @memberof Schema
-     * @instance
-     */
-    Schema.prototype.txid = "";
-
-    /**
-     * Schema name.
-     * @member {string} name
-     * @memberof Schema
-     * @instance
-     */
-    Schema.prototype.name = "";
-
-    /**
-     * Schema fields.
-     * @member {Array.<IField>} fields
-     * @memberof Schema
-     * @instance
-     */
-    Schema.prototype.fields = $util.emptyArray;
-
-    /**
-     * Creates a new Schema instance using the specified properties.
-     * @function create
-     * @memberof Schema
-     * @static
-     * @param {ISchema=} [properties] Properties to set
-     * @returns {Schema} Schema instance
-     */
-    Schema.create = function create(properties) {
-        return new Schema(properties);
-    };
-
-    /**
-     * Encodes the specified Schema message. Does not implicitly {@link Schema.verify|verify} messages.
-     * @function encode
-     * @memberof Schema
-     * @static
-     * @param {ISchema} message Schema message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    Schema.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.txid != null && message.hasOwnProperty("txid"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.txid);
-        if (message.name != null && message.hasOwnProperty("name"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-        if (message.fields != null && message.fields.length)
-            for (var i = 0; i < message.fields.length; ++i)
-                $root.Field.encode(message.fields[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-        return writer;
-    };
-
-    /**
-     * Encodes the specified Schema message, length delimited. Does not implicitly {@link Schema.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof Schema
-     * @static
-     * @param {ISchema} message Schema message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    Schema.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes a Schema message from the specified reader or buffer.
-     * @function decode
-     * @memberof Schema
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {Schema} Schema
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    Schema.decode = function decode(reader, length) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Schema();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            switch (tag >>> 3) {
-            case 1:
-                message.txid = reader.string();
-                break;
-            case 2:
-                message.name = reader.string();
-                break;
-            case 3:
-                if (!(message.fields && message.fields.length))
-                    message.fields = [];
-                message.fields.push($root.Field.decode(reader, reader.uint32()));
-                break;
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes a Schema message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof Schema
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {Schema} Schema
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    Schema.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies a Schema message.
-     * @function verify
-     * @memberof Schema
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    Schema.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.txid != null && message.hasOwnProperty("txid"))
-            if (!$util.isString(message.txid))
-                return "txid: string expected";
-        if (message.name != null && message.hasOwnProperty("name"))
-            if (!$util.isString(message.name))
-                return "name: string expected";
-        if (message.fields != null && message.hasOwnProperty("fields")) {
-            if (!Array.isArray(message.fields))
-                return "fields: array expected";
-            for (var i = 0; i < message.fields.length; ++i) {
-                var error = $root.Field.verify(message.fields[i]);
-                if (error)
-                    return "fields." + error;
-            }
-        }
-        return null;
-    };
-
-    /**
-     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof Schema
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {Schema} Schema
-     */
-    Schema.fromObject = function fromObject(object) {
-        if (object instanceof $root.Schema)
-            return object;
-        var message = new $root.Schema();
-        if (object.txid != null)
-            message.txid = String(object.txid);
-        if (object.name != null)
-            message.name = String(object.name);
-        if (object.fields) {
-            if (!Array.isArray(object.fields))
-                throw TypeError(".Schema.fields: array expected");
-            message.fields = [];
-            for (var i = 0; i < object.fields.length; ++i) {
-                if (typeof object.fields[i] !== "object")
-                    throw TypeError(".Schema.fields: object expected");
-                message.fields[i] = $root.Field.fromObject(object.fields[i]);
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Creates a plain object from a Schema message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof Schema
-     * @static
-     * @param {Schema} message Schema
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    Schema.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.arrays || options.defaults)
-            object.fields = [];
-        if (options.defaults) {
-            object.txid = "";
-            object.name = "";
-        }
-        if (message.txid != null && message.hasOwnProperty("txid"))
-            object.txid = message.txid;
-        if (message.name != null && message.hasOwnProperty("name"))
-            object.name = message.name;
-        if (message.fields && message.fields.length) {
-            object.fields = [];
-            for (var j = 0; j < message.fields.length; ++j)
-                object.fields[j] = $root.Field.toObject(message.fields[j], options);
-        }
-        return object;
-    };
-
-    /**
-     * Converts this Schema to JSON.
-     * @function toJSON
-     * @memberof Schema
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    Schema.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    return Schema;
-})();
-
 $root.UTXO = (function() {
 
     /**
@@ -826,7 +572,7 @@ $root.Stage = (function() {
      * @exports IStage
      * @interface IStage
      * @property {string|null} [name] Stage name
-     * @property {string|null} [schemaTxn] Stage schemaTxn
+     * @property {Stage.ISchema|null} [schema] Stage schema
      * @property {number|null} [funds] Stage funds
      * @property {string|null} [payee] Stage payee
      * @property {string|null} [validationScriptTxn] Stage validationScriptTxn
@@ -857,12 +603,12 @@ $root.Stage = (function() {
     Stage.prototype.name = "";
 
     /**
-     * Stage schemaTxn.
-     * @member {string} schemaTxn
+     * Stage schema.
+     * @member {Stage.ISchema|null|undefined} schema
      * @memberof Stage
      * @instance
      */
-    Stage.prototype.schemaTxn = "";
+    Stage.prototype.schema = null;
 
     /**
      * Stage funds.
@@ -922,8 +668,8 @@ $root.Stage = (function() {
             writer = $Writer.create();
         if (message.name != null && message.hasOwnProperty("name"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaTxn);
+        if (message.schema != null && message.hasOwnProperty("schema"))
+            $root.Stage.Schema.encode(message.schema, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.funds != null && message.hasOwnProperty("funds"))
             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.funds);
         if (message.payee != null && message.hasOwnProperty("payee"))
@@ -970,7 +716,7 @@ $root.Stage = (function() {
                 message.name = reader.string();
                 break;
             case 2:
-                message.schemaTxn = reader.string();
+                message.schema = $root.Stage.Schema.decode(reader, reader.uint32());
                 break;
             case 3:
                 message.funds = reader.int32();
@@ -1022,9 +768,11 @@ $root.Stage = (function() {
         if (message.name != null && message.hasOwnProperty("name"))
             if (!$util.isString(message.name))
                 return "name: string expected";
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            if (!$util.isString(message.schemaTxn))
-                return "schemaTxn: string expected";
+        if (message.schema != null && message.hasOwnProperty("schema")) {
+            var error = $root.Stage.Schema.verify(message.schema);
+            if (error)
+                return "schema." + error;
+        }
         if (message.funds != null && message.hasOwnProperty("funds"))
             if (!$util.isInteger(message.funds))
                 return "funds: integer expected";
@@ -1056,8 +804,11 @@ $root.Stage = (function() {
         var message = new $root.Stage();
         if (object.name != null)
             message.name = String(object.name);
-        if (object.schemaTxn != null)
-            message.schemaTxn = String(object.schemaTxn);
+        if (object.schema != null) {
+            if (typeof object.schema !== "object")
+                throw TypeError(".Stage.schema: object expected");
+            message.schema = $root.Stage.Schema.fromObject(object.schema);
+        }
         if (object.funds != null)
             message.funds = object.funds | 0;
         if (object.payee != null)
@@ -1087,7 +838,7 @@ $root.Stage = (function() {
         var object = {};
         if (options.defaults) {
             object.name = "";
-            object.schemaTxn = "";
+            object.schema = null;
             object.funds = 0;
             object.payee = "";
             object.validationScriptTxn = "";
@@ -1095,8 +846,8 @@ $root.Stage = (function() {
         }
         if (message.name != null && message.hasOwnProperty("name"))
             object.name = message.name;
-        if (message.schemaTxn != null && message.hasOwnProperty("schemaTxn"))
-            object.schemaTxn = message.schemaTxn;
+        if (message.schema != null && message.hasOwnProperty("schema"))
+            object.schema = $root.Stage.Schema.toObject(message.schema, options);
         if (message.funds != null && message.hasOwnProperty("funds"))
             object.funds = message.funds;
         if (message.payee != null && message.hasOwnProperty("payee"))
@@ -1118,6 +869,260 @@ $root.Stage = (function() {
     Stage.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
+
+    Stage.Schema = (function() {
+
+        /**
+         * Properties of a Schema.
+         * @memberof Stage
+         * @interface ISchema
+         * @property {string|null} [txid] Schema txid
+         * @property {string|null} [name] Schema name
+         * @property {Array.<IField>|null} [fields] Schema fields
+         */
+
+        /**
+         * Constructs a new Schema.
+         * @memberof Stage
+         * @classdesc Represents a Schema.
+         * @implements ISchema
+         * @constructor
+         * @param {Stage.ISchema=} [properties] Properties to set
+         */
+        function Schema(properties) {
+            this.fields = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Schema txid.
+         * @member {string} txid
+         * @memberof Stage.Schema
+         * @instance
+         */
+        Schema.prototype.txid = "";
+
+        /**
+         * Schema name.
+         * @member {string} name
+         * @memberof Stage.Schema
+         * @instance
+         */
+        Schema.prototype.name = "";
+
+        /**
+         * Schema fields.
+         * @member {Array.<IField>} fields
+         * @memberof Stage.Schema
+         * @instance
+         */
+        Schema.prototype.fields = $util.emptyArray;
+
+        /**
+         * Creates a new Schema instance using the specified properties.
+         * @function create
+         * @memberof Stage.Schema
+         * @static
+         * @param {Stage.ISchema=} [properties] Properties to set
+         * @returns {Stage.Schema} Schema instance
+         */
+        Schema.create = function create(properties) {
+            return new Schema(properties);
+        };
+
+        /**
+         * Encodes the specified Schema message. Does not implicitly {@link Stage.Schema.verify|verify} messages.
+         * @function encode
+         * @memberof Stage.Schema
+         * @static
+         * @param {Stage.ISchema} message Schema message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Schema.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.txid != null && message.hasOwnProperty("txid"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.txid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.fields != null && message.fields.length)
+                for (var i = 0; i < message.fields.length; ++i)
+                    $root.Field.encode(message.fields[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Schema message, length delimited. Does not implicitly {@link Stage.Schema.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof Stage.Schema
+         * @static
+         * @param {Stage.ISchema} message Schema message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Schema.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Schema message from the specified reader or buffer.
+         * @function decode
+         * @memberof Stage.Schema
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Stage.Schema} Schema
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Schema.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Stage.Schema();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.txid = reader.string();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    if (!(message.fields && message.fields.length))
+                        message.fields = [];
+                    message.fields.push($root.Field.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Schema message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof Stage.Schema
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {Stage.Schema} Schema
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Schema.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Schema message.
+         * @function verify
+         * @memberof Stage.Schema
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Schema.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.txid != null && message.hasOwnProperty("txid"))
+                if (!$util.isString(message.txid))
+                    return "txid: string expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.fields != null && message.hasOwnProperty("fields")) {
+                if (!Array.isArray(message.fields))
+                    return "fields: array expected";
+                for (var i = 0; i < message.fields.length; ++i) {
+                    var error = $root.Field.verify(message.fields[i]);
+                    if (error)
+                        return "fields." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof Stage.Schema
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {Stage.Schema} Schema
+         */
+        Schema.fromObject = function fromObject(object) {
+            if (object instanceof $root.Stage.Schema)
+                return object;
+            var message = new $root.Stage.Schema();
+            if (object.txid != null)
+                message.txid = String(object.txid);
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.fields) {
+                if (!Array.isArray(object.fields))
+                    throw TypeError(".Stage.Schema.fields: array expected");
+                message.fields = [];
+                for (var i = 0; i < object.fields.length; ++i) {
+                    if (typeof object.fields[i] !== "object")
+                        throw TypeError(".Stage.Schema.fields: object expected");
+                    message.fields[i] = $root.Field.fromObject(object.fields[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Schema message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof Stage.Schema
+         * @static
+         * @param {Stage.Schema} message Schema
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Schema.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.fields = [];
+            if (options.defaults) {
+                object.txid = "";
+                object.name = "";
+            }
+            if (message.txid != null && message.hasOwnProperty("txid"))
+                object.txid = message.txid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.fields && message.fields.length) {
+                object.fields = [];
+                for (var j = 0; j < message.fields.length; ++j)
+                    object.fields[j] = $root.Field.toObject(message.fields[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this Schema to JSON.
+         * @function toJSON
+         * @memberof Stage.Schema
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Schema.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Schema;
+    })();
 
     Stage.Handler = (function() {
 
