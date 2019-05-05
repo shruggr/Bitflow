@@ -34,27 +34,27 @@ public class SchemaUIController : MonoBehaviour
         {
             switch ( field.Type )
             {
-                case Schema.Types.Type.Text:
+                case Field.Types.Type.Text:
                     var text = Instantiate(TextInputFieldPrefab, Parent);
                     text.GetComponentInChildren<Text>().text = field.Label;
                     FieldGetterMap.Add(field.Key, text.GetComponent<ISchemaFieldGetter>());
                     break;
-                case Schema.Types.Type.Number:
+                case Field.Types.Type.Number:
                     var number = Instantiate(NumberInputFieldPrefab, Parent);
                     number.GetComponentInChildren<Text>().text = field.Label;
                     FieldGetterMap.Add(field.Key, number.GetComponent<ISchemaFieldGetter>());
                     break;
-                case Schema.Types.Type.Image:
+                case Field.Types.Type.Image:
                     var image = Instantiate(ImageUploadWidgetPrefab, Parent);
                     image.GetComponentsInChildren<Text>()[5].text = field.Label;
                     FieldGetterMap.Add(field.Key, image.GetComponent<ISchemaFieldGetter>());
                     break;
-                case Schema.Types.Type.File:
+                case Field.Types.Type.File:
                     var file = Instantiate(FileUploadWidgetPrefab, Parent);
                     file.GetComponentsInChildren<Text>()[5].text = field.Label;
                     FieldGetterMap.Add(field.Key, file.GetComponent<ISchemaFieldGetter>());
                     break;
-                case Schema.Types.Type.Bool:
+                case Field.Types.Type.Boolean:
                     var boolean = Instantiate(BoolInputPrefab, Parent);
                     boolean.GetComponentInChildren<Text>().text = field.Label;
                     FieldGetterMap.Add(field.Key, boolean.GetComponent<ISchemaFieldGetter>());

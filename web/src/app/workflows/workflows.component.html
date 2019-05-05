@@ -1,0 +1,19 @@
+<h3>Workflows</h3>
+<b>Upload Workflow</b>
+<div>
+  <input type="file" (change)="onFileChange($event)"><br>
+  <div id="money-button"></div>
+</div>
+{{result}}
+<ul>
+  <li *ngFor="let workflow of workflows | async">
+      {{ workflow.name }}
+      <a href="javascript:void(0)" (click)="startWorkflow(workflow.txid)">
+        Go
+      </a>
+  </li>
+</ul>
+
+<div *ngIf="workflowTxn">
+  <app-create [txid]="workflowTxn"></app-create>
+</div>

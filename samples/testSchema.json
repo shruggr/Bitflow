@@ -1,0 +1,12 @@
+{
+    "name": "Test Schema",
+    "fields": [{
+        "key": "name",
+        "label": "Name",
+        "type": 0
+    }, {
+        "key": "image",
+        "label": "Image",
+        "type": 1
+    }]
+}

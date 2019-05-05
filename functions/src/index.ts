@@ -1,13 +1,14 @@
 import axios from 'axios';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT } from './constants';
-import { Workflow, State, Schema, UTXO, IState, ISchema, Stage } from './bitflow-proto';
+import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT, WORKFLOW } from './constants';
+import { Workflow, State, Schema, UTXO, IState, ISchema, Stage, Field } from './bitflow-proto';
 import { NodeVM } from 'vm2';
 import { Transaction } from '@google-cloud/firestore';
 import { fromTx } from './3rd-party/txo';
 
 const bsv = require('bsv');
+const btoa = require('btoa');
 
 const vm = new NodeVM();
 
@@ -32,25 +33,25 @@ export const tx = functions.https.onRequest(async (req, res) => {
         let txid;
         switch (opRet && opRet.s1) {
             case REQUEST:
-                if(State.Status.Complete == await processRequest(txnData, true)) {
+                if (State.Status.Complete == await processRequest(txnData, true)) {
                     txid = await sendTxn(req.body.tx);
                 }
                 break;
             case SUBMIT:
-                if(State.Status.Complete == await processSubmit(txnData, true)) {
+                if (State.Status.Complete == await processSubmit(txnData, true)) {
                     txid = await sendTxn(req.body.tx);
                 }
                 break;
             default:
                 txid = await sendTxn(req.body.tx);
         }
-        return res.json({success: true, r: txid})
+        return res.json({ success: true, r: txid })
     }
-    catch(err) {
+    catch (err) {
         const response: any = {
             success: false
         }
-        if(err.response) {
+        if (err.response) {
             response.message = err.response.message;
             return res.status(err.response.status).json(response);
         }
@@ -87,50 +88,31 @@ export const webhook = functions.https.onRequest(async (req, res) => {
             case SUBMIT:
                 await processSubmit(txnData);
                 break;
+            case SCHEMA:
+                const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+                schema.txid = txnData.tx.h;
+                rtDb.ref(`schemas/${txnData.tx.h}`).set(schema);
+                break;
+            case SCRIPT:
+                db.collection('scripts').doc(txnData.tx.h).set({
+                    txid: txnData.tx.h,
+                    script: opRet.ls2 || opRet.s2,
+                    name: opRet.ls3 || opRet.s3
+                });
+                break;
+            case WORKFLOW:
+                const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+                workflow.txid = txnData.tx.h;
+                workflow.owner = txnData.in[0].e.a,
+                rtDb.ref(`workflows/${txnData.tx.h}`).set(workflow);
         }
         return res.send();
     }
-    catch(err) {
-        return console.error(err);
+    catch (err) {
+        console.error(err);
+        return res.status(500).send(err.message);
     }
 });
-
-async function initialize() {
-    const utxos = await Promise.all(addresses.map((address) => axios(
-        `https://api.bitindex.network/api/v3/main/addr/${address}/utxo`,
-        { headers: { api_key: BITINDEX_KEY } }
-    )));
-    Promise.all(addresses.map((address, i) => {
-        return db.runTransaction(async (t: Transaction) => {
-            const ref = db.collection('addresses').doc(address).collection('utxos');
-            let old = await t.get(ref);
-            await Promise.all(old.docs.map((doc) => {
-                t.delete(ref.doc(doc.id))
-            }));
-            return Promise.all(utxos[i].data.map((utxo: any) => {
-                t.set(ref.doc(`${utxo.txid}-${utxo.vout}`), utxo);
-            }));
-        });
-    }));
-
-    const [scripts, schemas] = await Promise.all([
-        bitQuery({ "out.s1": SCRIPT }),
-        bitQuery({ "out.s1": SCHEMA })
-    ])
-    for (let data of scripts) {
-        const opRet = data.out.find((out: any) => out.b0.op == 106);
-        db.collection('scripts').doc(data.tx.h).set({
-            script: opRet.ls2 || opRet.s2
-        });
-    }
-
-    for (let data of schemas) {
-        const opRet = data.out.find((out: any) => out.b0.op == 106);
-        const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-        rtDb.ref(`schemas/${data.tx.h}`).set(schema);
-        // db.collection('schema').doc().set(schema);
-    }
-}
 
 async function sendTxn(rawtx: string): Promise<string> {
     const resp = await axios(
@@ -145,22 +127,25 @@ async function sendTxn(rawtx: string): Promise<string> {
     return resp.data.txid;
 }
 async function getTxn(txid: string, filter: any = {}): Promise<any> {
-    filter.tx = { h: txid };
+    filter["tx.h"] = txid ;
     const results = await bitQuery(filter);
+    console.log(results);
     return results[0];
 }
 
 async function bitQuery(filter: any = {}): Promise<any> {
     var query = {
         v: 3,
-        q: { find: filter, limit: 1000 }
+        q: { find: filter, limit: 100 }
     };
     const b64 = btoa(JSON.stringify(query));
     const url = "https://genesis.bitdb.network/q/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/" + b64;
-    const header = { headers: { key: "1KJPjd3p8khnWZTkjhDYnywLB2yE1w5BmU" } };
+    const header = { headers: { key: "1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN" } };
+    console.log(url);
     let r = await axios(url, header);
 
-    return [...r.data.c, ...r.data.u];
+    console.log(JSON.stringify(r.data, null, 2));
+    return (r.data.c || []).concat(r.data.u || []);
 }
 
 async function getData(path: string) {
@@ -221,13 +206,14 @@ async function processRequest(
 
         const validate = vm.run(script.body);
         let context = {
-            state: JSON.parse(state.data),
+            state: state.values && state.values.map((value) => value.value),
+            schema: await getData(`schemas/${task.stage && task.stage.schemaTxn}`),
             data
         }
         task.status = validate(context);
     }
 
-    if(validateOnly || task.status !== State.Status.Complete) {
+    if (validateOnly || task.status !== State.Status.Complete) {
         return task.status;
     }
 
@@ -244,11 +230,11 @@ async function processSubmit(
 ): Promise<State.Status> {
     const opRet = txnData.out.find((out: any) => out.b0.op == 106);
     const stateDoc = await db.collection('states').doc(opRet.s2).get();
-    if(!stateDoc.exists) throw new Error(`Missing State: ${opRet.s2}`);
+    if (!stateDoc.exists) throw new Error(`Missing State: ${opRet.s2}`);
     const state = State.fromObject(stateDoc.data() || {});
 
     const taskDoc = await db.collection('pendingTasks').doc(txnData.in[0].e.h).get();
-    if(!taskDoc.exists) throw new Error(`Missing Task: ${txnData.tx.h}`);
+    if (!taskDoc.exists) throw new Error(`Missing Task: ${txnData.tx.h}`);
 
     const task = State.Task.fromObject(taskDoc.data() || {});
     const data = JSON.parse(opRet.ls3 || opRet.s3);
@@ -258,18 +244,19 @@ async function processSubmit(
 
         const validate = vm.run(script.body);
         let context = {
-            state: JSON.parse(state.data),
+            state: state.values && state.values.map((value) => value.value),
+            schema: await getData(`schemas/${task.stage && task.stage.schemaTxn}`),
             data
         }
         task.status = validate(context);
     }
 
-    if(validateOnly || task.status !== State.Status.Complete) {
+    if (validateOnly || task.status !== State.Status.Complete) {
         return task.status;
     }
 
     rtDb.ref(`pendingTasks/${taskDoc.id}`).remove();
-    rtDb.ref(`tasks/${task.address}/${task.txid}`).set(task);
+    rtDb.ref(`tasks/${task.address}/${state.txid}/${task.txid}`).set(task);
     return processTask(
         state,
         task,
@@ -290,12 +277,22 @@ async function processTask(
         const { script } = await getScript(handler.processScriptTxn);
         const process = vm.run(script);
         let context = {
-            state: JSON.parse(state.data || '{}'),
+            state: state.values && state.values.map((value) => value.value),
+            schema: Schema.fromObject(await getData(`schemas/${task.stage && task.stage.schemaTxn}`)),
             data
         }
 
         state.status = process(context);
-        state.data = JSON.stringify(context.state);
+        for(let field of context.schema.fields) {
+            let value = state.values && state.values.find((value) => value.key == field.key);
+            if(value) {
+                value.value = context.data[field.key || ''];
+            }
+            else {
+                field.value = context.data[field.key || ''];
+                state.values && state.values.push(field);
+            }
+        }
     }
 
     let nextStage: any;
@@ -336,7 +333,7 @@ async function processTask(
 
             if (schema) {
                 (schema.fields || [])
-                    .filter((field) => field.type == Schema.Type.Image || field.type == Schema.Type.File)
+                    .filter((field) => field.type == Field.Type.Image || field.type == Field.Type.File)
                     .forEach(() => txn.to(handler.assignee, UPLOAD));
             }
         }
@@ -372,14 +369,14 @@ async function processTask(
             utxo
         );
 
-        if(newTask) {
+        if (newTask) {
             rtDb.ref(`tasks/${newTask.address}/${txn.hash}`).set(newTask);
             t.set(
                 db.collection('pendingTasks').doc(txn.hash),
                 newTask
             );
         }
-        if(!state.txid) throw new Error('Missing txid');
+        if (!state.txid) throw new Error('Missing txid');
         t.set(db.collection('states').doc(state.txid), state);
         return txn;
     });
@@ -388,4 +385,6 @@ async function processTask(
     return task.status || State.Status.Error;
 }
 
-initialize();
+// initialize().catch((err) => {
+//     console.error(`Init error: ${err.message}`);
+// })

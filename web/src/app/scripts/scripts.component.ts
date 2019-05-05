@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ISchema } from 'src/lib/bitflow-proto';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { SCHEMA, ADDRESS } from 'src/lib/constants';
+import { ADDRESS, SCRIPT } from 'src/lib/constants';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare const moneyButton;
 declare const bsv;
 
 @Component({
-  selector: 'app-schemas',
-  templateUrl: './schemas.component.html',
-  styleUrls: ['./schemas.component.css']
+  selector: 'app-scripts',
+  templateUrl: './scripts.component.html',
+  styleUrls: ['./scripts.component.css']
 })
-export class SchemasComponent implements OnInit {
-  schemas: Observable<ISchema[]>;
+export class ScriptsComponent implements OnInit {
+  scripts: Observable<any[]>;
   mbdiv: any;
   name: string;
   fileData: any;
+  filename: string;
   result: string;
   JSON: any;
 
-  constructor(rtDb: AngularFireDatabase) {
-    this.schemas = rtDb.list<ISchema>('schemas').valueChanges();
+  constructor(db: AngularFirestore) {
+    this.scripts = db.collection<any>('scripts').valueChanges();
     this.JSON = JSON;
    }
 
@@ -32,18 +32,21 @@ export class SchemasComponent implements OnInit {
 
   onFileChange($event) {
     const reader = new FileReader();
+    const file: File = $event.target.files[0];
     reader.onload = () => {
+      this.filename = file.name;
       this.fileData = reader.result;
       this.updateMoneybutton();
     }
-    reader.readAsArrayBuffer($event.target.files[0]);
+    reader.readAsArrayBuffer(file);
   }
 
   updateMoneybutton() {
     let script = new bsv.Script();
     script.add(bsv.Opcode.OP_RETURN);
-    script.add(bsv.deps.Buffer.from(SCHEMA));
+    script.add(bsv.deps.Buffer.from(SCRIPT));
     script.add(bsv.deps.Buffer.from(this.fileData || ''));
+    script.add(bsv.deps.Buffer.from(this.filename || ''));
     moneyButton.render(this.mbdiv, {
       label: 'Upload',
       outputs: [

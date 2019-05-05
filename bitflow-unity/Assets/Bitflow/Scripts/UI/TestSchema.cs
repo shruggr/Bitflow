@@ -11,45 +11,45 @@ public class TestSchema : MonoBehaviour
     {
         Controller.Build( new Schema
         {
-            Id = "0",
+            Txid = "0",
             Name = "Collect Name",
             Fields =
             {
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "0",
                     Label = "First Name",
-                    Type = Schema.Types.Type.Text
+                    Type = Field.Types.Type.Text
                 },
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "1",
                     Label = "Surname",
-                    Type = Schema.Types.Type.Text
+                    Type = Field.Types.Type.Text
                 },
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "2",
                     Label = "Age",
-                    Type = Schema.Types.Type.Number
+                    Type = Field.Types.Type.Number
                 },
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "3",
                     Label = "Stuff",
-                    Type = Schema.Types.Type.Image
+                    Type = Field.Types.Type.Image
                 },
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "4",
                     Label = "Stuff2",
-                    Type = Schema.Types.Type.File
+                    Type = Field.Types.Type.File
                 },
-                new Schema.Types.Field
+                new Field
                 {
                     Key = "5",
                     Label = "Stuff3",
-                    Type = Schema.Types.Type.Bool
+                    Type = Field.Types.Type.Boolean
                 }
 
             }

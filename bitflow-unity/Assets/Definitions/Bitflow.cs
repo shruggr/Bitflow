@@ -22,40 +22,270 @@ public static partial class BitflowReflection {
   static BitflowReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cg1iaXRmbG93LnByb3RvIr8BCgZTY2hlbWESCgoCaWQYASABKAkSDAoEbmFt",
-          "ZRgCIAEoCRIdCgZmaWVsZHMYAyADKAsyDS5TY2hlbWEuRmllbGQaPwoFRmll",
-          "bGQSCwoDa2V5GAEgASgJEg0KBWxhYmVsGAIgASgJEhoKBHR5cGUYAyABKA4y",
-          "DC5TY2hlbWEuVHlwZSI7CgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABEggK",
-          "BEZpbGUQAhIKCgZOdW1iZXIQAxIICgRCb29sEAQiRAoEVVRYTxIMCgR0eElk",
-          "GAEgASgJEgwKBHZvdXQYAiABKAUSDgoGc2NyaXB0GAQgASgJEhAKCHNhdG9z",
-          "aGlzGAUgASgFIukBCgVTdGFnZRIMCgRuYW1lGAEgASgJEhEKCXNjaGVtYVR4",
-          "bhgCIAEoCRINCgVmdW5kcxgDIAEoBRINCgVwYXllZRgEIAEoCRIbChN2YWxp",
-          "ZGF0aW9uU2NyaXB0VHhuGAUgASgJEiIKCm9uQ29tcGxldGUYBiABKAsyDi5T",
-          "dGFnZS5IYW5kbGVyGmAKB0hhbmRsZXISGAoQcHJvY2Vzc1NjcmlwdFR4bhgB",
-          "IAEoCRIaChJjcmVhdGVUYXNrU3RhZ2VJZHgYAiABKAUSEAoIYXNzaWduZWUY",
-          "AyABKAkSDQoFZnVuZHMYBCABKAUiPwoIV29ya2Zsb3cSDAoEdHhpZBgBIAEo",
-          "CRINCgVvd25lchgCIAEoCRIWCgZzdGFnZXMYAyADKAsyBi5TdGFnZSKbAgoF",
-          "U3RhdGUSDAoEdHhpZBgBIAEoCRIbCgh3b3JrZmxvdxgCIAEoCzIJLldvcmtm",
-          "bG93Eh0KBnN0YXR1cxgDIAEoDjINLlN0YXRlLlN0YXR1cxIMCgRkYXRhGAQg",
-          "ASgJEhoKBXRhc2tzGAUgAygLMgsuU3RhdGUuVGFzaxpxCgRUYXNrEhUKBXN0",
-          "YWdlGAEgASgLMgYuU3RhZ2USHQoGc3RhdHVzGAIgASgOMg0uU3RhdGUuU3Rh",
-          "dHVzEg8KB2FkZHJlc3MYAyABKAkSFAoFdXR4b3MYBCADKAsyBS5VVFhPEgwK",
-          "BHR4aWQYBSABKAkiKwoGU3RhdHVzEggKBE9wZW4QABIJCgVFcnJvchABEgwK",
-          "CENvbXBsZXRlEAJiBnByb3RvMw=="));
+          "Cg1iaXRmbG93LnByb3RvIo0BCgVGaWVsZBILCgNrZXkYASABKAkSDQoFbGFi",
+          "ZWwYAiABKAkSGQoEdHlwZRgDIAEoDjILLkZpZWxkLlR5cGUSDQoFdmFsdWUY",
+          "BCABKAkiPgoEVHlwZRIICgRUZXh0EAASCQoFSW1hZ2UQARIICgRGaWxlEAIS",
+          "CgoGTnVtYmVyEAMSCwoHQm9vbGVhbhAEIjwKBlNjaGVtYRIMCgR0eGlkGAEg",
+          "ASgJEgwKBG5hbWUYAiABKAkSFgoGZmllbGRzGAMgAygLMgYuRmllbGQiRAoE",
+          "VVRYTxIMCgR0eElkGAEgASgJEgwKBHZvdXQYAiABKAUSDgoGc2NyaXB0GAQg",
+          "ASgJEhAKCHNhdG9zaGlzGAUgASgFIukBCgVTdGFnZRIMCgRuYW1lGAEgASgJ",
+          "EhEKCXNjaGVtYVR4bhgCIAEoCRINCgVmdW5kcxgDIAEoBRINCgVwYXllZRgE",
+          "IAEoCRIbChN2YWxpZGF0aW9uU2NyaXB0VHhuGAUgASgJEiIKCm9uQ29tcGxl",
+          "dGUYBiABKAsyDi5TdGFnZS5IYW5kbGVyGmAKB0hhbmRsZXISGAoQcHJvY2Vz",
+          "c1NjcmlwdFR4bhgBIAEoCRIaChJjcmVhdGVUYXNrU3RhZ2VJZHgYAiABKAUS",
+          "EAoIYXNzaWduZWUYAyABKAkSDQoFZnVuZHMYBCABKAUiTQoIV29ya2Zsb3cS",
+          "DAoEbmFtZRgBIAEoCRIMCgR0eGlkGAIgASgJEg0KBW93bmVyGAMgASgJEhYK",
+          "BnN0YWdlcxgEIAMoCzIGLlN0YWdlIqUCCgVTdGF0ZRIMCgR0eGlkGAEgASgJ",
+          "EhsKCHdvcmtmbG93GAIgASgLMgkuV29ya2Zsb3cSHQoGc3RhdHVzGAMgASgO",
+          "Mg0uU3RhdGUuU3RhdHVzEhYKBnZhbHVlcxgEIAMoCzIGLkZpZWxkEhoKBXRh",
+          "c2tzGAUgAygLMgsuU3RhdGUuVGFzaxpxCgRUYXNrEhUKBXN0YWdlGAEgASgL",
+          "MgYuU3RhZ2USHQoGc3RhdHVzGAIgASgOMg0uU3RhdGUuU3RhdHVzEg8KB2Fk",
+          "ZHJlc3MYAyABKAkSFAoFdXR4b3MYBCADKAsyBS5VVFhPEgwKBHR4aWQYBSAB",
+          "KAkiKwoGU3RhdHVzEggKBE9wZW4QABIJCgVFcnJvchABEgwKCENvbXBsZXRl",
+          "EAJiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Schema), global::Schema.Parser, new[]{ "Id", "Name", "Fields" }, null, new[]{ typeof(global::Schema.Types.Type) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Schema.Types.Field), global::Schema.Types.Field.Parser, new[]{ "Key", "Label", "Type" }, null, null, null)}),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Field), global::Field.Parser, new[]{ "Key", "Label", "Type", "Value" }, null, new[]{ typeof(global::Field.Types.Type) }, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Schema), global::Schema.Parser, new[]{ "Txid", "Name", "Fields" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::UTXO), global::UTXO.Parser, new[]{ "TxId", "Vout", "Script", "Satoshis" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "SchemaTxn", "Funds", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Txid", "Owner", "Stages" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Data", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "Txid" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Name", "Txid", "Owner", "Stages" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Values", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "Txid" }, null, null, null)})
         }));
   }
   #endregion
 
 }
 #region Messages
+public sealed partial class Field : pb::IMessage<Field> {
+  private static readonly pb::MessageParser<Field> _parser = new pb::MessageParser<Field>(() => new Field());
+  private pb::UnknownFieldSet _unknownFields;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pb::MessageParser<Field> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::BitflowReflection.Descriptor.MessageTypes[0]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Field() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Field(Field other) : this() {
+    key_ = other.key_;
+    label_ = other.label_;
+    type_ = other.type_;
+    value_ = other.value_;
+    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Field Clone() {
+    return new Field(this);
+  }
+
+  /// <summary>Field number for the "key" field.</summary>
+  public const int KeyFieldNumber = 1;
+  private string key_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Key {
+    get { return key_; }
+    set {
+      key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "label" field.</summary>
+  public const int LabelFieldNumber = 2;
+  private string label_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Label {
+    get { return label_; }
+    set {
+      label_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "type" field.</summary>
+  public const int TypeFieldNumber = 3;
+  private global::Field.Types.Type type_ = 0;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public global::Field.Types.Type Type {
+    get { return type_; }
+    set {
+      type_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "value" field.</summary>
+  public const int ValueFieldNumber = 4;
+  private string value_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Value {
+    get { return value_; }
+    set {
+      value_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override bool Equals(object other) {
+    return Equals(other as Field);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool Equals(Field other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (Key != other.Key) return false;
+    if (Label != other.Label) return false;
+    if (Type != other.Type) return false;
+    if (Value != other.Value) return false;
+    return Equals(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (Key.Length != 0) hash ^= Key.GetHashCode();
+    if (Label.Length != 0) hash ^= Label.GetHashCode();
+    if (Type != 0) hash ^= Type.GetHashCode();
+    if (Value.Length != 0) hash ^= Value.GetHashCode();
+    if (_unknownFields != null) {
+      hash ^= _unknownFields.GetHashCode();
+    }
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void WriteTo(pb::CodedOutputStream output) {
+    if (Key.Length != 0) {
+      output.WriteRawTag(10);
+      output.WriteString(Key);
+    }
+    if (Label.Length != 0) {
+      output.WriteRawTag(18);
+      output.WriteString(Label);
+    }
+    if (Type != 0) {
+      output.WriteRawTag(24);
+      output.WriteEnum((int) Type);
+    }
+    if (Value.Length != 0) {
+      output.WriteRawTag(34);
+      output.WriteString(Value);
+    }
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(output);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int CalculateSize() {
+    int size = 0;
+    if (Key.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+    }
+    if (Label.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Label);
+    }
+    if (Type != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+    }
+    if (Value.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+    }
+    if (_unknownFields != null) {
+      size += _unknownFields.CalculateSize();
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(Field other) {
+    if (other == null) {
+      return;
+    }
+    if (other.Key.Length != 0) {
+      Key = other.Key;
+    }
+    if (other.Label.Length != 0) {
+      Label = other.Label;
+    }
+    if (other.Type != 0) {
+      Type = other.Type;
+    }
+    if (other.Value.Length != 0) {
+      Value = other.Value;
+    }
+    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(pb::CodedInputStream input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          break;
+        case 10: {
+          Key = input.ReadString();
+          break;
+        }
+        case 18: {
+          Label = input.ReadString();
+          break;
+        }
+        case 24: {
+          type_ = (global::Field.Types.Type) input.ReadEnum();
+          break;
+        }
+        case 34: {
+          Value = input.ReadString();
+          break;
+        }
+      }
+    }
+  }
+
+  #region Nested types
+  /// <summary>Container for nested types declared in the Field message type.</summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static partial class Types {
+    public enum Type {
+      [pbr::OriginalName("Text")] Text = 0,
+      [pbr::OriginalName("Image")] Image = 1,
+      [pbr::OriginalName("File")] File = 2,
+      [pbr::OriginalName("Number")] Number = 3,
+      [pbr::OriginalName("Boolean")] Boolean = 4,
+    }
+
+  }
+  #endregion
+
+}
+
 public sealed partial class Schema : pb::IMessage<Schema> {
   private static readonly pb::MessageParser<Schema> _parser = new pb::MessageParser<Schema>(() => new Schema());
   private pb::UnknownFieldSet _unknownFields;
@@ -64,7 +294,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[0]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[1]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -81,7 +311,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public Schema(Schema other) : this() {
-    id_ = other.id_;
+    txid_ = other.txid_;
     name_ = other.name_;
     fields_ = other.fields_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -92,14 +322,14 @@ public sealed partial class Schema : pb::IMessage<Schema> {
     return new Schema(this);
   }
 
-  /// <summary>Field number for the "id" field.</summary>
-  public const int IdFieldNumber = 1;
-  private string id_ = "";
+  /// <summary>Field number for the "txid" field.</summary>
+  public const int TxidFieldNumber = 1;
+  private string txid_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Id {
-    get { return id_; }
+  public string Txid {
+    get { return txid_; }
     set {
-      id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      txid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
     }
   }
 
@@ -116,11 +346,11 @@ public sealed partial class Schema : pb::IMessage<Schema> {
 
   /// <summary>Field number for the "fields" field.</summary>
   public const int FieldsFieldNumber = 3;
-  private static readonly pb::FieldCodec<global::Schema.Types.Field> _repeated_fields_codec
-      = pb::FieldCodec.ForMessage(26, global::Schema.Types.Field.Parser);
-  private readonly pbc::RepeatedField<global::Schema.Types.Field> fields_ = new pbc::RepeatedField<global::Schema.Types.Field>();
+  private static readonly pb::FieldCodec<global::Field> _repeated_fields_codec
+      = pb::FieldCodec.ForMessage(26, global::Field.Parser);
+  private readonly pbc::RepeatedField<global::Field> fields_ = new pbc::RepeatedField<global::Field>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::Schema.Types.Field> Fields {
+  public pbc::RepeatedField<global::Field> Fields {
     get { return fields_; }
   }
 
@@ -137,7 +367,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (Id != other.Id) return false;
+    if (Txid != other.Txid) return false;
     if (Name != other.Name) return false;
     if(!fields_.Equals(other.fields_)) return false;
     return Equals(_unknownFields, other._unknownFields);
@@ -146,7 +376,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (Id.Length != 0) hash ^= Id.GetHashCode();
+    if (Txid.Length != 0) hash ^= Txid.GetHashCode();
     if (Name.Length != 0) hash ^= Name.GetHashCode();
     hash ^= fields_.GetHashCode();
     if (_unknownFields != null) {
@@ -162,9 +392,9 @@ public sealed partial class Schema : pb::IMessage<Schema> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Id.Length != 0) {
+    if (Txid.Length != 0) {
       output.WriteRawTag(10);
-      output.WriteString(Id);
+      output.WriteString(Txid);
     }
     if (Name.Length != 0) {
       output.WriteRawTag(18);
@@ -179,8 +409,8 @@ public sealed partial class Schema : pb::IMessage<Schema> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (Id.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+    if (Txid.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
     }
     if (Name.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
@@ -197,8 +427,8 @@ public sealed partial class Schema : pb::IMessage<Schema> {
     if (other == null) {
       return;
     }
-    if (other.Id.Length != 0) {
-      Id = other.Id;
+    if (other.Txid.Length != 0) {
+      Txid = other.Txid;
     }
     if (other.Name.Length != 0) {
       Name = other.Name;
@@ -216,7 +446,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          Id = input.ReadString();
+          Txid = input.ReadString();
           break;
         }
         case 18: {
@@ -231,206 +461,6 @@ public sealed partial class Schema : pb::IMessage<Schema> {
     }
   }
 
-  #region Nested types
-  /// <summary>Container for nested types declared in the Schema message type.</summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static partial class Types {
-    public enum Type {
-      [pbr::OriginalName("Text")] Text = 0,
-      [pbr::OriginalName("Image")] Image = 1,
-      [pbr::OriginalName("File")] File = 2,
-      [pbr::OriginalName("Number")] Number = 3,
-      [pbr::OriginalName("Bool")] Bool = 4,
-    }
-
-    public sealed partial class Field : pb::IMessage<Field> {
-      private static readonly pb::MessageParser<Field> _parser = new pb::MessageParser<Field>(() => new Field());
-      private pb::UnknownFieldSet _unknownFields;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pb::MessageParser<Field> Parser { get { return _parser; } }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pbr::MessageDescriptor Descriptor {
-        get { return global::Schema.Descriptor.NestedTypes[0]; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      pbr::MessageDescriptor pb::IMessage.Descriptor {
-        get { return Descriptor; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Field() {
-        OnConstruction();
-      }
-
-      partial void OnConstruction();
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Field(Field other) : this() {
-        key_ = other.key_;
-        label_ = other.label_;
-        type_ = other.type_;
-        _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Field Clone() {
-        return new Field(this);
-      }
-
-      /// <summary>Field number for the "key" field.</summary>
-      public const int KeyFieldNumber = 1;
-      private string key_ = "";
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public string Key {
-        get { return key_; }
-        set {
-          key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-        }
-      }
-
-      /// <summary>Field number for the "label" field.</summary>
-      public const int LabelFieldNumber = 2;
-      private string label_ = "";
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public string Label {
-        get { return label_; }
-        set {
-          label_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-        }
-      }
-
-      /// <summary>Field number for the "type" field.</summary>
-      public const int TypeFieldNumber = 3;
-      private global::Schema.Types.Type type_ = 0;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Schema.Types.Type Type {
-        get { return type_; }
-        set {
-          type_ = value;
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override bool Equals(object other) {
-        return Equals(other as Field);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool Equals(Field other) {
-        if (ReferenceEquals(other, null)) {
-          return false;
-        }
-        if (ReferenceEquals(other, this)) {
-          return true;
-        }
-        if (Key != other.Key) return false;
-        if (Label != other.Label) return false;
-        if (Type != other.Type) return false;
-        return Equals(_unknownFields, other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override int GetHashCode() {
-        int hash = 1;
-        if (Key.Length != 0) hash ^= Key.GetHashCode();
-        if (Label.Length != 0) hash ^= Label.GetHashCode();
-        if (Type != 0) hash ^= Type.GetHashCode();
-        if (_unknownFields != null) {
-          hash ^= _unknownFields.GetHashCode();
-        }
-        return hash;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override string ToString() {
-        return pb::JsonFormatter.ToDiagnosticString(this);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void WriteTo(pb::CodedOutputStream output) {
-        if (Key.Length != 0) {
-          output.WriteRawTag(10);
-          output.WriteString(Key);
-        }
-        if (Label.Length != 0) {
-          output.WriteRawTag(18);
-          output.WriteString(Label);
-        }
-        if (Type != 0) {
-          output.WriteRawTag(24);
-          output.WriteEnum((int) Type);
-        }
-        if (_unknownFields != null) {
-          _unknownFields.WriteTo(output);
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int CalculateSize() {
-        int size = 0;
-        if (Key.Length != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
-        }
-        if (Label.Length != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeStringSize(Label);
-        }
-        if (Type != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
-        }
-        if (_unknownFields != null) {
-          size += _unknownFields.CalculateSize();
-        }
-        return size;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(Field other) {
-        if (other == null) {
-          return;
-        }
-        if (other.Key.Length != 0) {
-          Key = other.Key;
-        }
-        if (other.Label.Length != 0) {
-          Label = other.Label;
-        }
-        if (other.Type != 0) {
-          Type = other.Type;
-        }
-        _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(pb::CodedInputStream input) {
-        uint tag;
-        while ((tag = input.ReadTag()) != 0) {
-          switch(tag) {
-            default:
-              _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-              break;
-            case 10: {
-              Key = input.ReadString();
-              break;
-            }
-            case 18: {
-              Label = input.ReadString();
-              break;
-            }
-            case 24: {
-              type_ = (global::Schema.Types.Type) input.ReadEnum();
-              break;
-            }
-          }
-        }
-      }
-
-    }
-
-  }
-  #endregion
-
 }
 
 public sealed partial class UTXO : pb::IMessage<UTXO> {
@@ -441,7 +471,7 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[1]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[2]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -654,7 +684,7 @@ public sealed partial class Stage : pb::IMessage<Stage> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[2]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[3]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1149,7 +1179,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[3]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[4]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1166,6 +1196,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public Workflow(Workflow other) : this() {
+    name_ = other.name_;
     txid_ = other.txid_;
     owner_ = other.owner_;
     stages_ = other.stages_.Clone();
@@ -1177,8 +1208,19 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     return new Workflow(this);
   }
 
+  /// <summary>Field number for the "name" field.</summary>
+  public const int NameFieldNumber = 1;
+  private string name_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Name {
+    get { return name_; }
+    set {
+      name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
   /// <summary>Field number for the "txid" field.</summary>
-  public const int TxidFieldNumber = 1;
+  public const int TxidFieldNumber = 2;
   private string txid_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public string Txid {
@@ -1189,7 +1231,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   }
 
   /// <summary>Field number for the "owner" field.</summary>
-  public const int OwnerFieldNumber = 2;
+  public const int OwnerFieldNumber = 3;
   private string owner_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public string Owner {
@@ -1200,9 +1242,9 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   }
 
   /// <summary>Field number for the "stages" field.</summary>
-  public const int StagesFieldNumber = 3;
+  public const int StagesFieldNumber = 4;
   private static readonly pb::FieldCodec<global::Stage> _repeated_stages_codec
-      = pb::FieldCodec.ForMessage(26, global::Stage.Parser);
+      = pb::FieldCodec.ForMessage(34, global::Stage.Parser);
   private readonly pbc::RepeatedField<global::Stage> stages_ = new pbc::RepeatedField<global::Stage>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public pbc::RepeatedField<global::Stage> Stages {
@@ -1222,6 +1264,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
+    if (Name != other.Name) return false;
     if (Txid != other.Txid) return false;
     if (Owner != other.Owner) return false;
     if(!stages_.Equals(other.stages_)) return false;
@@ -1231,6 +1274,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
+    if (Name.Length != 0) hash ^= Name.GetHashCode();
     if (Txid.Length != 0) hash ^= Txid.GetHashCode();
     if (Owner.Length != 0) hash ^= Owner.GetHashCode();
     hash ^= stages_.GetHashCode();
@@ -1247,12 +1291,16 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Txid.Length != 0) {
+    if (Name.Length != 0) {
       output.WriteRawTag(10);
+      output.WriteString(Name);
+    }
+    if (Txid.Length != 0) {
+      output.WriteRawTag(18);
       output.WriteString(Txid);
     }
     if (Owner.Length != 0) {
-      output.WriteRawTag(18);
+      output.WriteRawTag(26);
       output.WriteString(Owner);
     }
     stages_.WriteTo(output, _repeated_stages_codec);
@@ -1264,6 +1312,9 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
+    if (Name.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+    }
     if (Txid.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
     }
@@ -1281,6 +1332,9 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   public void MergeFrom(Workflow other) {
     if (other == null) {
       return;
+    }
+    if (other.Name.Length != 0) {
+      Name = other.Name;
     }
     if (other.Txid.Length != 0) {
       Txid = other.Txid;
@@ -1301,14 +1355,18 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          Txid = input.ReadString();
+          Name = input.ReadString();
           break;
         }
         case 18: {
-          Owner = input.ReadString();
+          Txid = input.ReadString();
           break;
         }
         case 26: {
+          Owner = input.ReadString();
+          break;
+        }
+        case 34: {
           stages_.AddEntriesFrom(input, _repeated_stages_codec);
           break;
         }
@@ -1326,7 +1384,7 @@ public sealed partial class State : pb::IMessage<State> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[4]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[5]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1346,7 +1404,7 @@ public sealed partial class State : pb::IMessage<State> {
     txid_ = other.txid_;
     workflow_ = other.workflow_ != null ? other.workflow_.Clone() : null;
     status_ = other.status_;
-    data_ = other.data_;
+    values_ = other.values_.Clone();
     tasks_ = other.tasks_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
@@ -1389,18 +1447,14 @@ public sealed partial class State : pb::IMessage<State> {
     }
   }
 
-  /// <summary>Field number for the "data" field.</summary>
-  public const int DataFieldNumber = 4;
-  private string data_ = "";
-  /// <summary>
-  /// JSON representation of state values
-  /// </summary>
+  /// <summary>Field number for the "values" field.</summary>
+  public const int ValuesFieldNumber = 4;
+  private static readonly pb::FieldCodec<global::Field> _repeated_values_codec
+      = pb::FieldCodec.ForMessage(34, global::Field.Parser);
+  private readonly pbc::RepeatedField<global::Field> values_ = new pbc::RepeatedField<global::Field>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Data {
-    get { return data_; }
-    set {
-      data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
+  public pbc::RepeatedField<global::Field> Values {
+    get { return values_; }
   }
 
   /// <summary>Field number for the "tasks" field.</summary>
@@ -1429,7 +1483,7 @@ public sealed partial class State : pb::IMessage<State> {
     if (Txid != other.Txid) return false;
     if (!object.Equals(Workflow, other.Workflow)) return false;
     if (Status != other.Status) return false;
-    if (Data != other.Data) return false;
+    if(!values_.Equals(other.values_)) return false;
     if(!tasks_.Equals(other.tasks_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
@@ -1440,7 +1494,7 @@ public sealed partial class State : pb::IMessage<State> {
     if (Txid.Length != 0) hash ^= Txid.GetHashCode();
     if (workflow_ != null) hash ^= Workflow.GetHashCode();
     if (Status != 0) hash ^= Status.GetHashCode();
-    if (Data.Length != 0) hash ^= Data.GetHashCode();
+    hash ^= values_.GetHashCode();
     hash ^= tasks_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
@@ -1467,10 +1521,7 @@ public sealed partial class State : pb::IMessage<State> {
       output.WriteRawTag(24);
       output.WriteEnum((int) Status);
     }
-    if (Data.Length != 0) {
-      output.WriteRawTag(34);
-      output.WriteString(Data);
-    }
+    values_.WriteTo(output, _repeated_values_codec);
     tasks_.WriteTo(output, _repeated_tasks_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
@@ -1489,9 +1540,7 @@ public sealed partial class State : pb::IMessage<State> {
     if (Status != 0) {
       size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
     }
-    if (Data.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Data);
-    }
+    size += values_.CalculateSize(_repeated_values_codec);
     size += tasks_.CalculateSize(_repeated_tasks_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -1516,9 +1565,7 @@ public sealed partial class State : pb::IMessage<State> {
     if (other.Status != 0) {
       Status = other.Status;
     }
-    if (other.Data.Length != 0) {
-      Data = other.Data;
-    }
+    values_.Add(other.values_);
     tasks_.Add(other.tasks_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -1547,7 +1594,7 @@ public sealed partial class State : pb::IMessage<State> {
           break;
         }
         case 34: {
-          Data = input.ReadString();
+          values_.AddEntriesFrom(input, _repeated_values_codec);
           break;
         }
         case 42: {

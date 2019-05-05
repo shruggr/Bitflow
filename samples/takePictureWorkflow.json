@@ -1,0 +1,43 @@
+{
+    "name": "Test workflow",
+    "stages": [
+        {
+            "name": "Request a picture",
+            "schemaTxn": "e833350fc7a6670edceb73e1f3351f4885430eb13951f13ffa4841561a212822",
+            "funds": 1000000,
+            "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
+            "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",
+            "onComplete": {
+                "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
+                "createTaskStageIdx": 1,
+                "assignee": "1Mz9ojrnfpiSJ3BkoRo5S6uBnDJ6igNtSF",
+                "funds": 1092
+            }
+        },
+        {
+            "name": "Take picture",
+            "schemaTxn": "53bf8f8437f7819c0d0f5133ac8024466bfc363a288e19a71a1de226eef213a8",
+            "funds": 546,
+            "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
+            "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",
+            "onComplete": {
+                "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
+                "createTaskStageIdx": 2,
+                "assignee": "12nHNhR2hz6nApwMxxTeKtEhYx1UrtdXgN",
+                "funds": 546
+            }
+        },
+        {
+            "name": "Review picture",
+            "schemaTxn": "43bdbdb1d6faae0ed3d0bb027ec6fdc2fb8b2d77ed94fa28aeb60261de2ac3e3",
+            "funds": 546,
+            "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
+            "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",
+            "onComplete": {
+                "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
+                "assignee": "1Mz9ojrnfpiSJ3BkoRo5S6uBnDJ6igNtSF",
+                "funds": 750000
+            }
+        }
+    ]
+}

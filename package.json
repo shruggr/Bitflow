@@ -4,7 +4,7 @@
   "description": "![Bitflow](https://github.com/shruggr/Bitflow/bitflow.png \"Bitflow\") Layout schema workflows that process payouts",
   "main": "index.js",
   "scripts": {
-    "build:proto": "pbjs -w commonjs -t static-module -o functions/lib/bitflow-proto.js bitflow-unity/Assets/Definitions/bitflow.proto && pbts -o functions/src/bitflow-proto.d.ts functions/lib/bitflow-proto.js",
+    "build:proto": "pbjs -w commonjs -t static-module -o functions/lib/bitflow-proto.js bitflow-unity/Assets/Definitions/bitflow.proto && pbts -o functions/src/bitflow-proto.d.ts functions/lib/bitflow-proto.js && cp functions/lib/bitflow-proto.js web/src/lib/ && cp functions/src/bitflow-proto.d.ts web/src/lib/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/shruggr/Bitflow#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "bsv": "^0.26.5",
+    "btoa": "^1.2.1",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
     "protobufjs": "^6.8.8"

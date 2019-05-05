@@ -1,3 +1,12 @@
-<p>
-  schemas works!
-</p>
+<h3>Schemas</h3>
+<b>Upload Schema</b>
+<div>
+  <input type="file" (change)="onFileChange($event)"><br>
+  <div id="money-button"></div>
+</div>
+{{result}}
+<ul>
+  <li *ngFor="let schema of schemas | async">
+    <pre>{{ JSON.stringify(schema, null, 2)}}</pre>
+  </li>
+</ul>
