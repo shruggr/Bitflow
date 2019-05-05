@@ -36,7 +36,7 @@ message Stage {
 
     string name = 1;
     string schemaTxn = 2;
-    int32 fundsRequired = 3;
+    int32 funds= 3;
     string payee = 4;
     string validationScriptTxn = 5;
     Handler onComplete = 6;

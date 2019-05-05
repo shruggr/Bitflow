@@ -12,7 +12,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bsv": "^0.26.5",
-    "datapay": "0.0.14",
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
     "protobufjs": "^6.8.8",

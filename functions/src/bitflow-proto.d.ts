@@ -331,8 +331,8 @@ export interface IStage {
     /** Stage schemaTxn */
     schemaTxn?: (string|null);
 
-    /** Stage fundsRequired */
-    fundsRequired?: (number|null);
+    /** Stage funds */
+    funds?: (number|null);
 
     /** Stage payee */
     payee?: (string|null);
@@ -341,7 +341,7 @@ export interface IStage {
     validationScriptTxn?: (string|null);
 
     /** Stage onComplete */
-    onComplete: Stage.IHandler;
+    onComplete?: (Stage.IHandler|null);
 }
 
 /** Represents a Stage. */
@@ -359,8 +359,8 @@ export class Stage implements IStage {
     /** Stage schemaTxn. */
     public schemaTxn: string;
 
-    /** Stage fundsRequired. */
-    public fundsRequired: number;
+    /** Stage funds. */
+    public funds: number;
 
     /** Stage payee. */
     public payee: string;
@@ -369,7 +369,7 @@ export class Stage implements IStage {
     public validationScriptTxn: string;
 
     /** Stage onComplete. */
-    public onComplete: Stage.IHandler;
+    public onComplete?: (Stage.IHandler|null);
 
     /**
      * Creates a new Stage instance using the specified properties.
@@ -659,16 +659,16 @@ export class Workflow implements IWorkflow {
 export interface IState {
 
     /** State txid */
-    txid: string;
+    txid?: (string|null);
 
     /** State workflow */
-    workflow: IWorkflow;
+    workflow?: (IWorkflow|null);
 
     /** State status */
-    status: State.Status;
+    status?: (State.Status|null);
 
     /** State data */
-    data: string;
+    data?: (string|null);
 
     /** State tasks */
     tasks?: (State.ITask[]|null);
@@ -687,7 +687,7 @@ export class State implements IState {
     public txid: string;
 
     /** State workflow. */
-    public workflow: IWorkflow;
+    public workflow?: (IWorkflow|null);
 
     /** State status. */
     public status: State.Status;
@@ -782,13 +782,13 @@ export namespace State {
     interface ITask {
 
         /** Task stage */
-        stage: IStage;
+        stage?: (IStage|null);
 
         /** Task status */
-        status: State.Status;
+        status?: (State.Status|null);
 
         /** Task address */
-        address: string;
+        address?: (string|null);
 
         /** Task utxos */
         utxos?: (IUTXO[]|null);
@@ -807,7 +807,7 @@ export namespace State {
         constructor(properties?: State.ITask);
 
         /** Task stage. */
-        public stage: IStage;
+        public stage?: (IStage|null);
 
         /** Task status. */
         public status: State.Status;
