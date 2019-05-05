@@ -38,6 +38,7 @@ public class Identity : ScriptableObject
         return key.PubKey.GetAddress( Network );
     }
 
+    [ContextMenu("Create")]
     [UsedImplicitly] public void Create()
     {
         var privKey = new Key();
