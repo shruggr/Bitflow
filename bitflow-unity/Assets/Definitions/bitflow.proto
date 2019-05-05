@@ -4,6 +4,8 @@ message Schema {
     enum Type {
         Text = 0;
         Image = 1;
+        File = 2;
+        Number = 3;
     }
 
     message Field {
@@ -17,10 +19,17 @@ message Schema {
     repeated Field fields = 3;
 }
 
-message Step {
+message UTXO {
+    string txId = 1;
+    int32 vout = 2;
+    string script = 4;
+    int32 satoshis = 5;
+}
+
+message Stage {
     message Handler {
         string processScriptTxn = 1;
-        int32 createTaskStepIdx = 2;
+        int32 createTaskStageIdx = 2;
         string assignee = 3;
         int32 funds = 4;
     }
@@ -30,39 +39,33 @@ message Step {
     int32 fundsRequired = 3;
     string payee = 4;
     string validationScriptTxn = 5;
-    repeated Handler onComplete = 6;
+    required Handler onComplete = 6;
 }
 
 message Workflow {
-    string id = 1;
+    string txid = 1;
     string owner = 2;
-    repeated Step steps = 3;
+    repeated Stage stages = 3;
 }
 
-message WorkflowState {
+message State {
     enum Status {
-        Pending = 0;
+        Open = 0;
         Error = 1;
         Complete = 2;
     }
 
-    message UTXO {
-        string txId = 1;
-        int32 vout = 2;
-        string address = 3;
-        string script = 4;
-        int32 satoshis = 5;
-    }
-
     message Task {
-        Step step = 1;
-        Status status = 2;
-        UTXO utxo = 3;
+        required Stage stage = 1;
+        required Status status = 2;
+        required string address = 3;
+        repeated UTXO utxos = 4;
+        string txid = 5;
     }
 
-    string id = 1;
-    string workflowTxn = 2;
-    Status status = 3;
-    string state = 4; // JSON representation of state values
+    required string txid = 1;
+    required Workflow workflow = 2;
+    required Status status = 3;
+    required string data = 4; // JSON representation of state values
     repeated Task tasks = 5;
 }
