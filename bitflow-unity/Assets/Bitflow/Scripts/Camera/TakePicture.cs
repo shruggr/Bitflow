@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class TakePicture : MonoBehaviour
 {
+
+    [SerializeField] Text ImageUrl;
+    [SerializeField] Image Image;
+
+
+
     public void Take()
     {
         NativeToolkit.OnCameraShotComplete += OnCameraShotComplete;
@@ -65,14 +71,20 @@ public class TakePicture : MonoBehaviour
                         OpReturns.MakeImg( buffer ) )
                     .Spend( txn =>
                     {
-                        Debug.Log( $"https://bico.media/{txn}" );
+                        var value = $"https://bico.media/{txn}";
+                        Debug.Log(value);
                         ModalDialog.Instance.Hide();
                         ModalDialog.Instance.Show( "Image successfully uploaded",
-                            $"Check it out at: https://bico.media/{txn}", "Copy to Clipboard", "Ok" );
+                            $"Check it out at: {value}", "View Online", "Ok" );
                         ModalDialog.Instance.CallbackYes.AddListener( () =>
                         {
-                            UniClipboard.SetText( $"https://bico.media/{txn}" );
+                            //UniClipboard.SetText( $"https://bico.media/{txn}" );
+                            Application.OpenURL(value);
                         } );
+                        
+                        ImageUrl.text = value;
+                        var sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, 200, 200), new Vector2(0.5f, 0.5f), 100.0f);
+                        Image.sprite = sprite;
                     } );
             } );
         }
