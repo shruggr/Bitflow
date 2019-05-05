@@ -3,7 +3,14 @@
     "stages": [
         {
             "name": "Request a picture",
-            "schemaTxn": "e833350fc7a6670edceb73e1f3351f4885430eb13951f13ffa4841561a212822",
+            "schema": {
+                "name": "Picture Request",
+                "fields": [{
+                    "key": "description",
+                    "label": "Describe Photo",
+                    "type": 0
+                }]
+            },
             "funds": 1000000,
             "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
             "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",
@@ -16,7 +23,18 @@
         },
         {
             "name": "Take picture",
-            "schemaTxn": "53bf8f8437f7819c0d0f5133ac8024466bfc363a288e19a71a1de226eef213a8",
+            "schema": {
+                "name": "Picture Submission",
+                "fields": [{
+                    "key": "image",
+                    "label": "Photo",
+                    "type": 1
+                },{
+                    "key": "lighting",
+                    "label": "Lighting conditions (indoor, sunlight, dusk)",
+                    "type": 0
+                }]
+            },
             "funds": 546,
             "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
             "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",
@@ -29,7 +47,14 @@
         },
         {
             "name": "Review picture",
-            "schemaTxn": "43bdbdb1d6faae0ed3d0bb027ec6fdc2fb8b2d77ed94fa28aeb60261de2ac3e3",
+            "schema": {
+                "name": "Picture Review",
+                "fields": [{
+                    "key": "approved",
+                    "label": "Approve Photo",
+                    "type": 4
+                }]
+            },
             "funds": 546,
             "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
             "validationScriptTxn": "39288237bcb1c44d7e28901ebbcbc8b75a2c6e0cf25d885a6fdf8e7d6035f098",

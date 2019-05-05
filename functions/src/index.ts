@@ -1,8 +1,8 @@
 import axios from 'axios';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT, WORKFLOW } from './constants';
-import { Workflow, State, Schema, UTXO, IState, ISchema, Stage, Field } from './bitflow-proto';
+import { SUBMIT, REQUEST, ASSIGN, UPLOAD, BITINDEX_KEY, SCRIPT, WORKFLOW } from './constants';
+import { Workflow, State, UTXO, IState, Stage, Field, IStage } from './bitflow-proto';
 import { NodeVM } from 'vm2';
 import { Transaction } from '@google-cloud/firestore';
 import { fromTx } from './3rd-party/txo';
@@ -88,11 +88,6 @@ export const webhook = functions.https.onRequest(async (req, res) => {
             case SUBMIT:
                 await processSubmit(txnData);
                 break;
-            case SCHEMA:
-                const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-                schema.txid = txnData.tx.h;
-                rtDb.ref(`schemas/${txnData.tx.h}`).set(schema);
-                break;
             case SCRIPT:
                 db.collection('scripts').doc(txnData.tx.h).set({
                     txid: txnData.tx.h,
@@ -148,14 +143,6 @@ async function bitQuery(filter: any = {}): Promise<any> {
     return (r.data.c || []).concat(r.data.u || []);
 }
 
-async function getData(path: string) {
-    return new Promise((resolve) => {
-        rtDb.ref(path).once('value', (data) => {
-            resolve(data);
-        })
-    })
-}
-
 async function getWorkflow(workflowTxn: string): Promise<any> {
     return new Promise((resolve, reject) => {
         rtDb.ref(`workflows/${workflowTxn}`).once('value', (snap) => {
@@ -169,13 +156,6 @@ async function getScript(scriptTxn: string): Promise<any> {
     let doc = await db.collection('scripts').doc(scriptTxn).get();
     if (!doc.exists) throw new Error(`Invalid Script: ${scriptTxn}`);
     return doc.data();
-}
-
-async function getSchema(schemaTxn: string): Promise<ISchema> {
-    const schemaData = getData(`schemas/${schemaTxn}`);
-    // let doc = await db.collection('schemas').doc(schemaTxn).get();
-    // if (!doc.exists) throw new Error(`Invalid Schema: ${schemaTxn}`);
-    return Schema.fromObject(schemaData);
 }
 
 async function processRequest(
@@ -207,7 +187,7 @@ async function processRequest(
         const validate = vm.run(script.body);
         let context = {
             state: state.values && state.values.map((value) => value.value),
-            schema: await getData(`schemas/${task.stage && task.stage.schemaTxn}`),
+            schema: task.stage && task.stage.schema,
             data
         }
         task.status = validate(context);
@@ -245,7 +225,7 @@ async function processSubmit(
         const validate = vm.run(script.body);
         let context = {
             state: state.values && state.values.map((value) => value.value),
-            schema: await getData(`schemas/${task.stage && task.stage.schemaTxn}`),
+            schema: task.stage && task.stage.schema,
             data
         }
         task.status = validate(context);
@@ -278,12 +258,12 @@ async function processTask(
         const process = vm.run(script);
         let context = {
             state: state.values && state.values.map((value) => value.value),
-            schema: Schema.fromObject(await getData(`schemas/${task.stage && task.stage.schemaTxn}`)),
+            schema: task.stage && task.stage.schema,
             data
         }
 
         state.status = process(context);
-        for(let field of context.schema.fields) {
+        for(let field of (context.schema && context.schema.fields) || []) {
             let value = state.values && state.values.find((value) => value.key == field.key);
             if(value) {
                 value.value = context.data[field.key || ''];
@@ -295,11 +275,9 @@ async function processTask(
         }
     }
 
-    let nextStage: any;
-    let schema: ISchema;
+    let nextStage: IStage;
     if (handler.createTaskStageIdx && state.workflow && state.workflow.stages) {
         nextStage = state.workflow.stages[handler.createTaskStageIdx];
-        schema = await getSchema(nextStage.schemaTxn);
     }
 
     await db.runTransaction(async (t: Transaction) => {
@@ -331,11 +309,9 @@ async function processTask(
                 address: handler.assignee
             });
 
-            if (schema) {
-                (schema.fields || [])
-                    .filter((field) => field.type == Field.Type.Image || field.type == Field.Type.File)
-                    .forEach(() => txn.to(handler.assignee, UPLOAD));
-            }
+            ((nextStage.schema && nextStage.schema.fields) || [])
+                .filter((field) => field.type == Field.Type.Image || field.type == Field.Type.File)
+                .forEach(() => txn.to(handler.assignee, UPLOAD));
         }
 
         if (newTask) {

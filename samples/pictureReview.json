@@ -1,8 +1,0 @@
-{
-    "name": "Picture Review",
-    "fields": [{
-        "key": "approved",
-        "label": "Approve Photo",
-        "type": 4
-    }]
-}

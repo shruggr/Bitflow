@@ -1,8 +1,0 @@
-{
-    "name": "Picture Request",
-    "fields": [{
-        "key": "description",
-        "label": "Describe Photo",
-        "type": 0
-    }]
-}

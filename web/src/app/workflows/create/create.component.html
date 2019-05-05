@@ -1,10 +1,9 @@
 <p>
-  {{ txid }}
   Name: {{ (workflow | async)?.name}}
 </p>
 
 <div *ngIf="workflow">
-  <div *ngFor="let stage of workflow.stages[0]">
+  <!-- <div *ngFor="let stage of (workflow | async)?.stages[0]">
 
-  </div>
+  </div> -->
 </div>

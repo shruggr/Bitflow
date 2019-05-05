@@ -42,7 +42,6 @@ Promise.resolve().then(async () => {
 
     const [scripts, schemas, workflows] = await Promise.all([
         bitQuery({ "out.s1": SCRIPT }),
-        bitQuery({ "out.s1": SCHEMA }),
         bitQuery({ "out.s1": WORKFLOW }),
     ])
     for (let data of scripts) {
@@ -52,19 +51,6 @@ Promise.resolve().then(async () => {
             script: opRet.ls2 || opRet.s2,
             name: opRet.ls3 || opRet.s3
         });
-    }
-
-    for (let data of schemas) {
-        const opRet = data.out.find((out) => out.b0.op == 106);
-        try {
-            const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-            schema.txid = data.tx.h;
-            await rtDb.ref(`schemas/${data.tx.h}`).set(schema);
-        }
-        catch (e) {
-            console.error(e);
-        }
-        // db.collection('schema').doc().set(schema);
     }
 
     for (let data of workflows) {
