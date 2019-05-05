@@ -22,26 +22,26 @@ public static partial class BitflowReflection {
   static BitflowReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cg1iaXRmbG93LnByb3RvIrUBCgZTY2hlbWESCgoCaWQYASABKAkSDAoEbmFt",
+          "Cg1iaXRmbG93LnByb3RvIr8BCgZTY2hlbWESCgoCaWQYASABKAkSDAoEbmFt",
           "ZRgCIAEoCRIdCgZmaWVsZHMYAyADKAsyDS5TY2hlbWEuRmllbGQaPwoFRmll",
           "bGQSCwoDa2V5GAEgASgJEg0KBWxhYmVsGAIgASgJEhoKBHR5cGUYAyABKA4y",
-          "DC5TY2hlbWEuVHlwZSIxCgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABEggK",
-          "BEZpbGUQAhIKCgZOdW1iZXIQAyJECgRVVFhPEgwKBHR4SWQYASABKAkSDAoE",
-          "dm91dBgCIAEoBRIOCgZzY3JpcHQYBCABKAkSEAoIc2F0b3NoaXMYBSABKAUi",
-          "6QEKBVN0YWdlEgwKBG5hbWUYASABKAkSEQoJc2NoZW1hVHhuGAIgASgJEg0K",
-          "BWZ1bmRzGAMgASgFEg0KBXBheWVlGAQgASgJEhsKE3ZhbGlkYXRpb25TY3Jp",
-          "cHRUeG4YBSABKAkSIgoKb25Db21wbGV0ZRgGIAEoCzIOLlN0YWdlLkhhbmRs",
-          "ZXIaYAoHSGFuZGxlchIYChBwcm9jZXNzU2NyaXB0VHhuGAEgASgJEhoKEmNy",
-          "ZWF0ZVRhc2tTdGFnZUlkeBgCIAEoBRIQCghhc3NpZ25lZRgDIAEoCRINCgVm",
-          "dW5kcxgEIAEoBSI/CghXb3JrZmxvdxIMCgR0eGlkGAEgASgJEg0KBW93bmVy",
-          "GAIgASgJEhYKBnN0YWdlcxgDIAMoCzIGLlN0YWdlIpsCCgVTdGF0ZRIMCgR0",
-          "eGlkGAEgASgJEhsKCHdvcmtmbG93GAIgASgLMgkuV29ya2Zsb3cSHQoGc3Rh",
-          "dHVzGAMgASgOMg0uU3RhdGUuU3RhdHVzEgwKBGRhdGEYBCABKAkSGgoFdGFz",
-          "a3MYBSADKAsyCy5TdGF0ZS5UYXNrGnEKBFRhc2sSFQoFc3RhZ2UYASABKAsy",
-          "Bi5TdGFnZRIdCgZzdGF0dXMYAiABKA4yDS5TdGF0ZS5TdGF0dXMSDwoHYWRk",
-          "cmVzcxgDIAEoCRIUCgV1dHhvcxgEIAMoCzIFLlVUWE8SDAoEdHhpZBgFIAEo",
-          "CSIrCgZTdGF0dXMSCAoET3BlbhAAEgkKBUVycm9yEAESDAoIQ29tcGxldGUQ",
-          "AmIGcHJvdG8z"));
+          "DC5TY2hlbWEuVHlwZSI7CgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABEggK",
+          "BEZpbGUQAhIKCgZOdW1iZXIQAxIICgRCb29sEAQiRAoEVVRYTxIMCgR0eElk",
+          "GAEgASgJEgwKBHZvdXQYAiABKAUSDgoGc2NyaXB0GAQgASgJEhAKCHNhdG9z",
+          "aGlzGAUgASgFIukBCgVTdGFnZRIMCgRuYW1lGAEgASgJEhEKCXNjaGVtYVR4",
+          "bhgCIAEoCRINCgVmdW5kcxgDIAEoBRINCgVwYXllZRgEIAEoCRIbChN2YWxp",
+          "ZGF0aW9uU2NyaXB0VHhuGAUgASgJEiIKCm9uQ29tcGxldGUYBiABKAsyDi5T",
+          "dGFnZS5IYW5kbGVyGmAKB0hhbmRsZXISGAoQcHJvY2Vzc1NjcmlwdFR4bhgB",
+          "IAEoCRIaChJjcmVhdGVUYXNrU3RhZ2VJZHgYAiABKAUSEAoIYXNzaWduZWUY",
+          "AyABKAkSDQoFZnVuZHMYBCABKAUiPwoIV29ya2Zsb3cSDAoEdHhpZBgBIAEo",
+          "CRINCgVvd25lchgCIAEoCRIWCgZzdGFnZXMYAyADKAsyBi5TdGFnZSKbAgoF",
+          "U3RhdGUSDAoEdHhpZBgBIAEoCRIbCgh3b3JrZmxvdxgCIAEoCzIJLldvcmtm",
+          "bG93Eh0KBnN0YXR1cxgDIAEoDjINLlN0YXRlLlN0YXR1cxIMCgRkYXRhGAQg",
+          "ASgJEhoKBXRhc2tzGAUgAygLMgsuU3RhdGUuVGFzaxpxCgRUYXNrEhUKBXN0",
+          "YWdlGAEgASgLMgYuU3RhZ2USHQoGc3RhdHVzGAIgASgOMg0uU3RhdGUuU3Rh",
+          "dHVzEg8KB2FkZHJlc3MYAyABKAkSFAoFdXR4b3MYBCADKAsyBS5VVFhPEgwK",
+          "BHR4aWQYBSABKAkiKwoGU3RhdHVzEggKBE9wZW4QABIJCgVFcnJvchABEgwK",
+          "CENvbXBsZXRlEAJiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -240,6 +240,7 @@ public sealed partial class Schema : pb::IMessage<Schema> {
       [pbr::OriginalName("Image")] Image = 1,
       [pbr::OriginalName("File")] File = 2,
       [pbr::OriginalName("Number")] Number = 3,
+      [pbr::OriginalName("Bool")] Bool = 4,
     }
 
     public sealed partial class Field : pb::IMessage<Field> {

@@ -6,6 +6,7 @@ message Schema {
         Image = 1;
         File = 2;
         Number = 3;
+        Bool = 4;
     }
 
     message Field {
