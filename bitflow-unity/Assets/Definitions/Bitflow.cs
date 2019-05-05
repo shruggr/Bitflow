@@ -28,26 +28,26 @@ public static partial class BitflowReflection {
           "DC5TY2hlbWEuVHlwZSIxCgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABEggK",
           "BEZpbGUQAhIKCgZOdW1iZXIQAyJECgRVVFhPEgwKBHR4SWQYASABKAkSDAoE",
           "dm91dBgCIAEoBRIOCgZzY3JpcHQYBCABKAkSEAoIc2F0b3NoaXMYBSABKAUi",
-          "8QEKBVN0YWdlEgwKBG5hbWUYASABKAkSEQoJc2NoZW1hVHhuGAIgASgJEhUK",
-          "DWZ1bmRzUmVxdWlyZWQYAyABKAUSDQoFcGF5ZWUYBCABKAkSGwoTdmFsaWRh",
-          "dGlvblNjcmlwdFR4bhgFIAEoCRIiCgpvbkNvbXBsZXRlGAYgASgLMg4uU3Rh",
-          "Z2UuSGFuZGxlchpgCgdIYW5kbGVyEhgKEHByb2Nlc3NTY3JpcHRUeG4YASAB",
-          "KAkSGgoSY3JlYXRlVGFza1N0YWdlSWR4GAIgASgFEhAKCGFzc2lnbmVlGAMg",
-          "ASgJEg0KBWZ1bmRzGAQgASgFIj8KCFdvcmtmbG93EgwKBHR4aWQYASABKAkS",
-          "DQoFb3duZXIYAiABKAkSFgoGc3RhZ2VzGAMgAygLMgYuU3RhZ2UimwIKBVN0",
-          "YXRlEgwKBHR4aWQYASABKAkSGwoId29ya2Zsb3cYAiABKAsyCS5Xb3JrZmxv",
-          "dxIdCgZzdGF0dXMYAyABKA4yDS5TdGF0ZS5TdGF0dXMSDAoEZGF0YRgEIAEo",
-          "CRIaCgV0YXNrcxgFIAMoCzILLlN0YXRlLlRhc2sacQoEVGFzaxIVCgVzdGFn",
-          "ZRgBIAEoCzIGLlN0YWdlEh0KBnN0YXR1cxgCIAEoDjINLlN0YXRlLlN0YXR1",
-          "cxIPCgdhZGRyZXNzGAMgASgJEhQKBXV0eG9zGAQgAygLMgUuVVRYTxIMCgR0",
-          "eGlkGAUgASgJIisKBlN0YXR1cxIICgRPcGVuEAASCQoFRXJyb3IQARIMCghD",
-          "b21wbGV0ZRACYgZwcm90bzM="));
+          "6QEKBVN0YWdlEgwKBG5hbWUYASABKAkSEQoJc2NoZW1hVHhuGAIgASgJEg0K",
+          "BWZ1bmRzGAMgASgFEg0KBXBheWVlGAQgASgJEhsKE3ZhbGlkYXRpb25TY3Jp",
+          "cHRUeG4YBSABKAkSIgoKb25Db21wbGV0ZRgGIAEoCzIOLlN0YWdlLkhhbmRs",
+          "ZXIaYAoHSGFuZGxlchIYChBwcm9jZXNzU2NyaXB0VHhuGAEgASgJEhoKEmNy",
+          "ZWF0ZVRhc2tTdGFnZUlkeBgCIAEoBRIQCghhc3NpZ25lZRgDIAEoCRINCgVm",
+          "dW5kcxgEIAEoBSI/CghXb3JrZmxvdxIMCgR0eGlkGAEgASgJEg0KBW93bmVy",
+          "GAIgASgJEhYKBnN0YWdlcxgDIAMoCzIGLlN0YWdlIpsCCgVTdGF0ZRIMCgR0",
+          "eGlkGAEgASgJEhsKCHdvcmtmbG93GAIgASgLMgkuV29ya2Zsb3cSHQoGc3Rh",
+          "dHVzGAMgASgOMg0uU3RhdGUuU3RhdHVzEgwKBGRhdGEYBCABKAkSGgoFdGFz",
+          "a3MYBSADKAsyCy5TdGF0ZS5UYXNrGnEKBFRhc2sSFQoFc3RhZ2UYASABKAsy",
+          "Bi5TdGFnZRIdCgZzdGF0dXMYAiABKA4yDS5TdGF0ZS5TdGF0dXMSDwoHYWRk",
+          "cmVzcxgDIAEoCRIUCgV1dHhvcxgEIAMoCzIFLlVUWE8SDAoEdHhpZBgFIAEo",
+          "CSIrCgZTdGF0dXMSCAoET3BlbhAAEgkKBUVycm9yEAESDAoIQ29tcGxldGUQ",
+          "AmIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::Schema), global::Schema.Parser, new[]{ "Id", "Name", "Fields" }, null, new[]{ typeof(global::Schema.Types.Type) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Schema.Types.Field), global::Schema.Types.Field.Parser, new[]{ "Key", "Label", "Type" }, null, null, null)}),
           new pbr::GeneratedClrTypeInfo(typeof(global::UTXO), global::UTXO.Parser, new[]{ "TxId", "Vout", "Script", "Satoshis" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "SchemaTxn", "FundsRequired", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "SchemaTxn", "Funds", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
           new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Txid", "Owner", "Stages" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Data", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "Txid" }, null, null, null)})
         }));
@@ -672,7 +672,7 @@ public sealed partial class Stage : pb::IMessage<Stage> {
   public Stage(Stage other) : this() {
     name_ = other.name_;
     schemaTxn_ = other.schemaTxn_;
-    fundsRequired_ = other.fundsRequired_;
+    funds_ = other.funds_;
     payee_ = other.payee_;
     validationScriptTxn_ = other.validationScriptTxn_;
     onComplete_ = other.onComplete_ != null ? other.onComplete_.Clone() : null;
@@ -706,14 +706,14 @@ public sealed partial class Stage : pb::IMessage<Stage> {
     }
   }
 
-  /// <summary>Field number for the "fundsRequired" field.</summary>
-  public const int FundsRequiredFieldNumber = 3;
-  private int fundsRequired_;
+  /// <summary>Field number for the "funds" field.</summary>
+  public const int FundsFieldNumber = 3;
+  private int funds_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int FundsRequired {
-    get { return fundsRequired_; }
+  public int Funds {
+    get { return funds_; }
     set {
-      fundsRequired_ = value;
+      funds_ = value;
     }
   }
 
@@ -765,7 +765,7 @@ public sealed partial class Stage : pb::IMessage<Stage> {
     }
     if (Name != other.Name) return false;
     if (SchemaTxn != other.SchemaTxn) return false;
-    if (FundsRequired != other.FundsRequired) return false;
+    if (Funds != other.Funds) return false;
     if (Payee != other.Payee) return false;
     if (ValidationScriptTxn != other.ValidationScriptTxn) return false;
     if (!object.Equals(OnComplete, other.OnComplete)) return false;
@@ -777,7 +777,7 @@ public sealed partial class Stage : pb::IMessage<Stage> {
     int hash = 1;
     if (Name.Length != 0) hash ^= Name.GetHashCode();
     if (SchemaTxn.Length != 0) hash ^= SchemaTxn.GetHashCode();
-    if (FundsRequired != 0) hash ^= FundsRequired.GetHashCode();
+    if (Funds != 0) hash ^= Funds.GetHashCode();
     if (Payee.Length != 0) hash ^= Payee.GetHashCode();
     if (ValidationScriptTxn.Length != 0) hash ^= ValidationScriptTxn.GetHashCode();
     if (onComplete_ != null) hash ^= OnComplete.GetHashCode();
@@ -802,9 +802,9 @@ public sealed partial class Stage : pb::IMessage<Stage> {
       output.WriteRawTag(18);
       output.WriteString(SchemaTxn);
     }
-    if (FundsRequired != 0) {
+    if (Funds != 0) {
       output.WriteRawTag(24);
-      output.WriteInt32(FundsRequired);
+      output.WriteInt32(Funds);
     }
     if (Payee.Length != 0) {
       output.WriteRawTag(34);
@@ -832,8 +832,8 @@ public sealed partial class Stage : pb::IMessage<Stage> {
     if (SchemaTxn.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(SchemaTxn);
     }
-    if (FundsRequired != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeInt32Size(FundsRequired);
+    if (Funds != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Funds);
     }
     if (Payee.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Payee);
@@ -861,8 +861,8 @@ public sealed partial class Stage : pb::IMessage<Stage> {
     if (other.SchemaTxn.Length != 0) {
       SchemaTxn = other.SchemaTxn;
     }
-    if (other.FundsRequired != 0) {
-      FundsRequired = other.FundsRequired;
+    if (other.Funds != 0) {
+      Funds = other.Funds;
     }
     if (other.Payee.Length != 0) {
       Payee = other.Payee;
@@ -896,7 +896,7 @@ public sealed partial class Stage : pb::IMessage<Stage> {
           break;
         }
         case 24: {
-          FundsRequired = input.ReadInt32();
+          Funds = input.ReadInt32();
           break;
         }
         case 34: {
