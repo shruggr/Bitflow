@@ -9,21 +9,16 @@ public class UploadImage : MonoBehaviour
 
     void Start()
     {
-        //var s = Texture2D.Resize( 16, 16 );
-        //if ( !s )
-        //{
-        //    Debug.LogError( "Problem resizing" );
-        //}
         var pix = Texture2D.GetPixels32();
 
-        // Copy the reversed image data to a new texture.
         var tex = new Texture2D( Texture2D.width, Texture2D.height );
         tex.SetPixels32( pix );
         tex.Apply();
 
+        // TODO: Refactor this after getting some sleep
         var width = 0;
         var height = 0;
-        var maxSize = 1024;
+        const int maxSize = 1024;
         if ( tex.width > tex.height )
         {
             if ( tex.width > maxSize )
@@ -47,7 +42,6 @@ public class UploadImage : MonoBehaviour
 
         var buffer = tex.EncodeToJPG();
         Debug.Log( buffer.Length );
-        //var identity = Authenticator.Instance.Identity;
 
         BitIndexUtils.QueryUtxos( Identity.Address, utxos =>
         {
