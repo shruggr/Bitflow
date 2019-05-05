@@ -22,34 +22,34 @@ public static partial class BitflowReflection {
   static BitflowReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cg1iaXRmbG93LnByb3RvIp8BCgZTY2hlbWESCgoCaWQYASABKAkSDAoEbmFt",
+          "Cg1iaXRmbG93LnByb3RvIrUBCgZTY2hlbWESCgoCaWQYASABKAkSDAoEbmFt",
           "ZRgCIAEoCRIdCgZmaWVsZHMYAyADKAsyDS5TY2hlbWEuRmllbGQaPwoFRmll",
           "bGQSCwoDa2V5GAEgASgJEg0KBWxhYmVsGAIgASgJEhoKBHR5cGUYAyABKA4y",
-          "DC5TY2hlbWEuVHlwZSIbCgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABIu4B",
-          "CgRTdGVwEgwKBG5hbWUYASABKAkSEQoJc2NoZW1hVHhuGAIgASgJEhUKDWZ1",
-          "bmRzUmVxdWlyZWQYAyABKAUSDQoFcGF5ZWUYBCABKAkSGwoTdmFsaWRhdGlv",
-          "blNjcmlwdFR4bhgFIAEoCRIhCgpvbkNvbXBsZXRlGAYgAygLMg0uU3RlcC5I",
-          "YW5kbGVyGl8KB0hhbmRsZXISGAoQcHJvY2Vzc1NjcmlwdFR4bhgBIAEoCRIZ",
-          "ChFjcmVhdGVUYXNrU3RlcElkeBgCIAEoBRIQCghhc3NpZ25lZRgDIAEoCRIN",
-          "CgVmdW5kcxgEIAEoBSI7CghXb3JrZmxvdxIKCgJpZBgBIAEoCRINCgVvd25l",
-          "chgCIAEoCRIUCgVzdGVwcxgDIAMoCzIFLlN0ZXAi+AIKDVdvcmtmbG93U3Rh",
-          "dGUSCgoCaWQYASABKAkSEwoLd29ya2Zsb3dUeG4YAiABKAkSJQoGc3RhdHVz",
-          "GAMgASgOMhUuV29ya2Zsb3dTdGF0ZS5TdGF0dXMSDQoFc3RhdGUYBCABKAkS",
-          "IgoFdGFza3MYBSADKAsyEy5Xb3JrZmxvd1N0YXRlLlRhc2saVQoEVVRYTxIM",
-          "CgR0eElkGAEgASgJEgwKBHZvdXQYAiABKAUSDwoHYWRkcmVzcxgDIAEoCRIO",
-          "CgZzY3JpcHQYBCABKAkSEAoIc2F0b3NoaXMYBSABKAUaZQoEVGFzaxITCgRz",
-          "dGVwGAEgASgLMgUuU3RlcBIlCgZzdGF0dXMYAiABKA4yFS5Xb3JrZmxvd1N0",
-          "YXRlLlN0YXR1cxIhCgR1dHhvGAMgASgLMhMuV29ya2Zsb3dTdGF0ZS5VVFhP",
-          "Ii4KBlN0YXR1cxILCgdQZW5kaW5nEAASCQoFRXJyb3IQARIMCghDb21wbGV0",
-          "ZRACYgZwcm90bzM="));
+          "DC5TY2hlbWEuVHlwZSIxCgRUeXBlEggKBFRleHQQABIJCgVJbWFnZRABEggK",
+          "BEZpbGUQAhIKCgZOdW1iZXIQAyJECgRVVFhPEgwKBHR4SWQYASABKAkSDAoE",
+          "dm91dBgCIAEoBRIOCgZzY3JpcHQYBCABKAkSEAoIc2F0b3NoaXMYBSABKAUi",
+          "8QEKBVN0YWdlEgwKBG5hbWUYASABKAkSEQoJc2NoZW1hVHhuGAIgASgJEhUK",
+          "DWZ1bmRzUmVxdWlyZWQYAyABKAUSDQoFcGF5ZWUYBCABKAkSGwoTdmFsaWRh",
+          "dGlvblNjcmlwdFR4bhgFIAEoCRIiCgpvbkNvbXBsZXRlGAYgASgLMg4uU3Rh",
+          "Z2UuSGFuZGxlchpgCgdIYW5kbGVyEhgKEHByb2Nlc3NTY3JpcHRUeG4YASAB",
+          "KAkSGgoSY3JlYXRlVGFza1N0YWdlSWR4GAIgASgFEhAKCGFzc2lnbmVlGAMg",
+          "ASgJEg0KBWZ1bmRzGAQgASgFIj8KCFdvcmtmbG93EgwKBHR4aWQYASABKAkS",
+          "DQoFb3duZXIYAiABKAkSFgoGc3RhZ2VzGAMgAygLMgYuU3RhZ2UimwIKBVN0",
+          "YXRlEgwKBHR4aWQYASABKAkSGwoId29ya2Zsb3cYAiABKAsyCS5Xb3JrZmxv",
+          "dxIdCgZzdGF0dXMYAyABKA4yDS5TdGF0ZS5TdGF0dXMSDAoEZGF0YRgEIAEo",
+          "CRIaCgV0YXNrcxgFIAMoCzILLlN0YXRlLlRhc2sacQoEVGFzaxIVCgVzdGFn",
+          "ZRgBIAEoCzIGLlN0YWdlEh0KBnN0YXR1cxgCIAEoDjINLlN0YXRlLlN0YXR1",
+          "cxIPCgdhZGRyZXNzGAMgASgJEhQKBXV0eG9zGAQgAygLMgUuVVRYTxIMCgR0",
+          "eGlkGAUgASgJIisKBlN0YXR1cxIICgRPcGVuEAASCQoFRXJyb3IQARIMCghD",
+          "b21wbGV0ZRACYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::Schema), global::Schema.Parser, new[]{ "Id", "Name", "Fields" }, null, new[]{ typeof(global::Schema.Types.Type) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Schema.Types.Field), global::Schema.Types.Field.Parser, new[]{ "Key", "Label", "Type" }, null, null, null)}),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Step), global::Step.Parser, new[]{ "Name", "SchemaTxn", "FundsRequired", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Step.Types.Handler), global::Step.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStepIdx", "Assignee", "Funds" }, null, null, null)}),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Id", "Owner", "Steps" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::WorkflowState), global::WorkflowState.Parser, new[]{ "Id", "WorkflowTxn", "Status", "State", "Tasks" }, null, new[]{ typeof(global::WorkflowState.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::WorkflowState.Types.UTXO), global::WorkflowState.Types.UTXO.Parser, new[]{ "TxId", "Vout", "Address", "Script", "Satoshis" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::WorkflowState.Types.Task), global::WorkflowState.Types.Task.Parser, new[]{ "Step", "Status", "Utxo" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(typeof(global::UTXO), global::UTXO.Parser, new[]{ "TxId", "Vout", "Script", "Satoshis" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "SchemaTxn", "FundsRequired", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Txid", "Owner", "Stages" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Data", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "Txid" }, null, null, null)})
         }));
   }
   #endregion
@@ -238,6 +238,8 @@ public sealed partial class Schema : pb::IMessage<Schema> {
     public enum Type {
       [pbr::OriginalName("Text")] Text = 0,
       [pbr::OriginalName("Image")] Image = 1,
+      [pbr::OriginalName("File")] File = 2,
+      [pbr::OriginalName("Number")] Number = 3,
     }
 
     public sealed partial class Field : pb::IMessage<Field> {
@@ -430,11 +432,11 @@ public sealed partial class Schema : pb::IMessage<Schema> {
 
 }
 
-public sealed partial class Step : pb::IMessage<Step> {
-  private static readonly pb::MessageParser<Step> _parser = new pb::MessageParser<Step>(() => new Step());
+public sealed partial class UTXO : pb::IMessage<UTXO> {
+  private static readonly pb::MessageParser<UTXO> _parser = new pb::MessageParser<UTXO>(() => new UTXO());
   private pb::UnknownFieldSet _unknownFields;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<Step> Parser { get { return _parser; } }
+  public static pb::MessageParser<UTXO> Parser { get { return _parser; } }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
@@ -447,26 +449,239 @@ public sealed partial class Step : pb::IMessage<Step> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Step() {
+  public UTXO() {
     OnConstruction();
   }
 
   partial void OnConstruction();
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Step(Step other) : this() {
+  public UTXO(UTXO other) : this() {
+    txId_ = other.txId_;
+    vout_ = other.vout_;
+    script_ = other.script_;
+    satoshis_ = other.satoshis_;
+    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public UTXO Clone() {
+    return new UTXO(this);
+  }
+
+  /// <summary>Field number for the "txId" field.</summary>
+  public const int TxIdFieldNumber = 1;
+  private string txId_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string TxId {
+    get { return txId_; }
+    set {
+      txId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "vout" field.</summary>
+  public const int VoutFieldNumber = 2;
+  private int vout_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int Vout {
+    get { return vout_; }
+    set {
+      vout_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "script" field.</summary>
+  public const int ScriptFieldNumber = 4;
+  private string script_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Script {
+    get { return script_; }
+    set {
+      script_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "satoshis" field.</summary>
+  public const int SatoshisFieldNumber = 5;
+  private int satoshis_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int Satoshis {
+    get { return satoshis_; }
+    set {
+      satoshis_ = value;
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override bool Equals(object other) {
+    return Equals(other as UTXO);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool Equals(UTXO other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (TxId != other.TxId) return false;
+    if (Vout != other.Vout) return false;
+    if (Script != other.Script) return false;
+    if (Satoshis != other.Satoshis) return false;
+    return Equals(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (TxId.Length != 0) hash ^= TxId.GetHashCode();
+    if (Vout != 0) hash ^= Vout.GetHashCode();
+    if (Script.Length != 0) hash ^= Script.GetHashCode();
+    if (Satoshis != 0) hash ^= Satoshis.GetHashCode();
+    if (_unknownFields != null) {
+      hash ^= _unknownFields.GetHashCode();
+    }
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void WriteTo(pb::CodedOutputStream output) {
+    if (TxId.Length != 0) {
+      output.WriteRawTag(10);
+      output.WriteString(TxId);
+    }
+    if (Vout != 0) {
+      output.WriteRawTag(16);
+      output.WriteInt32(Vout);
+    }
+    if (Script.Length != 0) {
+      output.WriteRawTag(34);
+      output.WriteString(Script);
+    }
+    if (Satoshis != 0) {
+      output.WriteRawTag(40);
+      output.WriteInt32(Satoshis);
+    }
+    if (_unknownFields != null) {
+      _unknownFields.WriteTo(output);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int CalculateSize() {
+    int size = 0;
+    if (TxId.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(TxId);
+    }
+    if (Vout != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Vout);
+    }
+    if (Script.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Script);
+    }
+    if (Satoshis != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Satoshis);
+    }
+    if (_unknownFields != null) {
+      size += _unknownFields.CalculateSize();
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(UTXO other) {
+    if (other == null) {
+      return;
+    }
+    if (other.TxId.Length != 0) {
+      TxId = other.TxId;
+    }
+    if (other.Vout != 0) {
+      Vout = other.Vout;
+    }
+    if (other.Script.Length != 0) {
+      Script = other.Script;
+    }
+    if (other.Satoshis != 0) {
+      Satoshis = other.Satoshis;
+    }
+    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(pb::CodedInputStream input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+          break;
+        case 10: {
+          TxId = input.ReadString();
+          break;
+        }
+        case 16: {
+          Vout = input.ReadInt32();
+          break;
+        }
+        case 34: {
+          Script = input.ReadString();
+          break;
+        }
+        case 40: {
+          Satoshis = input.ReadInt32();
+          break;
+        }
+      }
+    }
+  }
+
+}
+
+public sealed partial class Stage : pb::IMessage<Stage> {
+  private static readonly pb::MessageParser<Stage> _parser = new pb::MessageParser<Stage>(() => new Stage());
+  private pb::UnknownFieldSet _unknownFields;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pb::MessageParser<Stage> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::BitflowReflection.Descriptor.MessageTypes[2]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Stage() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Stage(Stage other) : this() {
     name_ = other.name_;
     schemaTxn_ = other.schemaTxn_;
     fundsRequired_ = other.fundsRequired_;
     payee_ = other.payee_;
     validationScriptTxn_ = other.validationScriptTxn_;
-    onComplete_ = other.onComplete_.Clone();
+    onComplete_ = other.onComplete_ != null ? other.onComplete_.Clone() : null;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Step Clone() {
-    return new Step(this);
+  public Stage Clone() {
+    return new Stage(this);
   }
 
   /// <summary>Field number for the "name" field.</summary>
@@ -526,21 +741,22 @@ public sealed partial class Step : pb::IMessage<Step> {
 
   /// <summary>Field number for the "onComplete" field.</summary>
   public const int OnCompleteFieldNumber = 6;
-  private static readonly pb::FieldCodec<global::Step.Types.Handler> _repeated_onComplete_codec
-      = pb::FieldCodec.ForMessage(50, global::Step.Types.Handler.Parser);
-  private readonly pbc::RepeatedField<global::Step.Types.Handler> onComplete_ = new pbc::RepeatedField<global::Step.Types.Handler>();
+  private global::Stage.Types.Handler onComplete_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::Step.Types.Handler> OnComplete {
+  public global::Stage.Types.Handler OnComplete {
     get { return onComplete_; }
+    set {
+      onComplete_ = value;
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
-    return Equals(other as Step);
+    return Equals(other as Stage);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(Step other) {
+  public bool Equals(Stage other) {
     if (ReferenceEquals(other, null)) {
       return false;
     }
@@ -552,7 +768,7 @@ public sealed partial class Step : pb::IMessage<Step> {
     if (FundsRequired != other.FundsRequired) return false;
     if (Payee != other.Payee) return false;
     if (ValidationScriptTxn != other.ValidationScriptTxn) return false;
-    if(!onComplete_.Equals(other.onComplete_)) return false;
+    if (!object.Equals(OnComplete, other.OnComplete)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -564,7 +780,7 @@ public sealed partial class Step : pb::IMessage<Step> {
     if (FundsRequired != 0) hash ^= FundsRequired.GetHashCode();
     if (Payee.Length != 0) hash ^= Payee.GetHashCode();
     if (ValidationScriptTxn.Length != 0) hash ^= ValidationScriptTxn.GetHashCode();
-    hash ^= onComplete_.GetHashCode();
+    if (onComplete_ != null) hash ^= OnComplete.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -598,7 +814,10 @@ public sealed partial class Step : pb::IMessage<Step> {
       output.WriteRawTag(42);
       output.WriteString(ValidationScriptTxn);
     }
-    onComplete_.WriteTo(output, _repeated_onComplete_codec);
+    if (onComplete_ != null) {
+      output.WriteRawTag(50);
+      output.WriteMessage(OnComplete);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -622,7 +841,9 @@ public sealed partial class Step : pb::IMessage<Step> {
     if (ValidationScriptTxn.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(ValidationScriptTxn);
     }
-    size += onComplete_.CalculateSize(_repeated_onComplete_codec);
+    if (onComplete_ != null) {
+      size += 1 + pb::CodedOutputStream.ComputeMessageSize(OnComplete);
+    }
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -630,7 +851,7 @@ public sealed partial class Step : pb::IMessage<Step> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(Step other) {
+  public void MergeFrom(Stage other) {
     if (other == null) {
       return;
     }
@@ -649,7 +870,12 @@ public sealed partial class Step : pb::IMessage<Step> {
     if (other.ValidationScriptTxn.Length != 0) {
       ValidationScriptTxn = other.ValidationScriptTxn;
     }
-    onComplete_.Add(other.onComplete_);
+    if (other.onComplete_ != null) {
+      if (onComplete_ == null) {
+        onComplete_ = new global::Stage.Types.Handler();
+      }
+      OnComplete.MergeFrom(other.OnComplete);
+    }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -682,7 +908,10 @@ public sealed partial class Step : pb::IMessage<Step> {
           break;
         }
         case 50: {
-          onComplete_.AddEntriesFrom(input, _repeated_onComplete_codec);
+          if (onComplete_ == null) {
+            onComplete_ = new global::Stage.Types.Handler();
+          }
+          input.ReadMessage(onComplete_);
           break;
         }
       }
@@ -690,7 +919,7 @@ public sealed partial class Step : pb::IMessage<Step> {
   }
 
   #region Nested types
-  /// <summary>Container for nested types declared in the Step message type.</summary>
+  /// <summary>Container for nested types declared in the Stage message type.</summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static partial class Types {
     public sealed partial class Handler : pb::IMessage<Handler> {
@@ -701,7 +930,7 @@ public sealed partial class Step : pb::IMessage<Step> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Step.Descriptor.NestedTypes[0]; }
+        get { return global::Stage.Descriptor.NestedTypes[0]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -719,7 +948,7 @@ public sealed partial class Step : pb::IMessage<Step> {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public Handler(Handler other) : this() {
         processScriptTxn_ = other.processScriptTxn_;
-        createTaskStepIdx_ = other.createTaskStepIdx_;
+        createTaskStageIdx_ = other.createTaskStageIdx_;
         assignee_ = other.assignee_;
         funds_ = other.funds_;
         _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -741,14 +970,14 @@ public sealed partial class Step : pb::IMessage<Step> {
         }
       }
 
-      /// <summary>Field number for the "createTaskStepIdx" field.</summary>
-      public const int CreateTaskStepIdxFieldNumber = 2;
-      private int createTaskStepIdx_;
+      /// <summary>Field number for the "createTaskStageIdx" field.</summary>
+      public const int CreateTaskStageIdxFieldNumber = 2;
+      private int createTaskStageIdx_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int CreateTaskStepIdx {
-        get { return createTaskStepIdx_; }
+      public int CreateTaskStageIdx {
+        get { return createTaskStageIdx_; }
         set {
-          createTaskStepIdx_ = value;
+          createTaskStageIdx_ = value;
         }
       }
 
@@ -788,7 +1017,7 @@ public sealed partial class Step : pb::IMessage<Step> {
           return true;
         }
         if (ProcessScriptTxn != other.ProcessScriptTxn) return false;
-        if (CreateTaskStepIdx != other.CreateTaskStepIdx) return false;
+        if (CreateTaskStageIdx != other.CreateTaskStageIdx) return false;
         if (Assignee != other.Assignee) return false;
         if (Funds != other.Funds) return false;
         return Equals(_unknownFields, other._unknownFields);
@@ -798,7 +1027,7 @@ public sealed partial class Step : pb::IMessage<Step> {
       public override int GetHashCode() {
         int hash = 1;
         if (ProcessScriptTxn.Length != 0) hash ^= ProcessScriptTxn.GetHashCode();
-        if (CreateTaskStepIdx != 0) hash ^= CreateTaskStepIdx.GetHashCode();
+        if (CreateTaskStageIdx != 0) hash ^= CreateTaskStageIdx.GetHashCode();
         if (Assignee.Length != 0) hash ^= Assignee.GetHashCode();
         if (Funds != 0) hash ^= Funds.GetHashCode();
         if (_unknownFields != null) {
@@ -818,9 +1047,9 @@ public sealed partial class Step : pb::IMessage<Step> {
           output.WriteRawTag(10);
           output.WriteString(ProcessScriptTxn);
         }
-        if (CreateTaskStepIdx != 0) {
+        if (CreateTaskStageIdx != 0) {
           output.WriteRawTag(16);
-          output.WriteInt32(CreateTaskStepIdx);
+          output.WriteInt32(CreateTaskStageIdx);
         }
         if (Assignee.Length != 0) {
           output.WriteRawTag(26);
@@ -841,8 +1070,8 @@ public sealed partial class Step : pb::IMessage<Step> {
         if (ProcessScriptTxn.Length != 0) {
           size += 1 + pb::CodedOutputStream.ComputeStringSize(ProcessScriptTxn);
         }
-        if (CreateTaskStepIdx != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeInt32Size(CreateTaskStepIdx);
+        if (CreateTaskStageIdx != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeInt32Size(CreateTaskStageIdx);
         }
         if (Assignee.Length != 0) {
           size += 1 + pb::CodedOutputStream.ComputeStringSize(Assignee);
@@ -864,8 +1093,8 @@ public sealed partial class Step : pb::IMessage<Step> {
         if (other.ProcessScriptTxn.Length != 0) {
           ProcessScriptTxn = other.ProcessScriptTxn;
         }
-        if (other.CreateTaskStepIdx != 0) {
-          CreateTaskStepIdx = other.CreateTaskStepIdx;
+        if (other.CreateTaskStageIdx != 0) {
+          CreateTaskStageIdx = other.CreateTaskStageIdx;
         }
         if (other.Assignee.Length != 0) {
           Assignee = other.Assignee;
@@ -889,7 +1118,7 @@ public sealed partial class Step : pb::IMessage<Step> {
               break;
             }
             case 16: {
-              CreateTaskStepIdx = input.ReadInt32();
+              CreateTaskStageIdx = input.ReadInt32();
               break;
             }
             case 26: {
@@ -919,7 +1148,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[2]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[3]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -936,9 +1165,9 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public Workflow(Workflow other) : this() {
-    id_ = other.id_;
+    txid_ = other.txid_;
     owner_ = other.owner_;
-    steps_ = other.steps_.Clone();
+    stages_ = other.stages_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -947,14 +1176,14 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     return new Workflow(this);
   }
 
-  /// <summary>Field number for the "id" field.</summary>
-  public const int IdFieldNumber = 1;
-  private string id_ = "";
+  /// <summary>Field number for the "txid" field.</summary>
+  public const int TxidFieldNumber = 1;
+  private string txid_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Id {
-    get { return id_; }
+  public string Txid {
+    get { return txid_; }
     set {
-      id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      txid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
     }
   }
 
@@ -969,14 +1198,14 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     }
   }
 
-  /// <summary>Field number for the "steps" field.</summary>
-  public const int StepsFieldNumber = 3;
-  private static readonly pb::FieldCodec<global::Step> _repeated_steps_codec
-      = pb::FieldCodec.ForMessage(26, global::Step.Parser);
-  private readonly pbc::RepeatedField<global::Step> steps_ = new pbc::RepeatedField<global::Step>();
+  /// <summary>Field number for the "stages" field.</summary>
+  public const int StagesFieldNumber = 3;
+  private static readonly pb::FieldCodec<global::Stage> _repeated_stages_codec
+      = pb::FieldCodec.ForMessage(26, global::Stage.Parser);
+  private readonly pbc::RepeatedField<global::Stage> stages_ = new pbc::RepeatedField<global::Stage>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::Step> Steps {
-    get { return steps_; }
+  public pbc::RepeatedField<global::Stage> Stages {
+    get { return stages_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -992,18 +1221,18 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (Id != other.Id) return false;
+    if (Txid != other.Txid) return false;
     if (Owner != other.Owner) return false;
-    if(!steps_.Equals(other.steps_)) return false;
+    if(!stages_.Equals(other.stages_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (Id.Length != 0) hash ^= Id.GetHashCode();
+    if (Txid.Length != 0) hash ^= Txid.GetHashCode();
     if (Owner.Length != 0) hash ^= Owner.GetHashCode();
-    hash ^= steps_.GetHashCode();
+    hash ^= stages_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -1017,15 +1246,15 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Id.Length != 0) {
+    if (Txid.Length != 0) {
       output.WriteRawTag(10);
-      output.WriteString(Id);
+      output.WriteString(Txid);
     }
     if (Owner.Length != 0) {
       output.WriteRawTag(18);
       output.WriteString(Owner);
     }
-    steps_.WriteTo(output, _repeated_steps_codec);
+    stages_.WriteTo(output, _repeated_stages_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -1034,13 +1263,13 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (Id.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+    if (Txid.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
     }
     if (Owner.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Owner);
     }
-    size += steps_.CalculateSize(_repeated_steps_codec);
+    size += stages_.CalculateSize(_repeated_stages_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -1052,13 +1281,13 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
     if (other == null) {
       return;
     }
-    if (other.Id.Length != 0) {
-      Id = other.Id;
+    if (other.Txid.Length != 0) {
+      Txid = other.Txid;
     }
     if (other.Owner.Length != 0) {
       Owner = other.Owner;
     }
-    steps_.Add(other.steps_);
+    stages_.Add(other.stages_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -1071,7 +1300,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          Id = input.ReadString();
+          Txid = input.ReadString();
           break;
         }
         case 18: {
@@ -1079,7 +1308,7 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
           break;
         }
         case 26: {
-          steps_.AddEntriesFrom(input, _repeated_steps_codec);
+          stages_.AddEntriesFrom(input, _repeated_stages_codec);
           break;
         }
       }
@@ -1088,15 +1317,15 @@ public sealed partial class Workflow : pb::IMessage<Workflow> {
 
 }
 
-public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
-  private static readonly pb::MessageParser<WorkflowState> _parser = new pb::MessageParser<WorkflowState>(() => new WorkflowState());
+public sealed partial class State : pb::IMessage<State> {
+  private static readonly pb::MessageParser<State> _parser = new pb::MessageParser<State>(() => new State());
   private pb::UnknownFieldSet _unknownFields;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<WorkflowState> Parser { get { return _parser; } }
+  public static pb::MessageParser<State> Parser { get { return _parser; } }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::BitflowReflection.Descriptor.MessageTypes[3]; }
+    get { return global::BitflowReflection.Descriptor.MessageTypes[4]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1105,101 +1334,101 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public WorkflowState() {
+  public State() {
     OnConstruction();
   }
 
   partial void OnConstruction();
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public WorkflowState(WorkflowState other) : this() {
-    id_ = other.id_;
-    workflowTxn_ = other.workflowTxn_;
+  public State(State other) : this() {
+    txid_ = other.txid_;
+    workflow_ = other.workflow_ != null ? other.workflow_.Clone() : null;
     status_ = other.status_;
-    state_ = other.state_;
+    data_ = other.data_;
     tasks_ = other.tasks_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public WorkflowState Clone() {
-    return new WorkflowState(this);
+  public State Clone() {
+    return new State(this);
   }
 
-  /// <summary>Field number for the "id" field.</summary>
-  public const int IdFieldNumber = 1;
-  private string id_ = "";
+  /// <summary>Field number for the "txid" field.</summary>
+  public const int TxidFieldNumber = 1;
+  private string txid_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string Id {
-    get { return id_; }
+  public string Txid {
+    get { return txid_; }
     set {
-      id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      txid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
     }
   }
 
-  /// <summary>Field number for the "workflowTxn" field.</summary>
-  public const int WorkflowTxnFieldNumber = 2;
-  private string workflowTxn_ = "";
+  /// <summary>Field number for the "workflow" field.</summary>
+  public const int WorkflowFieldNumber = 2;
+  private global::Workflow workflow_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string WorkflowTxn {
-    get { return workflowTxn_; }
+  public global::Workflow Workflow {
+    get { return workflow_; }
     set {
-      workflowTxn_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      workflow_ = value;
     }
   }
 
   /// <summary>Field number for the "status" field.</summary>
   public const int StatusFieldNumber = 3;
-  private global::WorkflowState.Types.Status status_ = 0;
+  private global::State.Types.Status status_ = 0;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::WorkflowState.Types.Status Status {
+  public global::State.Types.Status Status {
     get { return status_; }
     set {
       status_ = value;
     }
   }
 
-  /// <summary>Field number for the "state" field.</summary>
-  public const int StateFieldNumber = 4;
-  private string state_ = "";
+  /// <summary>Field number for the "data" field.</summary>
+  public const int DataFieldNumber = 4;
+  private string data_ = "";
   /// <summary>
   /// JSON representation of state values
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string State {
-    get { return state_; }
+  public string Data {
+    get { return data_; }
     set {
-      state_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
     }
   }
 
   /// <summary>Field number for the "tasks" field.</summary>
   public const int TasksFieldNumber = 5;
-  private static readonly pb::FieldCodec<global::WorkflowState.Types.Task> _repeated_tasks_codec
-      = pb::FieldCodec.ForMessage(42, global::WorkflowState.Types.Task.Parser);
-  private readonly pbc::RepeatedField<global::WorkflowState.Types.Task> tasks_ = new pbc::RepeatedField<global::WorkflowState.Types.Task>();
+  private static readonly pb::FieldCodec<global::State.Types.Task> _repeated_tasks_codec
+      = pb::FieldCodec.ForMessage(42, global::State.Types.Task.Parser);
+  private readonly pbc::RepeatedField<global::State.Types.Task> tasks_ = new pbc::RepeatedField<global::State.Types.Task>();
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::WorkflowState.Types.Task> Tasks {
+  public pbc::RepeatedField<global::State.Types.Task> Tasks {
     get { return tasks_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
-    return Equals(other as WorkflowState);
+    return Equals(other as State);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(WorkflowState other) {
+  public bool Equals(State other) {
     if (ReferenceEquals(other, null)) {
       return false;
     }
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (Id != other.Id) return false;
-    if (WorkflowTxn != other.WorkflowTxn) return false;
+    if (Txid != other.Txid) return false;
+    if (!object.Equals(Workflow, other.Workflow)) return false;
     if (Status != other.Status) return false;
-    if (State != other.State) return false;
+    if (Data != other.Data) return false;
     if(!tasks_.Equals(other.tasks_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
@@ -1207,10 +1436,10 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (Id.Length != 0) hash ^= Id.GetHashCode();
-    if (WorkflowTxn.Length != 0) hash ^= WorkflowTxn.GetHashCode();
+    if (Txid.Length != 0) hash ^= Txid.GetHashCode();
+    if (workflow_ != null) hash ^= Workflow.GetHashCode();
     if (Status != 0) hash ^= Status.GetHashCode();
-    if (State.Length != 0) hash ^= State.GetHashCode();
+    if (Data.Length != 0) hash ^= Data.GetHashCode();
     hash ^= tasks_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
@@ -1225,21 +1454,21 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Id.Length != 0) {
+    if (Txid.Length != 0) {
       output.WriteRawTag(10);
-      output.WriteString(Id);
+      output.WriteString(Txid);
     }
-    if (WorkflowTxn.Length != 0) {
+    if (workflow_ != null) {
       output.WriteRawTag(18);
-      output.WriteString(WorkflowTxn);
+      output.WriteMessage(Workflow);
     }
     if (Status != 0) {
       output.WriteRawTag(24);
       output.WriteEnum((int) Status);
     }
-    if (State.Length != 0) {
+    if (Data.Length != 0) {
       output.WriteRawTag(34);
-      output.WriteString(State);
+      output.WriteString(Data);
     }
     tasks_.WriteTo(output, _repeated_tasks_codec);
     if (_unknownFields != null) {
@@ -1250,17 +1479,17 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (Id.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
+    if (Txid.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
     }
-    if (WorkflowTxn.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(WorkflowTxn);
+    if (workflow_ != null) {
+      size += 1 + pb::CodedOutputStream.ComputeMessageSize(Workflow);
     }
     if (Status != 0) {
       size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
     }
-    if (State.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(State);
+    if (Data.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Data);
     }
     size += tasks_.CalculateSize(_repeated_tasks_codec);
     if (_unknownFields != null) {
@@ -1270,21 +1499,24 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(WorkflowState other) {
+  public void MergeFrom(State other) {
     if (other == null) {
       return;
     }
-    if (other.Id.Length != 0) {
-      Id = other.Id;
+    if (other.Txid.Length != 0) {
+      Txid = other.Txid;
     }
-    if (other.WorkflowTxn.Length != 0) {
-      WorkflowTxn = other.WorkflowTxn;
+    if (other.workflow_ != null) {
+      if (workflow_ == null) {
+        workflow_ = new global::Workflow();
+      }
+      Workflow.MergeFrom(other.Workflow);
     }
     if (other.Status != 0) {
       Status = other.Status;
     }
-    if (other.State.Length != 0) {
-      State = other.State;
+    if (other.Data.Length != 0) {
+      Data = other.Data;
     }
     tasks_.Add(other.tasks_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1299,19 +1531,22 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          Id = input.ReadString();
+          Txid = input.ReadString();
           break;
         }
         case 18: {
-          WorkflowTxn = input.ReadString();
+          if (workflow_ == null) {
+            workflow_ = new global::Workflow();
+          }
+          input.ReadMessage(workflow_);
           break;
         }
         case 24: {
-          status_ = (global::WorkflowState.Types.Status) input.ReadEnum();
+          status_ = (global::State.Types.Status) input.ReadEnum();
           break;
         }
         case 34: {
-          State = input.ReadString();
+          Data = input.ReadString();
           break;
         }
         case 42: {
@@ -1323,254 +1558,13 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
   }
 
   #region Nested types
-  /// <summary>Container for nested types declared in the WorkflowState message type.</summary>
+  /// <summary>Container for nested types declared in the State message type.</summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static partial class Types {
     public enum Status {
-      [pbr::OriginalName("Pending")] Pending = 0,
+      [pbr::OriginalName("Open")] Open = 0,
       [pbr::OriginalName("Error")] Error = 1,
       [pbr::OriginalName("Complete")] Complete = 2,
-    }
-
-    public sealed partial class UTXO : pb::IMessage<UTXO> {
-      private static readonly pb::MessageParser<UTXO> _parser = new pb::MessageParser<UTXO>(() => new UTXO());
-      private pb::UnknownFieldSet _unknownFields;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pb::MessageParser<UTXO> Parser { get { return _parser; } }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pbr::MessageDescriptor Descriptor {
-        get { return global::WorkflowState.Descriptor.NestedTypes[0]; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      pbr::MessageDescriptor pb::IMessage.Descriptor {
-        get { return Descriptor; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public UTXO() {
-        OnConstruction();
-      }
-
-      partial void OnConstruction();
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public UTXO(UTXO other) : this() {
-        txId_ = other.txId_;
-        vout_ = other.vout_;
-        address_ = other.address_;
-        script_ = other.script_;
-        satoshis_ = other.satoshis_;
-        _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public UTXO Clone() {
-        return new UTXO(this);
-      }
-
-      /// <summary>Field number for the "txId" field.</summary>
-      public const int TxIdFieldNumber = 1;
-      private string txId_ = "";
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public string TxId {
-        get { return txId_; }
-        set {
-          txId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-        }
-      }
-
-      /// <summary>Field number for the "vout" field.</summary>
-      public const int VoutFieldNumber = 2;
-      private int vout_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int Vout {
-        get { return vout_; }
-        set {
-          vout_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "address" field.</summary>
-      public const int AddressFieldNumber = 3;
-      private string address_ = "";
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public string Address {
-        get { return address_; }
-        set {
-          address_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-        }
-      }
-
-      /// <summary>Field number for the "script" field.</summary>
-      public const int ScriptFieldNumber = 4;
-      private string script_ = "";
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public string Script {
-        get { return script_; }
-        set {
-          script_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-        }
-      }
-
-      /// <summary>Field number for the "satoshis" field.</summary>
-      public const int SatoshisFieldNumber = 5;
-      private int satoshis_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int Satoshis {
-        get { return satoshis_; }
-        set {
-          satoshis_ = value;
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override bool Equals(object other) {
-        return Equals(other as UTXO);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool Equals(UTXO other) {
-        if (ReferenceEquals(other, null)) {
-          return false;
-        }
-        if (ReferenceEquals(other, this)) {
-          return true;
-        }
-        if (TxId != other.TxId) return false;
-        if (Vout != other.Vout) return false;
-        if (Address != other.Address) return false;
-        if (Script != other.Script) return false;
-        if (Satoshis != other.Satoshis) return false;
-        return Equals(_unknownFields, other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override int GetHashCode() {
-        int hash = 1;
-        if (TxId.Length != 0) hash ^= TxId.GetHashCode();
-        if (Vout != 0) hash ^= Vout.GetHashCode();
-        if (Address.Length != 0) hash ^= Address.GetHashCode();
-        if (Script.Length != 0) hash ^= Script.GetHashCode();
-        if (Satoshis != 0) hash ^= Satoshis.GetHashCode();
-        if (_unknownFields != null) {
-          hash ^= _unknownFields.GetHashCode();
-        }
-        return hash;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override string ToString() {
-        return pb::JsonFormatter.ToDiagnosticString(this);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void WriteTo(pb::CodedOutputStream output) {
-        if (TxId.Length != 0) {
-          output.WriteRawTag(10);
-          output.WriteString(TxId);
-        }
-        if (Vout != 0) {
-          output.WriteRawTag(16);
-          output.WriteInt32(Vout);
-        }
-        if (Address.Length != 0) {
-          output.WriteRawTag(26);
-          output.WriteString(Address);
-        }
-        if (Script.Length != 0) {
-          output.WriteRawTag(34);
-          output.WriteString(Script);
-        }
-        if (Satoshis != 0) {
-          output.WriteRawTag(40);
-          output.WriteInt32(Satoshis);
-        }
-        if (_unknownFields != null) {
-          _unknownFields.WriteTo(output);
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int CalculateSize() {
-        int size = 0;
-        if (TxId.Length != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeStringSize(TxId);
-        }
-        if (Vout != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeInt32Size(Vout);
-        }
-        if (Address.Length != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeStringSize(Address);
-        }
-        if (Script.Length != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeStringSize(Script);
-        }
-        if (Satoshis != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeInt32Size(Satoshis);
-        }
-        if (_unknownFields != null) {
-          size += _unknownFields.CalculateSize();
-        }
-        return size;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(UTXO other) {
-        if (other == null) {
-          return;
-        }
-        if (other.TxId.Length != 0) {
-          TxId = other.TxId;
-        }
-        if (other.Vout != 0) {
-          Vout = other.Vout;
-        }
-        if (other.Address.Length != 0) {
-          Address = other.Address;
-        }
-        if (other.Script.Length != 0) {
-          Script = other.Script;
-        }
-        if (other.Satoshis != 0) {
-          Satoshis = other.Satoshis;
-        }
-        _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(pb::CodedInputStream input) {
-        uint tag;
-        while ((tag = input.ReadTag()) != 0) {
-          switch(tag) {
-            default:
-              _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-              break;
-            case 10: {
-              TxId = input.ReadString();
-              break;
-            }
-            case 16: {
-              Vout = input.ReadInt32();
-              break;
-            }
-            case 26: {
-              Address = input.ReadString();
-              break;
-            }
-            case 34: {
-              Script = input.ReadString();
-              break;
-            }
-            case 40: {
-              Satoshis = input.ReadInt32();
-              break;
-            }
-          }
-        }
-      }
-
     }
 
     public sealed partial class Task : pb::IMessage<Task> {
@@ -1581,7 +1575,7 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::WorkflowState.Descriptor.NestedTypes[1]; }
+        get { return global::State.Descriptor.NestedTypes[0]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1598,9 +1592,11 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public Task(Task other) : this() {
-        step_ = other.step_ != null ? other.step_.Clone() : null;
+        stage_ = other.stage_ != null ? other.stage_.Clone() : null;
         status_ = other.status_;
-        utxo_ = other.utxo_ != null ? other.utxo_.Clone() : null;
+        address_ = other.address_;
+        utxos_ = other.utxos_.Clone();
+        txid_ = other.txid_;
         _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
       }
 
@@ -1609,36 +1605,57 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
         return new Task(this);
       }
 
-      /// <summary>Field number for the "step" field.</summary>
-      public const int StepFieldNumber = 1;
-      private global::Step step_;
+      /// <summary>Field number for the "stage" field.</summary>
+      public const int StageFieldNumber = 1;
+      private global::Stage stage_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Step Step {
-        get { return step_; }
+      public global::Stage Stage {
+        get { return stage_; }
         set {
-          step_ = value;
+          stage_ = value;
         }
       }
 
       /// <summary>Field number for the "status" field.</summary>
       public const int StatusFieldNumber = 2;
-      private global::WorkflowState.Types.Status status_ = 0;
+      private global::State.Types.Status status_ = 0;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::WorkflowState.Types.Status Status {
+      public global::State.Types.Status Status {
         get { return status_; }
         set {
           status_ = value;
         }
       }
 
-      /// <summary>Field number for the "utxo" field.</summary>
-      public const int UtxoFieldNumber = 3;
-      private global::WorkflowState.Types.UTXO utxo_;
+      /// <summary>Field number for the "address" field.</summary>
+      public const int AddressFieldNumber = 3;
+      private string address_ = "";
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::WorkflowState.Types.UTXO Utxo {
-        get { return utxo_; }
+      public string Address {
+        get { return address_; }
         set {
-          utxo_ = value;
+          address_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        }
+      }
+
+      /// <summary>Field number for the "utxos" field.</summary>
+      public const int UtxosFieldNumber = 4;
+      private static readonly pb::FieldCodec<global::UTXO> _repeated_utxos_codec
+          = pb::FieldCodec.ForMessage(34, global::UTXO.Parser);
+      private readonly pbc::RepeatedField<global::UTXO> utxos_ = new pbc::RepeatedField<global::UTXO>();
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public pbc::RepeatedField<global::UTXO> Utxos {
+        get { return utxos_; }
+      }
+
+      /// <summary>Field number for the "txid" field.</summary>
+      public const int TxidFieldNumber = 5;
+      private string txid_ = "";
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public string Txid {
+        get { return txid_; }
+        set {
+          txid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
         }
       }
 
@@ -1655,18 +1672,22 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
         if (ReferenceEquals(other, this)) {
           return true;
         }
-        if (!object.Equals(Step, other.Step)) return false;
+        if (!object.Equals(Stage, other.Stage)) return false;
         if (Status != other.Status) return false;
-        if (!object.Equals(Utxo, other.Utxo)) return false;
+        if (Address != other.Address) return false;
+        if(!utxos_.Equals(other.utxos_)) return false;
+        if (Txid != other.Txid) return false;
         return Equals(_unknownFields, other._unknownFields);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public override int GetHashCode() {
         int hash = 1;
-        if (step_ != null) hash ^= Step.GetHashCode();
+        if (stage_ != null) hash ^= Stage.GetHashCode();
         if (Status != 0) hash ^= Status.GetHashCode();
-        if (utxo_ != null) hash ^= Utxo.GetHashCode();
+        if (Address.Length != 0) hash ^= Address.GetHashCode();
+        hash ^= utxos_.GetHashCode();
+        if (Txid.Length != 0) hash ^= Txid.GetHashCode();
         if (_unknownFields != null) {
           hash ^= _unknownFields.GetHashCode();
         }
@@ -1680,17 +1701,22 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public void WriteTo(pb::CodedOutputStream output) {
-        if (step_ != null) {
+        if (stage_ != null) {
           output.WriteRawTag(10);
-          output.WriteMessage(Step);
+          output.WriteMessage(Stage);
         }
         if (Status != 0) {
           output.WriteRawTag(16);
           output.WriteEnum((int) Status);
         }
-        if (utxo_ != null) {
+        if (Address.Length != 0) {
           output.WriteRawTag(26);
-          output.WriteMessage(Utxo);
+          output.WriteString(Address);
+        }
+        utxos_.WriteTo(output, _repeated_utxos_codec);
+        if (Txid.Length != 0) {
+          output.WriteRawTag(42);
+          output.WriteString(Txid);
         }
         if (_unknownFields != null) {
           _unknownFields.WriteTo(output);
@@ -1700,14 +1726,18 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public int CalculateSize() {
         int size = 0;
-        if (step_ != null) {
-          size += 1 + pb::CodedOutputStream.ComputeMessageSize(Step);
+        if (stage_ != null) {
+          size += 1 + pb::CodedOutputStream.ComputeMessageSize(Stage);
         }
         if (Status != 0) {
           size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
         }
-        if (utxo_ != null) {
-          size += 1 + pb::CodedOutputStream.ComputeMessageSize(Utxo);
+        if (Address.Length != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeStringSize(Address);
+        }
+        size += utxos_.CalculateSize(_repeated_utxos_codec);
+        if (Txid.Length != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
         }
         if (_unknownFields != null) {
           size += _unknownFields.CalculateSize();
@@ -1720,20 +1750,21 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
         if (other == null) {
           return;
         }
-        if (other.step_ != null) {
-          if (step_ == null) {
-            step_ = new global::Step();
+        if (other.stage_ != null) {
+          if (stage_ == null) {
+            stage_ = new global::Stage();
           }
-          Step.MergeFrom(other.Step);
+          Stage.MergeFrom(other.Stage);
         }
         if (other.Status != 0) {
           Status = other.Status;
         }
-        if (other.utxo_ != null) {
-          if (utxo_ == null) {
-            utxo_ = new global::WorkflowState.Types.UTXO();
-          }
-          Utxo.MergeFrom(other.Utxo);
+        if (other.Address.Length != 0) {
+          Address = other.Address;
+        }
+        utxos_.Add(other.utxos_);
+        if (other.Txid.Length != 0) {
+          Txid = other.Txid;
         }
         _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
       }
@@ -1747,21 +1778,26 @@ public sealed partial class WorkflowState : pb::IMessage<WorkflowState> {
               _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
               break;
             case 10: {
-              if (step_ == null) {
-                step_ = new global::Step();
+              if (stage_ == null) {
+                stage_ = new global::Stage();
               }
-              input.ReadMessage(step_);
+              input.ReadMessage(stage_);
               break;
             }
             case 16: {
-              status_ = (global::WorkflowState.Types.Status) input.ReadEnum();
+              status_ = (global::State.Types.Status) input.ReadEnum();
               break;
             }
             case 26: {
-              if (utxo_ == null) {
-                utxo_ = new global::WorkflowState.Types.UTXO();
-              }
-              input.ReadMessage(utxo_);
+              Address = input.ReadString();
+              break;
+            }
+            case 34: {
+              utxos_.AddEntriesFrom(input, _repeated_utxos_codec);
+              break;
+            }
+            case 42: {
+              Txid = input.ReadString();
               break;
             }
           }
