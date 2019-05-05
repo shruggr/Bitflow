@@ -1,13 +1,14 @@
 import axios from 'axios';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT } from './constants';
+import { SUBMIT, REQUEST, ASSIGN, SCHEMA, UPLOAD, BITINDEX_KEY, SCRIPT, WORKFLOW } from './constants';
 import { Workflow, State, Schema, UTXO, IState, ISchema, Stage } from './bitflow-proto';
 import { NodeVM } from 'vm2';
 import { Transaction } from '@google-cloud/firestore';
 import { fromTx } from './3rd-party/txo';
 
 const bsv = require('bsv');
+const btoa = require('btoa');
 
 const vm = new NodeVM();
 
@@ -87,6 +88,21 @@ export const webhook = functions.https.onRequest(async (req, res) => {
             case SUBMIT:
                 await processSubmit(txnData);
                 break;
+            case SCHEMA:
+                const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+                schema.txid = txnData.tx.h;
+                rtDb.ref(`schemas/${txnData.tx.h}`).set(schema);
+                break;
+            case SCRIPT:
+                db.collection('scripts').doc(txnData.tx.h).set({
+                    txid: txnData.tx.h,
+                    script: opRet.ls2 || opRet.s2
+                });
+                break;
+            case WORKFLOW:
+                const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+                workflow.txid = txnData.tx.h;
+                rtDb.ref(`workflows/${txnData.tx.h}`).set(workflow);
         }
         return res.send();
     }
@@ -113,13 +129,15 @@ async function initialize() {
         });
     }));
 
-    const [scripts, schemas] = await Promise.all([
+    const [scripts, schemas, workflows] = await Promise.all([
         bitQuery({ "out.s1": SCRIPT }),
-        bitQuery({ "out.s1": SCHEMA })
+        bitQuery({ "out.s1": SCHEMA }),
+        bitQuery({ "out.s1": WORKFLOW }),
     ])
     for (let data of scripts) {
         const opRet = data.out.find((out: any) => out.b0.op == 106);
         db.collection('scripts').doc(data.tx.h).set({
+            txid: data.tx.h,
             script: opRet.ls2 || opRet.s2
         });
     }
@@ -127,8 +145,16 @@ async function initialize() {
     for (let data of schemas) {
         const opRet = data.out.find((out: any) => out.b0.op == 106);
         const schema = Schema.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+        schema.txid = data.tx.h;
         rtDb.ref(`schemas/${data.tx.h}`).set(schema);
         // db.collection('schema').doc().set(schema);
+    }
+
+    for (let data of workflows) {
+        const opRet = data.out.find((out: any) => out.b0.op == 106);
+        const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+        workflow.txid = data.tx.h;
+        rtDb.ref(`workflows/${data.tx.h}`).set(workflow);
     }
 }
 

@@ -2,8 +2,8 @@ import * as $protobuf from "protobufjs";
 /** Properties of a Schema. */
 export interface ISchema {
 
-    /** Schema id */
-    id?: (string|null);
+    /** Schema txid */
+    txid?: (string|null);
 
     /** Schema name */
     name?: (string|null);
@@ -21,8 +21,8 @@ export class Schema implements ISchema {
      */
     constructor(properties?: ISchema);
 
-    /** Schema id. */
-    public id: string;
+    /** Schema txid. */
+    public txid: string;
 
     /** Schema name. */
     public name: string;

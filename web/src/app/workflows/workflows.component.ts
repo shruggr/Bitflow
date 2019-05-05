@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ISchema } from 'src/lib/bitflow-proto';
+import { IWorkflow } from 'src/lib/bitflow-proto';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { SCHEMA, ADDRESS } from 'src/lib/constants';
+import { SCHEMA, ADDRESS, WORKFLOW } from 'src/lib/constants';
 
 declare const moneyButton;
 declare const bsv;
 
 @Component({
-  selector: 'app-schemas',
-  templateUrl: './schemas.component.html',
-  styleUrls: ['./schemas.component.css']
+  selector: 'app-workflows',
+  templateUrl: './workflows.component.html',
+  styleUrls: ['./workflows.component.css']
 })
-export class SchemasComponent implements OnInit {
-  schemas: Observable<ISchema[]>;
+export class WorkflowsComponent implements OnInit {
+  workflows: Observable<IWorkflow[]>;
   mbdiv: any;
   name: string;
   fileData: any;
@@ -21,7 +21,7 @@ export class SchemasComponent implements OnInit {
   JSON: any;
 
   constructor(rtDb: AngularFireDatabase) {
-    this.schemas = rtDb.list<ISchema>('schemas').valueChanges();
+    this.workflows = rtDb.list<IWorkflow>('workflows').valueChanges();
     this.JSON = JSON;
    }
 
@@ -42,7 +42,7 @@ export class SchemasComponent implements OnInit {
   updateMoneybutton() {
     let script = new bsv.Script();
     script.add(bsv.Opcode.OP_RETURN);
-    script.add(bsv.deps.Buffer.from(SCHEMA));
+    script.add(bsv.deps.Buffer.from(WORKFLOW));
     script.add(bsv.deps.Buffer.from(this.fileData || ''));
     moneyButton.render(this.mbdiv, {
       label: 'Upload',

@@ -1,0 +1,12 @@
+<h3>Scripts</h3>
+<b>Upload Scripts</b>
+<div>
+  <input type="file" (change)="onFileChange($event)"><br>
+  <div id="money-button"></div>
+</div>
+{{result}}
+<ul>
+  <li *ngFor="let script of scripts | async">
+    <pre>{{ JSON.stringify(script, null, 2)}}</pre>
+  </li>
+</ul>

@@ -1,14 +1,12 @@
 <h3>Schemas</h3>
-<table>
-  <thead>
-    <tr>
-      <th>txid</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let schema of schemas | async">
-      <td>{{ schema.txid }}</td>
-    </tr>
-  </tbody>
-</table>
+<b>Upload Schema</b>
+<div>
+  <input type="file" (change)="onFileChange($event)"><br>
+  <div id="money-button"></div>
+</div>
+{{result}}
+<ul>
+  <li *ngFor="let schema of schemas | async">
+    <pre>{{ JSON.stringify(schema, null, 2)}}</pre>
+  </li>
+</ul>

@@ -11,12 +11,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { SchemasComponent } from './schemas/schemas.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { environment } from 'src/environments/environment';
+import { WorkflowsComponent } from './workflows/workflows.component';
+import { ScriptsComponent } from './scripts/scripts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SchemasComponent,
-    WalletComponent
+    WalletComponent,
+    WorkflowsComponent,
+    ScriptsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -27,7 +31,9 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
