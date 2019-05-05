@@ -1,0 +1,12 @@
+{
+    "name": "Picture Submission",
+    "fields": [{
+        "key": "image",
+        "label": "Photo",
+        "type": 1
+    },{
+        "key": "lighting",
+        "label": "Lighting conditions (indoor, sunlight, dusk)",
+        "type": 0
+    }]
+}

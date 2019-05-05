@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IWorkflow } from 'src/lib/bitflow-proto';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { SCHEMA, ADDRESS, WORKFLOW } from 'src/lib/constants';
+import { ADDRESS, WORKFLOW } from 'src/lib/constants';
 
 declare const moneyButton;
 declare const bsv;
@@ -15,9 +15,9 @@ declare const bsv;
 export class WorkflowsComponent implements OnInit {
   workflows: Observable<IWorkflow[]>;
   mbdiv: any;
-  name: string;
   fileData: any;
   result: string;
+  workflowTxn: string;
   JSON: any;
 
   constructor(rtDb: AngularFireDatabase) {
@@ -67,5 +67,9 @@ export class WorkflowsComponent implements OnInit {
         this.result = `Error: ${error.message}`;
       }
     })
+  }
+
+  startWorkflow(txid) {
+    this.workflowTxn = txid;
   }
 }

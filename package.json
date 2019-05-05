@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/shruggr/Bitflow#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "bsv": "^0.26.5",
+    "btoa": "^1.2.1",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
     "protobufjs": "^6.8.8"

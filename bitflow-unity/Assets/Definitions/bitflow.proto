@@ -1,19 +1,22 @@
 syntax = "proto3";
 
-message Schema {
+
+message Field {
     enum Type {
         Text = 0;
         Image = 1;
         File = 2;
         Number = 3;
+        Boolean = 4;
     }
 
-    message Field {
-        string key = 1;
-        string label = 2;
-        Type type = 3;
-    }
+    string key = 1;
+    string label = 2;
+    Type type = 3;
+    string value = 4;
+}
 
+message Schema {
     string txid = 1;
     string name = 2;
     repeated Field fields = 3;
@@ -43,9 +46,10 @@ message Stage {
 }
 
 message Workflow {
-    string txid = 1;
-    string owner = 2;
-    repeated Stage stages = 3;
+    string name = 1;
+    string txid = 2;
+    string owner = 3;
+    repeated Stage stages = 4;
 }
 
 message State {
@@ -66,6 +70,6 @@ message State {
     string txid = 1;
     Workflow workflow = 2;
     Status status = 3;
-    string data = 4; // JSON representation of state values
+    repeated Field values = 4;
     repeated Task tasks = 5;
 }

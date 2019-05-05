@@ -1,4 +1,124 @@
 import * as $protobuf from "protobufjs";
+/** Properties of a Field. */
+export interface IField {
+
+    /** Field key */
+    key?: (string|null);
+
+    /** Field label */
+    label?: (string|null);
+
+    /** Field type */
+    type?: (Field.Type|null);
+
+    /** Field value */
+    value?: (string|null);
+}
+
+/** Represents a Field. */
+export class Field implements IField {
+
+    /**
+     * Constructs a new Field.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IField);
+
+    /** Field key. */
+    public key: string;
+
+    /** Field label. */
+    public label: string;
+
+    /** Field type. */
+    public type: Field.Type;
+
+    /** Field value. */
+    public value: string;
+
+    /**
+     * Creates a new Field instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Field instance
+     */
+    public static create(properties?: IField): Field;
+
+    /**
+     * Encodes the specified Field message. Does not implicitly {@link Field.verify|verify} messages.
+     * @param message Field message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Field message, length delimited. Does not implicitly {@link Field.verify|verify} messages.
+     * @param message Field message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a Field message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Field
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Field;
+
+    /**
+     * Decodes a Field message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Field
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Field;
+
+    /**
+     * Verifies a Field message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a Field message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Field
+     */
+    public static fromObject(object: { [k: string]: any }): Field;
+
+    /**
+     * Creates a plain object from a Field message. Also converts values to other types if specified.
+     * @param message Field
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Field, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Field to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+export namespace Field {
+
+    /** Type enum. */
+    enum Type {
+        Text = 0,
+        Image = 1,
+        File = 2,
+        Number = 3,
+        Boolean = 4
+    }
+}
+
 /** Properties of a Schema. */
 export interface ISchema {
 
@@ -9,7 +129,7 @@ export interface ISchema {
     name?: (string|null);
 
     /** Schema fields */
-    fields?: (Schema.IField[]|null);
+    fields?: (IField[]|null);
 }
 
 /** Represents a Schema. */
@@ -28,7 +148,7 @@ export class Schema implements ISchema {
     public name: string;
 
     /** Schema fields. */
-    public fields: Schema.IField[];
+    public fields: IField[];
 
     /**
      * Creates a new Schema instance using the specified properties.
@@ -99,119 +219,6 @@ export class Schema implements ISchema {
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
-}
-
-export namespace Schema {
-
-    /** Type enum. */
-    enum Type {
-        Text = 0,
-        Image = 1,
-        File = 2,
-        Number = 3
-    }
-
-    /** Properties of a Field. */
-    interface IField {
-
-        /** Field key */
-        key?: (string|null);
-
-        /** Field label */
-        label?: (string|null);
-
-        /** Field type */
-        type?: (Schema.Type|null);
-    }
-
-    /** Represents a Field. */
-    class Field implements IField {
-
-        /**
-         * Constructs a new Field.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: Schema.IField);
-
-        /** Field key. */
-        public key: string;
-
-        /** Field label. */
-        public label: string;
-
-        /** Field type. */
-        public type: Schema.Type;
-
-        /**
-         * Creates a new Field instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Field instance
-         */
-        public static create(properties?: Schema.IField): Schema.Field;
-
-        /**
-         * Encodes the specified Field message. Does not implicitly {@link Schema.Field.verify|verify} messages.
-         * @param message Field message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: Schema.IField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Field message, length delimited. Does not implicitly {@link Schema.Field.verify|verify} messages.
-         * @param message Field message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: Schema.IField, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a Field message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns Field
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Schema.Field;
-
-        /**
-         * Decodes a Field message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Field
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Schema.Field;
-
-        /**
-         * Verifies a Field message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a Field message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns Field
-         */
-        public static fromObject(object: { [k: string]: any }): Schema.Field;
-
-        /**
-         * Creates a plain object from a Field message. Also converts values to other types if specified.
-         * @param message Field
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: Schema.Field, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this Field to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
 }
 
 /** Properties of a UTXO. */
@@ -556,6 +563,9 @@ export namespace Stage {
 /** Properties of a Workflow. */
 export interface IWorkflow {
 
+    /** Workflow name */
+    name?: (string|null);
+
     /** Workflow txid */
     txid?: (string|null);
 
@@ -574,6 +584,9 @@ export class Workflow implements IWorkflow {
      * @param [properties] Properties to set
      */
     constructor(properties?: IWorkflow);
+
+    /** Workflow name. */
+    public name: string;
 
     /** Workflow txid. */
     public txid: string;
@@ -667,8 +680,8 @@ export interface IState {
     /** State status */
     status?: (State.Status|null);
 
-    /** State data */
-    data?: (string|null);
+    /** State values */
+    values?: (IField[]|null);
 
     /** State tasks */
     tasks?: (State.ITask[]|null);
@@ -692,8 +705,8 @@ export class State implements IState {
     /** State status. */
     public status: State.Status;
 
-    /** State data. */
-    public data: string;
+    /** State values. */
+    public values: IField[];
 
     /** State tasks. */
     public tasks: State.ITask[];

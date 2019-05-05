@@ -13,6 +13,7 @@ import { WalletComponent } from './wallet/wallet.component';
 import { environment } from 'src/environments/environment';
 import { WorkflowsComponent } from './workflows/workflows.component';
 import { ScriptsComponent } from './scripts/scripts.component';
+import { CreateComponent } from './workflows/create/create.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ScriptsComponent } from './scripts/scripts.component';
     SchemasComponent,
     WalletComponent,
     WorkflowsComponent,
-    ScriptsComponent
+    ScriptsComponent,
+    CreateComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

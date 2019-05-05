@@ -9,6 +9,308 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
+$root.Field = (function() {
+
+    /**
+     * Properties of a Field.
+     * @exports IField
+     * @interface IField
+     * @property {string|null} [key] Field key
+     * @property {string|null} [label] Field label
+     * @property {Field.Type|null} [type] Field type
+     * @property {string|null} [value] Field value
+     */
+
+    /**
+     * Constructs a new Field.
+     * @exports Field
+     * @classdesc Represents a Field.
+     * @implements IField
+     * @constructor
+     * @param {IField=} [properties] Properties to set
+     */
+    function Field(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Field key.
+     * @member {string} key
+     * @memberof Field
+     * @instance
+     */
+    Field.prototype.key = "";
+
+    /**
+     * Field label.
+     * @member {string} label
+     * @memberof Field
+     * @instance
+     */
+    Field.prototype.label = "";
+
+    /**
+     * Field type.
+     * @member {Field.Type} type
+     * @memberof Field
+     * @instance
+     */
+    Field.prototype.type = 0;
+
+    /**
+     * Field value.
+     * @member {string} value
+     * @memberof Field
+     * @instance
+     */
+    Field.prototype.value = "";
+
+    /**
+     * Creates a new Field instance using the specified properties.
+     * @function create
+     * @memberof Field
+     * @static
+     * @param {IField=} [properties] Properties to set
+     * @returns {Field} Field instance
+     */
+    Field.create = function create(properties) {
+        return new Field(properties);
+    };
+
+    /**
+     * Encodes the specified Field message. Does not implicitly {@link Field.verify|verify} messages.
+     * @function encode
+     * @memberof Field
+     * @static
+     * @param {IField} message Field message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Field.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.key != null && message.hasOwnProperty("key"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+        if (message.label != null && message.hasOwnProperty("label"))
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+        if (message.type != null && message.hasOwnProperty("type"))
+            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+        if (message.value != null && message.hasOwnProperty("value"))
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.value);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified Field message, length delimited. Does not implicitly {@link Field.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Field
+     * @static
+     * @param {IField} message Field message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Field.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a Field message from the specified reader or buffer.
+     * @function decode
+     * @memberof Field
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Field} Field
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Field.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Field();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.key = reader.string();
+                break;
+            case 2:
+                message.label = reader.string();
+                break;
+            case 3:
+                message.type = reader.int32();
+                break;
+            case 4:
+                message.value = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a Field message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Field
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Field} Field
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Field.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a Field message.
+     * @function verify
+     * @memberof Field
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Field.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.key != null && message.hasOwnProperty("key"))
+            if (!$util.isString(message.key))
+                return "key: string expected";
+        if (message.label != null && message.hasOwnProperty("label"))
+            if (!$util.isString(message.label))
+                return "label: string expected";
+        if (message.type != null && message.hasOwnProperty("type"))
+            switch (message.type) {
+            default:
+                return "type: enum value expected";
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                break;
+            }
+        if (message.value != null && message.hasOwnProperty("value"))
+            if (!$util.isString(message.value))
+                return "value: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a Field message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Field
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Field} Field
+     */
+    Field.fromObject = function fromObject(object) {
+        if (object instanceof $root.Field)
+            return object;
+        var message = new $root.Field();
+        if (object.key != null)
+            message.key = String(object.key);
+        if (object.label != null)
+            message.label = String(object.label);
+        switch (object.type) {
+        case "Text":
+        case 0:
+            message.type = 0;
+            break;
+        case "Image":
+        case 1:
+            message.type = 1;
+            break;
+        case "File":
+        case 2:
+            message.type = 2;
+            break;
+        case "Number":
+        case 3:
+            message.type = 3;
+            break;
+        case "Boolean":
+        case 4:
+            message.type = 4;
+            break;
+        }
+        if (object.value != null)
+            message.value = String(object.value);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a Field message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Field
+     * @static
+     * @param {Field} message Field
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Field.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.key = "";
+            object.label = "";
+            object.type = options.enums === String ? "Text" : 0;
+            object.value = "";
+        }
+        if (message.key != null && message.hasOwnProperty("key"))
+            object.key = message.key;
+        if (message.label != null && message.hasOwnProperty("label"))
+            object.label = message.label;
+        if (message.type != null && message.hasOwnProperty("type"))
+            object.type = options.enums === String ? $root.Field.Type[message.type] : message.type;
+        if (message.value != null && message.hasOwnProperty("value"))
+            object.value = message.value;
+        return object;
+    };
+
+    /**
+     * Converts this Field to JSON.
+     * @function toJSON
+     * @memberof Field
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Field.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Type enum.
+     * @name Field.Type
+     * @enum {string}
+     * @property {number} Text=0 Text value
+     * @property {number} Image=1 Image value
+     * @property {number} File=2 File value
+     * @property {number} Number=3 Number value
+     * @property {number} Boolean=4 Boolean value
+     */
+    Field.Type = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Text"] = 0;
+        values[valuesById[1] = "Image"] = 1;
+        values[valuesById[2] = "File"] = 2;
+        values[valuesById[3] = "Number"] = 3;
+        values[valuesById[4] = "Boolean"] = 4;
+        return values;
+    })();
+
+    return Field;
+})();
+
 $root.Schema = (function() {
 
     /**
@@ -17,7 +319,7 @@ $root.Schema = (function() {
      * @interface ISchema
      * @property {string|null} [txid] Schema txid
      * @property {string|null} [name] Schema name
-     * @property {Array.<Schema.IField>|null} [fields] Schema fields
+     * @property {Array.<IField>|null} [fields] Schema fields
      */
 
     /**
@@ -54,7 +356,7 @@ $root.Schema = (function() {
 
     /**
      * Schema fields.
-     * @member {Array.<Schema.IField>} fields
+     * @member {Array.<IField>} fields
      * @memberof Schema
      * @instance
      */
@@ -90,7 +392,7 @@ $root.Schema = (function() {
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
         if (message.fields != null && message.fields.length)
             for (var i = 0; i < message.fields.length; ++i)
-                $root.Schema.Field.encode(message.fields[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.Field.encode(message.fields[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         return writer;
     };
 
@@ -134,7 +436,7 @@ $root.Schema = (function() {
             case 3:
                 if (!(message.fields && message.fields.length))
                     message.fields = [];
-                message.fields.push($root.Schema.Field.decode(reader, reader.uint32()));
+                message.fields.push($root.Field.decode(reader, reader.uint32()));
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -181,7 +483,7 @@ $root.Schema = (function() {
             if (!Array.isArray(message.fields))
                 return "fields: array expected";
             for (var i = 0; i < message.fields.length; ++i) {
-                var error = $root.Schema.Field.verify(message.fields[i]);
+                var error = $root.Field.verify(message.fields[i]);
                 if (error)
                     return "fields." + error;
             }
@@ -212,7 +514,7 @@ $root.Schema = (function() {
             for (var i = 0; i < object.fields.length; ++i) {
                 if (typeof object.fields[i] !== "object")
                     throw TypeError(".Schema.fields: object expected");
-                message.fields[i] = $root.Schema.Field.fromObject(object.fields[i]);
+                message.fields[i] = $root.Field.fromObject(object.fields[i]);
             }
         }
         return message;
@@ -244,7 +546,7 @@ $root.Schema = (function() {
         if (message.fields && message.fields.length) {
             object.fields = [];
             for (var j = 0; j < message.fields.length; ++j)
-                object.fields[j] = $root.Schema.Field.toObject(message.fields[j], options);
+                object.fields[j] = $root.Field.toObject(message.fields[j], options);
         }
         return object;
     };
@@ -259,279 +561,6 @@ $root.Schema = (function() {
     Schema.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
-
-    /**
-     * Type enum.
-     * @name Schema.Type
-     * @enum {string}
-     * @property {number} Text=0 Text value
-     * @property {number} Image=1 Image value
-     * @property {number} File=2 File value
-     * @property {number} Number=3 Number value
-     */
-    Schema.Type = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Text"] = 0;
-        values[valuesById[1] = "Image"] = 1;
-        values[valuesById[2] = "File"] = 2;
-        values[valuesById[3] = "Number"] = 3;
-        return values;
-    })();
-
-    Schema.Field = (function() {
-
-        /**
-         * Properties of a Field.
-         * @memberof Schema
-         * @interface IField
-         * @property {string|null} [key] Field key
-         * @property {string|null} [label] Field label
-         * @property {Schema.Type|null} [type] Field type
-         */
-
-        /**
-         * Constructs a new Field.
-         * @memberof Schema
-         * @classdesc Represents a Field.
-         * @implements IField
-         * @constructor
-         * @param {Schema.IField=} [properties] Properties to set
-         */
-        function Field(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Field key.
-         * @member {string} key
-         * @memberof Schema.Field
-         * @instance
-         */
-        Field.prototype.key = "";
-
-        /**
-         * Field label.
-         * @member {string} label
-         * @memberof Schema.Field
-         * @instance
-         */
-        Field.prototype.label = "";
-
-        /**
-         * Field type.
-         * @member {Schema.Type} type
-         * @memberof Schema.Field
-         * @instance
-         */
-        Field.prototype.type = 0;
-
-        /**
-         * Creates a new Field instance using the specified properties.
-         * @function create
-         * @memberof Schema.Field
-         * @static
-         * @param {Schema.IField=} [properties] Properties to set
-         * @returns {Schema.Field} Field instance
-         */
-        Field.create = function create(properties) {
-            return new Field(properties);
-        };
-
-        /**
-         * Encodes the specified Field message. Does not implicitly {@link Schema.Field.verify|verify} messages.
-         * @function encode
-         * @memberof Schema.Field
-         * @static
-         * @param {Schema.IField} message Field message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Field.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.key != null && message.hasOwnProperty("key"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-            if (message.label != null && message.hasOwnProperty("label"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
-            if (message.type != null && message.hasOwnProperty("type"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified Field message, length delimited. Does not implicitly {@link Schema.Field.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof Schema.Field
-         * @static
-         * @param {Schema.IField} message Field message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Field.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a Field message from the specified reader or buffer.
-         * @function decode
-         * @memberof Schema.Field
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {Schema.Field} Field
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Field.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Schema.Field();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.key = reader.string();
-                    break;
-                case 2:
-                    message.label = reader.string();
-                    break;
-                case 3:
-                    message.type = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a Field message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof Schema.Field
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {Schema.Field} Field
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Field.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a Field message.
-         * @function verify
-         * @memberof Schema.Field
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        Field.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.key != null && message.hasOwnProperty("key"))
-                if (!$util.isString(message.key))
-                    return "key: string expected";
-            if (message.label != null && message.hasOwnProperty("label"))
-                if (!$util.isString(message.label))
-                    return "label: string expected";
-            if (message.type != null && message.hasOwnProperty("type"))
-                switch (message.type) {
-                default:
-                    return "type: enum value expected";
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    break;
-                }
-            return null;
-        };
-
-        /**
-         * Creates a Field message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof Schema.Field
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {Schema.Field} Field
-         */
-        Field.fromObject = function fromObject(object) {
-            if (object instanceof $root.Schema.Field)
-                return object;
-            var message = new $root.Schema.Field();
-            if (object.key != null)
-                message.key = String(object.key);
-            if (object.label != null)
-                message.label = String(object.label);
-            switch (object.type) {
-            case "Text":
-            case 0:
-                message.type = 0;
-                break;
-            case "Image":
-            case 1:
-                message.type = 1;
-                break;
-            case "File":
-            case 2:
-                message.type = 2;
-                break;
-            case "Number":
-            case 3:
-                message.type = 3;
-                break;
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a Field message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof Schema.Field
-         * @static
-         * @param {Schema.Field} message Field
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        Field.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.key = "";
-                object.label = "";
-                object.type = options.enums === String ? "Text" : 0;
-            }
-            if (message.key != null && message.hasOwnProperty("key"))
-                object.key = message.key;
-            if (message.label != null && message.hasOwnProperty("label"))
-                object.label = message.label;
-            if (message.type != null && message.hasOwnProperty("type"))
-                object.type = options.enums === String ? $root.Schema.Type[message.type] : message.type;
-            return object;
-        };
-
-        /**
-         * Converts this Field to JSON.
-         * @function toJSON
-         * @memberof Schema.Field
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        Field.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Field;
-    })();
 
     return Schema;
 })();
@@ -1353,6 +1382,7 @@ $root.Workflow = (function() {
      * Properties of a Workflow.
      * @exports IWorkflow
      * @interface IWorkflow
+     * @property {string|null} [name] Workflow name
      * @property {string|null} [txid] Workflow txid
      * @property {string|null} [owner] Workflow owner
      * @property {Array.<IStage>|null} [stages] Workflow stages
@@ -1373,6 +1403,14 @@ $root.Workflow = (function() {
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
+
+    /**
+     * Workflow name.
+     * @member {string} name
+     * @memberof Workflow
+     * @instance
+     */
+    Workflow.prototype.name = "";
 
     /**
      * Workflow txid.
@@ -1422,13 +1460,15 @@ $root.Workflow = (function() {
     Workflow.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
+        if (message.name != null && message.hasOwnProperty("name"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
         if (message.txid != null && message.hasOwnProperty("txid"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.txid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.txid);
         if (message.owner != null && message.hasOwnProperty("owner"))
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.owner);
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.owner);
         if (message.stages != null && message.stages.length)
             for (var i = 0; i < message.stages.length; ++i)
-                $root.Stage.encode(message.stages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.Stage.encode(message.stages[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         return writer;
     };
 
@@ -1464,12 +1504,15 @@ $root.Workflow = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.txid = reader.string();
+                message.name = reader.string();
                 break;
             case 2:
-                message.owner = reader.string();
+                message.txid = reader.string();
                 break;
             case 3:
+                message.owner = reader.string();
+                break;
+            case 4:
                 if (!(message.stages && message.stages.length))
                     message.stages = [];
                 message.stages.push($root.Stage.decode(reader, reader.uint32()));
@@ -1509,6 +1552,9 @@ $root.Workflow = (function() {
     Workflow.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
+        if (message.name != null && message.hasOwnProperty("name"))
+            if (!$util.isString(message.name))
+                return "name: string expected";
         if (message.txid != null && message.hasOwnProperty("txid"))
             if (!$util.isString(message.txid))
                 return "txid: string expected";
@@ -1539,6 +1585,8 @@ $root.Workflow = (function() {
         if (object instanceof $root.Workflow)
             return object;
         var message = new $root.Workflow();
+        if (object.name != null)
+            message.name = String(object.name);
         if (object.txid != null)
             message.txid = String(object.txid);
         if (object.owner != null)
@@ -1572,9 +1620,12 @@ $root.Workflow = (function() {
         if (options.arrays || options.defaults)
             object.stages = [];
         if (options.defaults) {
+            object.name = "";
             object.txid = "";
             object.owner = "";
         }
+        if (message.name != null && message.hasOwnProperty("name"))
+            object.name = message.name;
         if (message.txid != null && message.hasOwnProperty("txid"))
             object.txid = message.txid;
         if (message.owner != null && message.hasOwnProperty("owner"))
@@ -1610,7 +1661,7 @@ $root.State = (function() {
      * @property {string|null} [txid] State txid
      * @property {IWorkflow|null} [workflow] State workflow
      * @property {State.Status|null} [status] State status
-     * @property {string|null} [data] State data
+     * @property {Array.<IField>|null} [values] State values
      * @property {Array.<State.ITask>|null} [tasks] State tasks
      */
 
@@ -1623,6 +1674,7 @@ $root.State = (function() {
      * @param {IState=} [properties] Properties to set
      */
     function State(properties) {
+        this.values = [];
         this.tasks = [];
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1655,12 +1707,12 @@ $root.State = (function() {
     State.prototype.status = 0;
 
     /**
-     * State data.
-     * @member {string} data
+     * State values.
+     * @member {Array.<IField>} values
      * @memberof State
      * @instance
      */
-    State.prototype.data = "";
+    State.prototype.values = $util.emptyArray;
 
     /**
      * State tasks.
@@ -1700,8 +1752,9 @@ $root.State = (function() {
             $root.Workflow.encode(message.workflow, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.status != null && message.hasOwnProperty("status"))
             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.status);
-        if (message.data != null && message.hasOwnProperty("data"))
-            writer.uint32(/* id 4, wireType 2 =*/34).string(message.data);
+        if (message.values != null && message.values.length)
+            for (var i = 0; i < message.values.length; ++i)
+                $root.Field.encode(message.values[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.tasks != null && message.tasks.length)
             for (var i = 0; i < message.tasks.length; ++i)
                 $root.State.Task.encode(message.tasks[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -1749,7 +1802,9 @@ $root.State = (function() {
                 message.status = reader.int32();
                 break;
             case 4:
-                message.data = reader.string();
+                if (!(message.values && message.values.length))
+                    message.values = [];
+                message.values.push($root.Field.decode(reader, reader.uint32()));
                 break;
             case 5:
                 if (!(message.tasks && message.tasks.length))
@@ -1808,9 +1863,15 @@ $root.State = (function() {
             case 2:
                 break;
             }
-        if (message.data != null && message.hasOwnProperty("data"))
-            if (!$util.isString(message.data))
-                return "data: string expected";
+        if (message.values != null && message.hasOwnProperty("values")) {
+            if (!Array.isArray(message.values))
+                return "values: array expected";
+            for (var i = 0; i < message.values.length; ++i) {
+                var error = $root.Field.verify(message.values[i]);
+                if (error)
+                    return "values." + error;
+            }
+        }
         if (message.tasks != null && message.hasOwnProperty("tasks")) {
             if (!Array.isArray(message.tasks))
                 return "tasks: array expected";
@@ -1856,8 +1917,16 @@ $root.State = (function() {
             message.status = 2;
             break;
         }
-        if (object.data != null)
-            message.data = String(object.data);
+        if (object.values) {
+            if (!Array.isArray(object.values))
+                throw TypeError(".State.values: array expected");
+            message.values = [];
+            for (var i = 0; i < object.values.length; ++i) {
+                if (typeof object.values[i] !== "object")
+                    throw TypeError(".State.values: object expected");
+                message.values[i] = $root.Field.fromObject(object.values[i]);
+            }
+        }
         if (object.tasks) {
             if (!Array.isArray(object.tasks))
                 throw TypeError(".State.tasks: array expected");
@@ -1884,13 +1953,14 @@ $root.State = (function() {
         if (!options)
             options = {};
         var object = {};
-        if (options.arrays || options.defaults)
+        if (options.arrays || options.defaults) {
+            object.values = [];
             object.tasks = [];
+        }
         if (options.defaults) {
             object.txid = "";
             object.workflow = null;
             object.status = options.enums === String ? "Open" : 0;
-            object.data = "";
         }
         if (message.txid != null && message.hasOwnProperty("txid"))
             object.txid = message.txid;
@@ -1898,8 +1968,11 @@ $root.State = (function() {
             object.workflow = $root.Workflow.toObject(message.workflow, options);
         if (message.status != null && message.hasOwnProperty("status"))
             object.status = options.enums === String ? $root.State.Status[message.status] : message.status;
-        if (message.data != null && message.hasOwnProperty("data"))
-            object.data = message.data;
+        if (message.values && message.values.length) {
+            object.values = [];
+            for (var j = 0; j < message.values.length; ++j)
+                object.values[j] = $root.Field.toObject(message.values[j], options);
+        }
         if (message.tasks && message.tasks.length) {
             object.tasks = [];
             for (var j = 0; j < message.tasks.length; ++j)

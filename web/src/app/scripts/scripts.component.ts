@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ISchema } from 'src/lib/bitflow-proto';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { SCHEMA, ADDRESS, SCRIPT } from 'src/lib/constants';
+import { ADDRESS, SCRIPT } from 'src/lib/constants';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare const moneyButton;
 declare const bsv;
@@ -17,11 +16,12 @@ export class ScriptsComponent implements OnInit {
   mbdiv: any;
   name: string;
   fileData: any;
+  filename: string;
   result: string;
   JSON: any;
 
-  constructor(rtDb: AngularFireDatabase) {
-    this.scripts = rtDb.list<any>('scripts').valueChanges();
+  constructor(db: AngularFirestore) {
+    this.scripts = db.collection<any>('scripts').valueChanges();
     this.JSON = JSON;
    }
 
@@ -32,11 +32,13 @@ export class ScriptsComponent implements OnInit {
 
   onFileChange($event) {
     const reader = new FileReader();
+    const file: File = $event.target.files[0];
     reader.onload = () => {
+      this.filename = file.name;
       this.fileData = reader.result;
       this.updateMoneybutton();
     }
-    reader.readAsArrayBuffer($event.target.files[0]);
+    reader.readAsArrayBuffer(file);
   }
 
   updateMoneybutton() {
@@ -44,6 +46,7 @@ export class ScriptsComponent implements OnInit {
     script.add(bsv.Opcode.OP_RETURN);
     script.add(bsv.deps.Buffer.from(SCRIPT));
     script.add(bsv.deps.Buffer.from(this.fileData || ''));
+    script.add(bsv.deps.Buffer.from(this.filename || ''));
     moneyButton.render(this.mbdiv, {
       label: 'Upload',
       outputs: [
