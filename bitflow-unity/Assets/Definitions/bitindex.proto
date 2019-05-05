@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+message BitIndexUTXO {
+    string address = 1;
+    string txid = 2;
+    int32 vout = 3;
+    float amount = 4;
+    int64 satoshis = 5;
+    int32 value = 6;
+    int32 height = 7;
+    int32 confirmations = 8;
+    string scriptPubKey= 9;
+}
+
+message BitIndexTx {
+	message Vin{
+		message ScriptSig{
+			string asm = 1;
+			string hex = 2;
+		}
+		string txid = 1;
+		int32 vout = 2;
+		ScriptSig scriptSig = 3;
+		int64 sequence = 4;
+	}
+
+	message Vout{
+		message ScriptPubKey{
+			string asm = 1;
+			string hex = 2;
+			string type = 3;
+			repeated string addresses = 4;
+		}
+		float value = 1;
+        int32 n = 2;
+        ScriptPubKey scriptPubKey = 3;
+	}
+
+	string hex = 1;
+	string txid = 2;
+	string hash = 3;
+	int32 size = 4;
+	int32 version = 5;
+	int32 locktime = 6;
+	repeated Vin vin = 7;
+	repeated Vout vout = 8;
+	string blockhash = 9;
+	int32 confirmations = 10;
+	int32 time = 11;
+	int32 blocktime = 12;
+}
+
+message BitIndexAddressList{
+    string address = 1;
+    string txid = 2;
+    int32 height = 3;
+}
+
+message BitIndexAddressDetails{
+	string addrStr = 1;
+	float balance = 2;
+	int64 balanceSat = 3;
+	float totalReceived = 4;
+	int64 totalReceivedSat = 5;
+	float totalSent = 6;
+	int64 totalSentSat = 7;
+	float unconfirmedBalance = 8;
+	int64 unconfirmedBalanceSat = 9;
+	int64 unconfirmedTxApperances = 10;
+	int64 txApperances = 11;
+	repeated string transactions = 12;
+}
