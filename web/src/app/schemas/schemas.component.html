@@ -1,3 +1,14 @@
-<p>
-  schemas works!
-</p>
+<h3>Schemas</h3>
+<table>
+  <thead>
+    <tr>
+      <th>txid</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let schema of schemas | async">
+      <td>{{ schema.txid }}</td>
+    </tr>
+  </tbody>
+</table>

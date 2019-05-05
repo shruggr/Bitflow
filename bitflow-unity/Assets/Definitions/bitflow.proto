@@ -14,7 +14,7 @@ message Schema {
         Type type = 3;
     }
 
-    string id = 1;
+    string txid = 1;
     string name = 2;
     repeated Field fields = 3;
 }
