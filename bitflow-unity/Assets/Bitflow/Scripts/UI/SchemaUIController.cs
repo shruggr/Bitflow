@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[System.Serializable] public class SubmissionEvent : UnityEvent<Dictionary<string, object>>
+[System.Serializable] public class SubmissionEvent : UnityEvent<Dictionary<string, string>>
 {
 }
 
@@ -74,7 +74,7 @@ public class SchemaUIController : MonoBehaviour
 
     void Submit()
     {
-        var submitMap = new Dictionary<string, object>();
+        var submitMap = new Dictionary<string, string>();
         foreach ( var element in FieldGetterMap )
         {
             submitMap.Add( element.Key, element.Value.Get() );

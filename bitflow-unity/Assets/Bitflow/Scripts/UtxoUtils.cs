@@ -50,14 +50,27 @@ public static class UtxoUtils
         return tx;
     }
 
-    public static Transaction BuildTxnFromUtxo( Key spender, UTXO utxo, byte[][] msg )
+    public static Transaction BuildTxnFromUtxo(Key spender, UTXO utxo, byte[][] msg)
     {
         // Debug.Log($"Building utxo with: {JsonConvert.SerializeObject(utxo)}");
 
-        return BuildTxn( utxo.ToCoin( spender ), spender,
+        return BuildTxn(utxo.ToCoin(spender), spender,
             new[] // Outs
             {
                 new KeyValuePair<Script, Money>( TxNullDataTemplate.Instance.GenerateScriptPubKey( msg ), Money.Zero )
-            } );
+            });
+    }
+
+    public static Transaction BuildSubmitTxnFromUtxo(Key spender, UTXO utxo, byte[][] msg, string payeeAddr, long funds)
+    {
+        // Debug.Log($"Building utxo with: {JsonConvert.SerializeObject(utxo)}");
+        var payeeAddress = new BitcoinPubKeyAddress(payeeAddr);
+
+        return BuildTxn(utxo.ToCoin(spender), spender,
+            new[] // Outs
+            {
+                new KeyValuePair<Script, Money>( TxNullDataTemplate.Instance.GenerateScriptPubKey( msg ), Money.Zero ),
+                new KeyValuePair<Script, Money>( payeeAddress.ScriptPubKey, new Money( funds, MoneyUnit.Satoshi ) )
+            });
     }
 }

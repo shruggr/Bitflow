@@ -43,7 +43,7 @@ public class TaskListPanel : MonoBehaviour
                     entry.OnClick.onClick.AddListener( () =>
                     {
                         UIManager.Instance.ShowSchemaController( stateTxnToTask.Key, task.Stage.Schema,
-                            task.Utxos.ToList() );
+                            task.Utxos.ToList(), task.Stage );
                     } );
                 }
             }

@@ -56,7 +56,7 @@ public class TestSchema : MonoBehaviour
         Controller.OnSubmit.AddListener( BuildAndBroadcastTransaction );
     }
 
-    public void BuildAndBroadcastTransaction( Dictionary<string, object> submitMap )
+    public void BuildAndBroadcastTransaction( Dictionary<string, string> submitMap )
     {
         Debug.Log( "Submit the map: " + JsonConvert.SerializeObject( submitMap ) );
     }

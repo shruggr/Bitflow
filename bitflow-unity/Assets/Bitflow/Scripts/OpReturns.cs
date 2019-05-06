@@ -30,7 +30,7 @@ public static class OpReturns
         };
     }
 
-    public static byte[][] MakeSubmit( string stateTxn, Dictionary<string, object> data )
+    public static byte[][] MakeSubmit( string stateTxn, Dictionary<string, string> data )
     {
         return new[]
         {
@@ -38,6 +38,5 @@ public static class OpReturns
             Encoding.UTF8.GetBytes( stateTxn ),
             Encoding.UTF8.GetBytes( JsonConvert.SerializeObject( data ) )
         };
-        throw new System.NotImplementedException();
     }
 }

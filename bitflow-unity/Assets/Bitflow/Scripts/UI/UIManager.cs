@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject TaskList;
     [SerializeField] SchemaUIController SchemaController;
+
+    [SerializeField] Button BackButton;
 
     [UsedImplicitly] void Awake()
     {
@@ -21,10 +25,17 @@ public class UIManager : MonoBehaviour
 
     string stateId;
     UTXO submitUTXO;
+    string payeeAddr;
+    long funds;
 
-    public void ShowSchemaController( string stateTxn, Stage.Types.Schema schema, List<UTXO> utxos )
+    public void ShowSchemaController( string stateTxn, Stage.Types.Schema schema, List<UTXO> utxos, Stage stage )
     {
         Assert.IsTrue( !string.IsNullOrEmpty( stateTxn ) );
+
+        payeeAddr = stage.Payee;
+        funds = stage.Funds;
+        Assert.IsTrue( !string.IsNullOrEmpty( payeeAddr ) );
+
         stateId = stateTxn;
         TaskList.gameObject.SetActive( false );
         SchemaController.gameObject.SetActive( true );
@@ -43,23 +54,42 @@ public class UIManager : MonoBehaviour
 
         SchemaController.Build( schema, utxos.ToArray() );
         SchemaController.OnSubmit.AddListener( SubmitForm );
+        BackButton.gameObject.SetActive( true );
     }
 
-    void SubmitForm( Dictionary<string, object> data )
+    void SubmitForm( Dictionary<string, string> data )
     {
-        ModalDialog.Instance.Show( "Submitting task",
-            "Please wait while your task txn is being build and broadcast" );
-
-        Assert.IsTrue( !string.IsNullOrEmpty( stateId ) );
-        Assert.IsNotNull( submitUTXO );
-        UtxoUtils.BuildTxnFromUtxo( Authenticator.Instance.Identity.PrivateKey, submitUTXO,
-            OpReturns.MakeSubmit( stateId, data ) ).Spend( s =>
+        foreach ( var item in data )
         {
-            ModalDialog.Instance.Show( "Transaction Successful",
-                "You txn was broadcast and this task is completed. " +
-                "The appropriate funds have been delivered to the payee." +
-                "Txn: " + s, "Ok" );
+            if ( string.IsNullOrEmpty( item.Value ) )
+            {
+                ModalDialog.Instance.Show( "Missing Fields",
+                    "Please fill in all the fields necessary to complete the task", "Ok" );
+                return;
+            }
+        }
+
+        try
+        {
+            ModalDialog.Instance.Show( "Submitting task",
+                "Please wait while your task txn is being build and broadcast" );
+
+            Assert.IsTrue( !string.IsNullOrEmpty( stateId ) );
+            Assert.IsNotNull( submitUTXO );
+            UtxoUtils.BuildSubmitTxnFromUtxo( Authenticator.Instance.Identity.PrivateKey, submitUTXO,
+                OpReturns.MakeSubmit( stateId, data ), payeeAddr, funds ).Spend( s =>
+            {
+                ModalDialog.Instance.Show( "Transaction Successful",
+                    "You txn was broadcast and this task is completed. " +
+                    $"{funds} BSV sat have been delivered to the payee ({payeeAddr}). " +
+                    "Txn: " + s, "Ok" );
+                ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
+            } );
+        }
+        catch
+        {
+            ModalDialog.Instance.Show( "Fatal Error", "Please try again", "Ok" );
             ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
-        } );
+        }
     }
 }
