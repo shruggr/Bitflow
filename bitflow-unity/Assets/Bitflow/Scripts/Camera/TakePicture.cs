@@ -90,7 +90,7 @@ public class TakePicture : MonoBehaviour
                     } );
 
                     InputField.text = txn;
-                    var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, 200, 200 ), new Vector2( 0.5f, 0.5f ),
+                    var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, tex.width, tex.height), new Vector2( 0.5f, 0.5f ),
                         100.0f );
                     Image.sprite = sprite;
                 } );
