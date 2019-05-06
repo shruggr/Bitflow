@@ -289,7 +289,7 @@ async function processSubmit(
     }
 
     rtDb.ref(`pendingTasks/${taskDoc.id}`).remove();
-    rtDb.ref(`tasks/${task.address}/${state.txid}/${task.txid}`)
+    rtDb.ref(`tasks/${task.address}/${state.txid}/${txnData.in[0].e.h}`)
         .set(task.toJSON());
     return processTask(
         state,
