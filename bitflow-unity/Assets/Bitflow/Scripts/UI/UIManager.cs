@@ -106,8 +106,8 @@ public class UIManager : MonoBehaviour
     public IEnumerator DelayedGoToMenu()
     {
         yield return new WaitForSeconds( 0.25f );
-        ModalDialog.Instance.Show("Please Wait", "Waiting for confirmation");
-        yield return new WaitForSeconds(5f);
+        ModalDialog.Instance.Show("Please Wait", "Loading new tasks");
+        yield return new WaitForSeconds(10f);
         SceneManager.LoadScene("Main");
     }
 }
