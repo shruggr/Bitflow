@@ -35,14 +35,14 @@ public static partial class BitflowReflection {
           "ZXISGAoQcHJvY2Vzc1NjcmlwdFR4bhgBIAEoCRIaChJjcmVhdGVUYXNrU3Rh",
           "Z2VJZHgYAiABKAUSEAoIYXNzaWduZWUYAyABKAkSDQoFZnVuZHMYBCABKAUi",
           "TQoIV29ya2Zsb3cSDAoEbmFtZRgBIAEoCRIMCgR0eGlkGAIgASgJEg0KBW93",
-          "bmVyGAMgASgJEhYKBnN0YWdlcxgEIAMoCzIGLlN0YWdlIqUCCgVTdGF0ZRIM",
+          "bmVyGAMgASgJEhYKBnN0YWdlcxgEIAMoCzIGLlN0YWdlIrkCCgVTdGF0ZRIM",
           "CgR0eGlkGAEgASgJEhsKCHdvcmtmbG93GAIgASgLMgkuV29ya2Zsb3cSHQoG",
           "c3RhdHVzGAMgASgOMg0uU3RhdGUuU3RhdHVzEhYKBnZhbHVlcxgEIAMoCzIG",
-          "LkZpZWxkEhoKBXRhc2tzGAUgAygLMgsuU3RhdGUuVGFzaxpxCgRUYXNrEhUK",
-          "BXN0YWdlGAEgASgLMgYuU3RhZ2USHQoGc3RhdHVzGAIgASgOMg0uU3RhdGUu",
-          "U3RhdHVzEg8KB2FkZHJlc3MYAyABKAkSFAoFdXR4b3MYBCADKAsyBS5VVFhP",
-          "EgwKBHR4aWQYBSABKAkiKwoGU3RhdHVzEggKBE9wZW4QABIJCgVFcnJvchAB",
-          "EgwKCENvbXBsZXRlEAJiBnByb3RvMw=="));
+          "LkZpZWxkEhoKBXRhc2tzGAUgAygLMgsuU3RhdGUuVGFzaxqEAQoEVGFzaxIV",
+          "CgVzdGFnZRgBIAEoCzIGLlN0YWdlEh0KBnN0YXR1cxgCIAEoDjINLlN0YXRl",
+          "LlN0YXR1cxIPCgdhZGRyZXNzGAMgASgJEhQKBXV0eG9zGAQgAygLMgUuVVRY",
+          "TxIRCglhc3NpZ25UeG4YBSABKAkSDAoEdHhpZBgGIAEoCSIrCgZTdGF0dXMS",
+          "CAoET3BlbhAAEgkKBUVycm9yEAESDAoIQ29tcGxldGUQAmIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,7 +51,7 @@ public static partial class BitflowReflection {
           new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "Schema", "Funds", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Schema), global::Stage.Types.Schema.Parser, new[]{ "Txid", "Name", "Fields" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
           new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Name", "Txid", "Owner", "Stages" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Values", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "Txid" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(typeof(global::State), global::State.Parser, new[]{ "Txid", "Workflow", "Status", "Values", "Tasks" }, null, new[]{ typeof(global::State.Types.Status) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::State.Types.Task), global::State.Types.Task.Parser, new[]{ "Stage", "Status", "Address", "Utxos", "AssignTxn", "Txid" }, null, null, null)})
         }));
   }
   #endregion
@@ -1650,6 +1650,7 @@ public sealed partial class State : pb::IMessage<State> {
         status_ = other.status_;
         address_ = other.address_;
         utxos_ = other.utxos_.Clone();
+        assignTxn_ = other.assignTxn_;
         txid_ = other.txid_;
         _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
       }
@@ -1702,8 +1703,19 @@ public sealed partial class State : pb::IMessage<State> {
         get { return utxos_; }
       }
 
+      /// <summary>Field number for the "assignTxn" field.</summary>
+      public const int AssignTxnFieldNumber = 5;
+      private string assignTxn_ = "";
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public string AssignTxn {
+        get { return assignTxn_; }
+        set {
+          assignTxn_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        }
+      }
+
       /// <summary>Field number for the "txid" field.</summary>
-      public const int TxidFieldNumber = 5;
+      public const int TxidFieldNumber = 6;
       private string txid_ = "";
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public string Txid {
@@ -1730,6 +1742,7 @@ public sealed partial class State : pb::IMessage<State> {
         if (Status != other.Status) return false;
         if (Address != other.Address) return false;
         if(!utxos_.Equals(other.utxos_)) return false;
+        if (AssignTxn != other.AssignTxn) return false;
         if (Txid != other.Txid) return false;
         return Equals(_unknownFields, other._unknownFields);
       }
@@ -1741,6 +1754,7 @@ public sealed partial class State : pb::IMessage<State> {
         if (Status != 0) hash ^= Status.GetHashCode();
         if (Address.Length != 0) hash ^= Address.GetHashCode();
         hash ^= utxos_.GetHashCode();
+        if (AssignTxn.Length != 0) hash ^= AssignTxn.GetHashCode();
         if (Txid.Length != 0) hash ^= Txid.GetHashCode();
         if (_unknownFields != null) {
           hash ^= _unknownFields.GetHashCode();
@@ -1768,8 +1782,12 @@ public sealed partial class State : pb::IMessage<State> {
           output.WriteString(Address);
         }
         utxos_.WriteTo(output, _repeated_utxos_codec);
-        if (Txid.Length != 0) {
+        if (AssignTxn.Length != 0) {
           output.WriteRawTag(42);
+          output.WriteString(AssignTxn);
+        }
+        if (Txid.Length != 0) {
+          output.WriteRawTag(50);
           output.WriteString(Txid);
         }
         if (_unknownFields != null) {
@@ -1790,6 +1808,9 @@ public sealed partial class State : pb::IMessage<State> {
           size += 1 + pb::CodedOutputStream.ComputeStringSize(Address);
         }
         size += utxos_.CalculateSize(_repeated_utxos_codec);
+        if (AssignTxn.Length != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeStringSize(AssignTxn);
+        }
         if (Txid.Length != 0) {
           size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
         }
@@ -1817,6 +1838,9 @@ public sealed partial class State : pb::IMessage<State> {
           Address = other.Address;
         }
         utxos_.Add(other.utxos_);
+        if (other.AssignTxn.Length != 0) {
+          AssignTxn = other.AssignTxn;
+        }
         if (other.Txid.Length != 0) {
           Txid = other.Txid;
         }
@@ -1851,6 +1875,10 @@ public sealed partial class State : pb::IMessage<State> {
               break;
             }
             case 42: {
+              AssignTxn = input.ReadString();
+              break;
+            }
+            case 50: {
               Txid = input.ReadString();
               break;
             }
