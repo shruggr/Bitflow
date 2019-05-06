@@ -34,11 +34,13 @@ export const tx = functions.https.onRequest(async (req, res) => {
                 if (State.Status.Complete == await processRequest(txnData, true)) {
                     txid = await sendTxn(req.body.tx);
                 }
+                else return res.json({success: false, error: 'Insufficient Payment'})
                 break;
             case SUBMIT:
                 if (State.Status.Complete == await processSubmit(txnData, true)) {
                     txid = await sendTxn(req.body.tx);
                 }
+                else return res.json({success: false, error: 'Insufficient Payment'})
                 break;
             default:
                 txid = await sendTxn(req.body.tx);
@@ -141,6 +143,7 @@ async function sendTxn(rawtx: string): Promise<string> {
         throw err;
     });
 
+    console.log(resp.data);
     return resp.data.txid;
 }
 async function getTxn(txid: string, filter: any = {}): Promise<any> {
@@ -185,6 +188,7 @@ async function processRequest(
     validateOnly: boolean = false
 ): Promise<State.Status> {
     const opRet = txnData.out.find((out: any) => out.b0.op == 106);
+    if(!opRet.s2) return State.Status.Error;
     const workflow = await getWorkflow(opRet.s2);
 
     const task = State.Task.fromObject({
@@ -205,9 +209,10 @@ async function processRequest(
 
     const stage = task.stage || {};
     if(stage.funds) {
-        let fundsIn = txnData.in.find((input: any) => {
-            return input.e.v == stage.funds && input.e.a == stage.payee
+        let fundsIn = txnData.out.find((out: any) => {
+            return out.e.v == stage.funds && out.e.a == stage.payee
         });
+        console.error('Insufficient Payment');
         if(!fundsIn) return State.Status.Error;
     }
     if (task.stage && task.stage.validationScriptTxn) {
@@ -250,9 +255,10 @@ async function processSubmit(
 
     const stage = task.stage || {};
     if(stage.funds) {
-        let fundsIn = txnData.in.find((input: any) => {
-            return input.e.v == stage.funds && input.e.a == stage.payee
+        let fundsIn = txnData.out.find((out: any) => {
+            return out.e.v == stage.funds && out.e.a == stage.payee
         });
+        console.error('Insufficient Payment');
         if(!fundsIn) return State.Status.Error;
     }
 

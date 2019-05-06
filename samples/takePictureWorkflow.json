@@ -1,5 +1,5 @@
 {
-    "name": "Test workflow v2",
+    "name": "Test Workflow V3",
     "stages": [
         {
             "name": "Request a picture",
@@ -11,14 +11,14 @@
                     "type": 0
                 }]
             },
-            "funds": 1000000,
+            "funds": 100000,
             "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
             "validationScriptTxn": "8ebc4f5936be127fa877bd3eef838b3fcbc7541445167b485b9feeb100bac415",
             "onComplete": {
                 "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
                 "createTaskStageIdx": 1,
                 "assignee": "1Mz9ojrnfpiSJ3BkoRo5S6uBnDJ6igNtSF",
-                "funds": 1092
+                "funds": 2000
             }
         },
         {
@@ -39,10 +39,10 @@
             "payee": "15a7BXVYwnkht7ryNN12YT5K3U6vPJthvv",
             "validationScriptTxn": "8ebc4f5936be127fa877bd3eef838b3fcbc7541445167b485b9feeb100bac415",
             "onComplete": {
-                "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
+                "processScriptTxn": "0ddcc25ca66c939286d9446f1f24ee8976f5c9a3c918a8d91ba2713b7934a80e",
                 "createTaskStageIdx": 2,
                 "assignee": "12nHNhR2hz6nApwMxxTeKtEhYx1UrtdXgN",
-                "funds": 546
+                "funds": 2000
             }
         },
         {
@@ -61,7 +61,7 @@
             "onComplete": {
                 "processScriptTxn": "5ba296cd638e658e036266dbed8a695dfd9e3785c549069779d3363dd11bcf13",
                 "assignee": "1Mz9ojrnfpiSJ3BkoRo5S6uBnDJ6igNtSF",
-                "funds": 750000
+                "funds": 75000
             }
         }
     ]

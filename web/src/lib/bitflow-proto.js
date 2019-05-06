@@ -317,7 +317,7 @@ $root.UTXO = (function() {
      * Properties of a UTXO.
      * @exports IUTXO
      * @interface IUTXO
-     * @property {string|null} [txId] UTXO txId
+     * @property {string|null} [txid] UTXO txid
      * @property {number|null} [vout] UTXO vout
      * @property {string|null} [script] UTXO script
      * @property {number|null} [satoshis] UTXO satoshis
@@ -339,12 +339,12 @@ $root.UTXO = (function() {
     }
 
     /**
-     * UTXO txId.
-     * @member {string} txId
+     * UTXO txid.
+     * @member {string} txid
      * @memberof UTXO
      * @instance
      */
-    UTXO.prototype.txId = "";
+    UTXO.prototype.txid = "";
 
     /**
      * UTXO vout.
@@ -394,8 +394,8 @@ $root.UTXO = (function() {
     UTXO.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.txId != null && message.hasOwnProperty("txId"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.txId);
+        if (message.txid != null && message.hasOwnProperty("txid"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.txid);
         if (message.vout != null && message.hasOwnProperty("vout"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.vout);
         if (message.script != null && message.hasOwnProperty("script"))
@@ -437,7 +437,7 @@ $root.UTXO = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.txId = reader.string();
+                message.txid = reader.string();
                 break;
             case 2:
                 message.vout = reader.int32();
@@ -483,9 +483,9 @@ $root.UTXO = (function() {
     UTXO.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        if (message.txId != null && message.hasOwnProperty("txId"))
-            if (!$util.isString(message.txId))
-                return "txId: string expected";
+        if (message.txid != null && message.hasOwnProperty("txid"))
+            if (!$util.isString(message.txid))
+                return "txid: string expected";
         if (message.vout != null && message.hasOwnProperty("vout"))
             if (!$util.isInteger(message.vout))
                 return "vout: integer expected";
@@ -510,8 +510,8 @@ $root.UTXO = (function() {
         if (object instanceof $root.UTXO)
             return object;
         var message = new $root.UTXO();
-        if (object.txId != null)
-            message.txId = String(object.txId);
+        if (object.txid != null)
+            message.txid = String(object.txid);
         if (object.vout != null)
             message.vout = object.vout | 0;
         if (object.script != null)
@@ -535,13 +535,13 @@ $root.UTXO = (function() {
             options = {};
         var object = {};
         if (options.defaults) {
-            object.txId = "";
+            object.txid = "";
             object.vout = 0;
             object.script = "";
             object.satoshis = 0;
         }
-        if (message.txId != null && message.hasOwnProperty("txId"))
-            object.txId = message.txId;
+        if (message.txid != null && message.hasOwnProperty("txid"))
+            object.txid = message.txid;
         if (message.vout != null && message.hasOwnProperty("vout"))
             object.vout = message.vout;
         if (message.script != null && message.hasOwnProperty("script"))

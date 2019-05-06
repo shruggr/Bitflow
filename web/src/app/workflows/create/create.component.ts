@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { IWorkflow } from 'src/lib/bitflow-proto';
-import { Observable } from 'rxjs';
+import { IWorkflow, IStage } from 'src/lib/bitflow-proto';
 import { REQUEST } from 'src/lib/constants';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare const moneyButton;
 declare const bsv;
@@ -13,50 +12,42 @@ declare const bsv;
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  @Input() txid: string;
-  workflow: Observable<IWorkflow>;
+  @Input() workflow: IWorkflow;
+  stage: IStage;
   data: any = {};
-  mbdiv: any;
-  result: string;
 
-  constructor(private rtDb: AngularFireDatabase) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
-    this.mbdiv = document.getElementById('create-money-button');
-    this.workflow = this.rtDb.object<IWorkflow>(`workflows/${this.txid}`).valueChanges();
+    this.stage = this.workflow.stages[0];
+    this.updateMoneybutton();
   }
 
-  updateMoneybutton($event) {
-    // let stage;
-    // if(this.workflow) {
-    //   stage = this.workflow.stages[0];
-    // }
-    let script = new bsv.Script();
-    script.add(bsv.Opcode.OP_RETURN);
-    script.add(bsv.deps.Buffer.from(REQUEST));
-    script.add(bsv.deps.Buffer.from(JSON.stringify(this.data)));
-    moneyButton.render(this.mbdiv, {
-      label: 'Upload',
-      outputs: [
-        {
-          type: 'SCRIPT',
-          script: script.toASM(),
-          amount: 0,
-          currency: 'BSV'
-        },
-        {
-          address: ADDRESS,
-          amount: 546 / 100000000,
-          currency: 'BSV'
-        }
-      ],
-      disabled: !this.workflow,
-      onPayment: (payment) => {
-        this.result = payment.txid;
-      },
-      onError: (error) => {
-        this.result = `Error: ${error.message}`;
+  updateMoneybutton() {
+    const outputs: any[] = [
+      {
+        type: 'SCRIPT',
+        script: bsv.Script.buildDataOut([
+          bsv.deps.Buffer.from(REQUEST),
+          bsv.deps.Buffer.from(this.workflow.txid),
+          bsv.deps.Buffer.from(JSON.stringify(this.data))
+        ]).toASM(),
+        amount: 0,
+        currency: 'BSV'
       }
+
+    ];
+    if(this.stage && this.stage.funds) {
+      outputs.push({
+        address: this.stage.payee,
+        amount: this.stage.funds / 100000000,
+        currency: 'BSV'
+      })
+    }
+    moneyButton.render(document.getElementById('create-moneybutton'), {
+      label: 'Upload',
+      outputs,
+      disabled: !this.stage
     })
   }
 
