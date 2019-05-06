@@ -59,13 +59,14 @@ public class SchemaUIController : MonoBehaviour
             Instantiate( Spacer, parent );
         }
 
-        Instantiate(Separator, Parent);
-
+        Instantiate( Separator, Parent );
     }
 
     IEnumerator ReplaceSprite( string txn, Image img )
     {
-        var www = new WWW( "https://bico.media/ " + txn + ".jpg" );
+        var path = "https://bico.media/" + txn + ".jpg";
+        Debug.Log( path );
+        var www = new WWW( path );
         yield return www;
         // Create a texture in DXT1 format
         Texture2D texture = new Texture2D( www.texture.width, www.texture.height, TextureFormat.DXT1, false );
