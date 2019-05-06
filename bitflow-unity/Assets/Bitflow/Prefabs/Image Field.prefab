@@ -113,7 +113,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.37254903, g: 0.4117647, b: 0.4509804, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.37254903, g: 0.4117647, b: 0.4509804, a: 0.39215687}
-  m_Text: e1213576aac729bf328a013e7f05ad507b98ab7a975d93b557745d70b800229c
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 1
@@ -1398,7 +1398,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: e1213576aac729bf328a013e7f05ad507b98ab7a975d93b557745d70b800229c
+  m_Text: 
 --- !u!1 &4659964942553115193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681069604451736232}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
