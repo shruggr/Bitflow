@@ -1,4 +1,4 @@
-!(web/src/assets/logo.png)
+![](web/src/assets/logo.png)
 # Bitflow
 *Bitcoin Dynamic Workflow Engine*
 
@@ -21,10 +21,10 @@ Bitflow workflows can collect payments and make payouts of any amount of Bitcoin
 * Payouts to users who accomplish tasks
 
 ## Artifacts
-[Management Website](https://bitflow.shruggr.cloud)
-[Android Task Wallet](bitflow.apk)
-[Schemas](bitflow-unity/Assets/Definitions/bitflow.proto)
-[Bitcoin Protocols](docs/bitcoin-schema.md)
+* [Management Website](https://bitflow.shruggr.cloud)
+* [Android Task Wallet](bitflow.apk)
+* [Schemas](bitflow-unity/Assets/Definitions/bitflow.proto)
+* [Bitcoin Protocols](docs/bitcoin-schema.md)
 
 ## Technology
 * Unity wallet implemented in C# with modified NBitcoin library to allow for large OP_RETURN
