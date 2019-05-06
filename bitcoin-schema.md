@@ -20,7 +20,7 @@ For a Create task, spend from requestor's funds.
 3. Schema data
 
 ### Output Payment
-If Step.fundsRequired > 0, pay Step.fundsRequired to Step.payee
+If Stage.funds > 0, pay Stage.funds to Stage.payee
 
 
 ## Assign Task

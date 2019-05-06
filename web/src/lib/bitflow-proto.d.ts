@@ -122,8 +122,8 @@ export namespace Field {
 /** Properties of a UTXO. */
 export interface IUTXO {
 
-    /** UTXO txId */
-    txId?: (string|null);
+    /** UTXO txid */
+    txid?: (string|null);
 
     /** UTXO vout */
     vout?: (number|null);
@@ -144,8 +144,8 @@ export class UTXO implements IUTXO {
      */
     constructor(properties?: IUTXO);
 
-    /** UTXO txId. */
-    public txId: string;
+    /** UTXO txid. */
+    public txid: string;
 
     /** UTXO vout. */
     public vout: number;

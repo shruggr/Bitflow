@@ -42,7 +42,7 @@ Promise.resolve().then(async () => {
 
     const [scripts, schemas, workflows] = await Promise.all([
         bitQuery({ "out.s1": SCRIPT }),
-        bitQuery({ "out.s1": WORKFLOW }),
+        // bitQuery({ "out.s1": WORKFLOW }),
     ])
     for (let data of scripts) {
         const opRet = data.out.find((out) => out.b0.op == 106);
@@ -53,18 +53,18 @@ Promise.resolve().then(async () => {
         });
     }
 
-    for (let data of workflows) {
-        try {
-            const opRet = data.out.find((out) => out.b0.op == 106);
-            const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-            workflow.txid = data.tx.h;
-            workflow.owner = data.in[0].e.a,
-            await rtDb.ref(`workflows/${data.tx.h}`).set(workflow);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
+    // for (let data of workflows) {
+    //     try {
+    //         const opRet = data.out.find((out) => out.b0.op == 106);
+    //         const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+    //         workflow.txid = data.tx.h;
+    //         workflow.owner = data.in[0].e.a,
+    //         await rtDb.ref(`workflows/${data.tx.h}`).set(workflow);
+    //     }
+    //     catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 })
 .catch(console.error)
 .then(() => process.exit());

@@ -6,12 +6,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WalletComponent } from './wallet/wallet.component';
 import { environment } from 'src/environments/environment';
 import { WorkflowsComponent } from './workflows/workflows.component';
 import { ScriptsComponent } from './scripts/scripts.component';
 import { CreateComponent } from './workflows/create/create.component';
+import { ManageComponent } from './workflows/manage/manage.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,19 +22,23 @@ import { CreateComponent } from './workflows/create/create.component';
     WalletComponent,
     WorkflowsComponent,
     ScriptsComponent,
-    CreateComponent
+    CreateComponent,
+    ManageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModalModule
   ],
   providers: [
 
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CreateComponent]
 })
 export class AppModule { }

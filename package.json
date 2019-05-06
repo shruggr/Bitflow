@@ -22,8 +22,10 @@
     "bsv": "^0.26.5",
     "btoa": "^1.2.1",
     "datapay": "0.0.14",
+    "dotenv": "^8.0.0",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
-    "protobufjs": "^6.8.8"
+    "protobufjs": "^6.8.8",
+    "txo": "0.0.12"
   }
 }
