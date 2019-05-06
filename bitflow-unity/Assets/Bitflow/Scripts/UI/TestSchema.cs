@@ -51,13 +51,12 @@ public class TestSchema : MonoBehaviour
                     Label = "Stuff3",
                     Type = Field.Types.Type.Boolean
                 }
-
             }
-        } );
+        }, null );
         Controller.OnSubmit.AddListener( BuildAndBroadcastTransaction );
     }
 
-    public void BuildAndBroadcastTransaction(Dictionary<string, object> submitMap)
+    public void BuildAndBroadcastTransaction( Dictionary<string, object> submitMap )
     {
         Debug.Log( "Submit the map: " + JsonConvert.SerializeObject( submitMap ) );
     }

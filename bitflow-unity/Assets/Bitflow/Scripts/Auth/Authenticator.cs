@@ -6,9 +6,8 @@ public delegate void UserAuthenticatedHandler();
 public class Authenticator : MonoBehaviour
 {
     public static Authenticator Instance;
+    public static bool Initialized;
     public Identity Identity;
-
-    event UserAuthenticatedHandler UserAuthenticated = delegate {};
 
     [UsedImplicitly]
     void Start()
@@ -43,6 +42,6 @@ public class Authenticator : MonoBehaviour
     void OnIdentityLoaded()
     {
         Debug.Log("Authenticated as player with address " + Identity.Address);
-        UserAuthenticated();
+        Initialized = true;
     }
 }

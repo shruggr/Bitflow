@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class UploadFile : MonoBehaviour
 {
-
-    [SerializeField] Text FileUrl;
+    public UTXO UTXO;
+    [SerializeField] InputField InputField;
 
 
     public void Upload()
@@ -70,7 +70,7 @@ public class UploadFile : MonoBehaviour
                                 Application.OpenURL( value);
                             } );
 
-                            FileUrl.text = value;
+                            InputField.text = value;
                         } );
                 } );
             }

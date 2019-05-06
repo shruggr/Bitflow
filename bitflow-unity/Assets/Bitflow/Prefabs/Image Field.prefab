@@ -740,8 +740,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0fdbb00ba62f249b1d74883843b352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImageUrl: {fileID: 4659964942491387362}
+  InputField: {fileID: 4659964940513935703}
   Image: {fileID: 4659964942618737390}
+  DebugTexture: {fileID: 2800000, guid: e20e38a70d025a741b9ca553bb1caa52, type: 3}
 --- !u!1 &4659964942017144793
 GameObject:
   m_ObjectHideFlags: 0

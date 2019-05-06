@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,8 +24,9 @@ public class SchemaUIController : MonoBehaviour
 
     Dictionary<string, ISchemaFieldGetter> FieldGetterMap = new Dictionary<string, ISchemaFieldGetter>();
 
-    public void Build( Stage.Types.Schema schema )
+    public void Build( Stage.Types.Schema schema, UTXO[] utxos )
     {
+        var utxoIndex = 0;
         var schemaName = Instantiate( SchemaNameTextPrefab, Parent );
         schemaName.GetComponent<Text>().text = schema.Name.ToUpper();
 
@@ -35,32 +35,35 @@ public class SchemaUIController : MonoBehaviour
             switch ( field.Type )
             {
                 case Field.Types.Type.Text:
-                    var text = Instantiate(TextInputFieldPrefab, Parent);
+                    var text = Instantiate( TextInputFieldPrefab, Parent );
                     text.GetComponentInChildren<Text>().text = field.Label;
-                    FieldGetterMap.Add(field.Key, text.GetComponent<ISchemaFieldGetter>());
+                    FieldGetterMap.Add( field.Key, text.GetComponent<ISchemaFieldGetter>() );
                     break;
                 case Field.Types.Type.Number:
-                    var number = Instantiate(NumberInputFieldPrefab, Parent);
+                    var number = Instantiate( NumberInputFieldPrefab, Parent );
                     number.GetComponentInChildren<Text>().text = field.Label;
-                    FieldGetterMap.Add(field.Key, number.GetComponent<ISchemaFieldGetter>());
+                    FieldGetterMap.Add( field.Key, number.GetComponent<ISchemaFieldGetter>() );
                     break;
                 case Field.Types.Type.Image:
-                    var image = Instantiate(ImageUploadWidgetPrefab, Parent);
+                    var image = Instantiate( ImageUploadWidgetPrefab, Parent );
                     image.GetComponentsInChildren<Text>()[5].text = field.Label;
-                    FieldGetterMap.Add(field.Key, image.GetComponent<ISchemaFieldGetter>());
+                    image.GetComponentInChildren<TakePicture>().UTXO = utxos[utxoIndex];
+                    utxoIndex++;
+                    FieldGetterMap.Add( field.Key, image.GetComponent<ISchemaFieldGetter>() );
                     break;
                 case Field.Types.Type.File:
-                    var file = Instantiate(FileUploadWidgetPrefab, Parent);
+                    var file = Instantiate( FileUploadWidgetPrefab, Parent );
                     file.GetComponentsInChildren<Text>()[5].text = field.Label;
-                    FieldGetterMap.Add(field.Key, file.GetComponent<ISchemaFieldGetter>());
+                    file.GetComponentInChildren<UploadFile>().UTXO = utxos[utxoIndex];
+                    utxoIndex++;
+                    FieldGetterMap.Add( field.Key, file.GetComponent<ISchemaFieldGetter>() );
                     break;
                 case Field.Types.Type.Boolean:
-                    var boolean = Instantiate(BoolInputPrefab, Parent);
+                    var boolean = Instantiate( BoolInputPrefab, Parent );
                     boolean.GetComponentInChildren<Text>().text = field.Label;
-                    FieldGetterMap.Add(field.Key, boolean.GetComponent<ISchemaFieldGetter>());
+                    FieldGetterMap.Add( field.Key, boolean.GetComponent<ISchemaFieldGetter>() );
                     break;
             }
-            
         }
 
         var button = Instantiate( ButtonPrefab, Parent );

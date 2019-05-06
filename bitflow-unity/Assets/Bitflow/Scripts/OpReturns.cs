@@ -1,10 +1,12 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 public static class OpReturns
 {
     const string BitcoinSimpleStorageProtocol = "19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut";
+    const string SubmitProtocol = "183u2ms8jZ79pNhghxMhebYqheyZwLCSYt";
 
     public static byte[][] MakeImg(byte[] buffer)
     {
@@ -26,5 +28,16 @@ public static class OpReturns
             Encoding.UTF8.GetBytes( "text" ),
             Encoding.UTF8.GetBytes( "binary" ),
         };
+    }
+
+    public static byte[][] MakeSubmit( string stateTxn, Dictionary<string, object> data )
+    {
+        return new[]
+        {
+            Encoding.UTF8.GetBytes( SubmitProtocol ),
+            Encoding.UTF8.GetBytes( stateTxn ),
+            Encoding.UTF8.GetBytes( JsonConvert.SerializeObject( data ) )
+        };
+        throw new System.NotImplementedException();
     }
 }
