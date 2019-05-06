@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using BestHTTP;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Transaction = NBitcoin.Transaction;
 
 public static class TransactionExtensions
@@ -51,9 +52,12 @@ public static class TransactionExtensions
                         Debug.LogError( txnR.Exception.Message );
                     }
 
-                    Debug.LogError( e.GetType() );
-                    Debug.LogError( e.Message );
+                    Debug.LogError( $"{e.GetType()}: {e.Message}" );
 
+                    ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
+                    ModalDialog.Instance.Show( "Failed to spend UTXO",
+                        $"{e.GetType()}: {e.Message}",
+                        "Ok" );
 
                     //Debug.LogError(JsonConvert.SerializeObject(txn));
                     //Debug.LogError($"{{\"tx\":\"{txn.ToHex()}\"}}");

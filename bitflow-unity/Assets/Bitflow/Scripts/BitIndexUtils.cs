@@ -146,7 +146,7 @@ public static class BitIndexUtils
             Vout = bitQueryUtxo.Vout,
             Satoshis = (int)bitQueryUtxo.Satoshis,
             Script = bitQueryUtxo.ScriptPubKey,
-            TxId = bitQueryUtxo.Txid
+            Txid = bitQueryUtxo.Txid
         };
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Firebase.Database;
 using Newtonsoft.Json;
@@ -33,8 +35,59 @@ public class FirebaseHelper : MonoBehaviour
                     throw new FirebaseDataException( "Results non existent: " + error );
                 }
 
-                return JsonConvert.DeserializeObject<T>( task.Result.GetRawJsonValue() );
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>( task.Result.GetRawJsonValue() );
+                }
+                catch ( Exception e )
+                {
+                    Debug.Log( task.Result.GetRawJsonValue() );
+                    throw new FirebaseDataException( $"Parsing error: {e.GetType()}. {error}" );
+                }
             } );
+    }
+
+    public static async Task<Dictionary<string, List<State.Types.Task>>> GetTaskList( DatabaseReference db )
+    {
+        var d = new Dictionary<string, List<State.Types.Task>>();
+        try
+        {
+            var dic = await Get<Dictionary<string, Dictionary<string, State.Types.Task>>>( db );
+            foreach ( var stateKeyToStateTasks in dic )
+            {
+                var stateTasks = new List<State.Types.Task>();
+                foreach ( var stateTasksDic in stateKeyToStateTasks.Value )
+                {
+                    stateTasks.Add( stateTasksDic.Value );
+                }
+
+                d.Add( stateKeyToStateTasks.Key, stateTasks );
+            }
+        }
+        catch ( FirebaseDataException e )
+        {
+            Debug.LogError( $"{e.GetType()}:{e.Message}" );
+        }
+
+        return d;
+    }
+
+    public static async Task<List<T>> GetList<T>( DatabaseReference db )
+    {
+        var list = new List<T>();
+        try
+        {
+            var dic = await Get<Dictionary<string, T>>( db );
+            foreach ( var entry in dic )
+            {
+                list.Add( entry.Value );
+            }
+        }
+        catch ( FirebaseDataException e )
+        {
+        }
+
+        return list;
     }
 
     public static async Task<T> Listen<T>( DatabaseReference db, string key, FirebaseEventType eventType,

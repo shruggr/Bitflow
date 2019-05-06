@@ -9,7 +9,7 @@ public class TestSchema : MonoBehaviour
 
     public void Start()
     {
-        Controller.Build( new Schema
+        Controller.Build( new Stage.Types.Schema
         {
             Txid = "0",
             Name = "Collect Name",
@@ -51,13 +51,12 @@ public class TestSchema : MonoBehaviour
                     Label = "Stuff3",
                     Type = Field.Types.Type.Boolean
                 }
-
             }
-        } );
+        }, null );
         Controller.OnSubmit.AddListener( BuildAndBroadcastTransaction );
     }
 
-    public void BuildAndBroadcastTransaction(Dictionary<string, object> submitMap)
+    public void BuildAndBroadcastTransaction( Dictionary<string, string> submitMap )
     {
         Debug.Log( "Submit the map: " + JsonConvert.SerializeObject( submitMap ) );
     }

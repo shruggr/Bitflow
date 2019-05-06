@@ -22,7 +22,7 @@ public static class UtxoUtilsExtensions
 
     public static Coin ToCoin( this UTXO utxo, Script owner )
     {
-        return new Coin( new uint256( utxo.TxId ), (uint)utxo.Vout, utxo.Satoshis, owner );
+        return new Coin( new uint256( utxo.Txid ), (uint)utxo.Vout, utxo.Satoshis, owner );
     }
 
     public static Coin ToCoin( this UTXO utxo, Key owner )

@@ -3,20 +3,29 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class TakePicture : MonoBehaviour
 {
-
-    [SerializeField] Text ImageUrl;
+    [SerializeField] InputField InputField;
     [SerializeField] Image Image;
+    [SerializeField] Texture2D DebugTexture;
 
-
+    public UTXO UTXO;
 
     public void Take()
     {
-        NativeToolkit.OnCameraShotComplete += OnCameraShotComplete;
-        NativeToolkit.TakeCameraShot();
+        Assert.IsNotNull( UTXO, "You forgot to initialize the UTXO for this button" );
+        if ( Application.platform == RuntimePlatform.WindowsEditor )
+        {
+            OnCameraShotComplete( DebugTexture, "" );
+        }
+        else
+        {
+            NativeToolkit.OnCameraShotComplete += OnCameraShotComplete;
+            NativeToolkit.TakeCameraShot();
+        }
     }
 
     void OnCameraShotComplete( Texture2D texture2D, string path )
@@ -72,18 +81,19 @@ public class TakePicture : MonoBehaviour
                     .Spend( txn =>
                     {
                         var value = $"https://bico.media/{txn}";
-                        Debug.Log(value);
+                        Debug.Log( value );
                         ModalDialog.Instance.Hide();
                         ModalDialog.Instance.Show( "Image successfully uploaded",
                             $"Check it out at: {value}", "View Online", "Ok" );
                         ModalDialog.Instance.CallbackYes.AddListener( () =>
                         {
                             //UniClipboard.SetText( $"https://bico.media/{txn}" );
-                            Application.OpenURL(value);
+                            Application.OpenURL( value );
                         } );
-                        
-                        ImageUrl.text = value;
-                        var sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, 200, 200), new Vector2(0.5f, 0.5f), 100.0f);
+
+                        InputField.text = value;
+                        var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, 200, 200 ), new Vector2( 0.5f, 0.5f ),
+                            100.0f );
                         Image.sprite = sprite;
                     } );
             } );

@@ -8,7 +8,7 @@ public class SchemaBoolFieldGetter : MonoBehaviour, ISchemaFieldGetter
 {
     [SerializeField] Toggle Toggle;
 
-    public object Get()
+    public string Get()
     {
         return Toggle.isOn.ToString();
     }

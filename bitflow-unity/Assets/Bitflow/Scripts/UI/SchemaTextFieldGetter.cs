@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public interface ISchemaFieldGetter
 {
-    object Get();
+    string Get();
 }
 
 public class SchemaTextFieldGetter : MonoBehaviour, ISchemaFieldGetter
 {
     [SerializeField] InputField InputField;
 
-    public object Get()
+    public string Get()
     {
         return InputField.textComponent.text;
     }
