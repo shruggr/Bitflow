@@ -5,8 +5,5 @@
   <div id="money-button"></div>
 </div>
 {{result}}
-<ul>
-  <li *ngFor="let script of scripts | async">
-    <pre>{{ JSON.stringify(script, null, 2)}}</pre>
-  </li>
-</ul>
+
+    <pre *ngFor="let script of scripts | async">{{ JSON.stringify(script, null, 2)}}</pre>

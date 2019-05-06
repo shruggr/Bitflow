@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IWorkflow } from 'src/lib/bitflow-proto';
+import { IWorkflow, IState } from 'src/lib/bitflow-proto';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateComponent } from './create/create.component';
@@ -13,9 +13,11 @@ import { CreateComponent } from './create/create.component';
 export class WorkflowsComponent implements OnInit {
   workflows: Observable<IWorkflow[]>;
   workflowTxn: string;
+  states: Observable<IState[]>;
 
   constructor(rtDb: AngularFireDatabase, private modalService: NgbModal) {
     this.workflows = rtDb.list<IWorkflow>('workflows').valueChanges();
+    this.states = rtDb.list<IState>('state').valueChanges();
    }
 
   ngOnInit() {}
@@ -23,5 +25,10 @@ export class WorkflowsComponent implements OnInit {
   openModal(workflow) {
     const modalRef = this.modalService.open(CreateComponent);
     modalRef.componentInstance.workflow = workflow
+  }
+
+  getOpenTask(state) {
+    let task = state.tasks.find((task) => task.status == "Open");
+    return task ? task.stage.name : '';
   }
 }

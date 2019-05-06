@@ -15,6 +15,7 @@ export class CreateComponent implements OnInit {
   @Input() workflow: IWorkflow;
   stage: IStage;
   data: any = {};
+  txid: string;
 
   constructor(public activeModal: NgbActiveModal) {}
 
@@ -47,7 +48,12 @@ export class CreateComponent implements OnInit {
     moneyButton.render(document.getElementById('create-moneybutton'), {
       label: 'Upload',
       outputs,
-      disabled: !this.stage
+      disabled: !this.stage || this.txid,
+      onPayment: (payment) => {
+        this.txid = payment.txid;
+        this.updateMoneybutton();
+        // this.activeModal.dismiss();
+      }
     })
   }
 

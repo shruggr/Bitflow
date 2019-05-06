@@ -212,15 +212,20 @@ async function processRequest(
         let fundsIn = txnData.out.find((out: any) => {
             return out.e.v == stage.funds && out.e.a == stage.payee
         });
-        console.error('Insufficient Payment');
-        if(!fundsIn) return State.Status.Error;
+        if(!fundsIn) {
+            console.error('Insufficient Payment');
+            return State.Status.Error;
+        }
     }
     if (task.stage && task.stage.validationScriptTxn) {
         const { script } = await getScript(task.stage.validationScriptTxn);
         const vm = new NodeVM();
         const validate = vm.run(script);
         let context = {
-            state: state.values && state.values.map((value) => value.value),
+            state: state.values && state.values.reduce((acc: any, value) => {
+                acc[value.key || ''] = value.value;
+                return acc;
+            }, {}),
             schema: task.stage && task.stage.schema,
             data
         }
@@ -258,8 +263,10 @@ async function processSubmit(
         let fundsIn = txnData.out.find((out: any) => {
             return out.e.v == stage.funds && out.e.a == stage.payee
         });
-        console.error('Insufficient Payment');
-        if(!fundsIn) return State.Status.Error;
+        if(!fundsIn) {
+            console.error('Insufficient Payment');
+            return State.Status.Error;
+        }
     }
 
     if (task.stage && task.stage.validationScriptTxn) {
@@ -267,7 +274,10 @@ async function processSubmit(
         const vm = new NodeVM();
         const validate = vm.run(script);
         let context = {
-            state: state.values && state.values.map((value) => value.value),
+            state: state.values && state.values.reduce((acc: any, value) => {
+                acc[value.key || ''] = value.value;
+                return acc;
+            }, {}),
             schema: task.stage && task.stage.schema,
             data
         }
@@ -302,7 +312,10 @@ async function processTask(
         const vm = new NodeVM();
         const process = vm.run(script);
         let context = {
-            state: state.values && state.values.map((value) => value.value),
+            state: state.values && state.values.reduce((acc: any, value) => {
+                acc[value.key || ''] = value.value;
+                return acc;
+            }, {}),
             schema: task.stage && task.stage.schema,
             data
         }

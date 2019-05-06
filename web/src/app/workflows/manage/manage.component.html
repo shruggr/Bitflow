@@ -7,9 +7,7 @@
 {{result}}
 <ul>
   <li *ngFor="let workflow of workflows | async">
-      {{ workflow.name }}
-      <a href="javascript:void(0)" (click)="startWorkflow(workflow.txid)">
-        Go
-      </a>
+      <b>{{ workflow.name }}</b> -
+      {{ workflow.txid }}
   </li>
 </ul>

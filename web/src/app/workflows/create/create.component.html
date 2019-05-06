@@ -4,11 +4,15 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
+<div class="modal-body" *ngIf="!txid">
   <div class="form-group" *ngFor="let field of stage?.schema.fields">
     <label>{{field.label}}</label>
     <input type="text" [(ngModel)]="data[field.key]" class="form-control" (keyup)="updateMoneybutton()">
   </div>
+</div>
+<div class="modal-body" *ngIf="txid">
+  <small><b>Txn ID</b>
+  {{txid}}</small>
 </div>
 <div class="modal-footer">
     <div id="create-moneybutton"></div>

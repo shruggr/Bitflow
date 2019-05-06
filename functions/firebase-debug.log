@@ -1,0 +1,23 @@
+[debug] [2019-05-06T04:03:14.689Z] ----------------------------------------------------------------------
+[debug] [2019-05-06T04:03:14.692Z] Command:       /Users/davidcase/.nvm/versions/node/v8.15.0/bin/node /Users/davidcase/.nvm/versions/node/v8.15.0/bin/firebase deploy --only functions
+[debug] [2019-05-06T04:03:14.692Z] CLI Version:   6.6.0
+[debug] [2019-05-06T04:03:14.692Z] Platform:      darwin
+[debug] [2019-05-06T04:03:14.692Z] Node Version:  v8.15.0
+[debug] [2019-05-06T04:03:14.693Z] Time:          Mon May 06 2019 00:03:14 GMT-0400 (EDT)
+[debug] [2019-05-06T04:03:14.693Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-06T04:03:14.707Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-06T04:03:14.707Z] > authorizing via signed-in user
+[debug] [2019-05-06T04:03:14.707Z] [iam] checking project bitflow-a5e50 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-05-06T04:03:14.709Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-06T04:03:14.710Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-05-06T04:03:14.989Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-06T04:03:15.003Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bitflow-a5e50:testIamPermissions  
+
+[debug] [2019-05-06T04:03:15.314Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'bitflow-a5e50'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
