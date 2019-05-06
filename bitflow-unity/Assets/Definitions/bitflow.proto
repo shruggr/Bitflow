@@ -17,7 +17,7 @@ message Field {
 }
 
 message UTXO {
-    string txId = 1;
+    string txid = 1;
     int32 vout = 2;
     string script = 4;
     int32 satoshis = 5;

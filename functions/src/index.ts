@@ -194,7 +194,6 @@ async function processRequest(
         txid: txnData.tx.h
     });
 
-    //TODO: validate funds
     const state = State.fromObject({
         txid: txnData.tx.h,
         workflow,
@@ -204,6 +203,13 @@ async function processRequest(
 
     const data = JSON.parse(opRet.ls3 || opRet.s3);
 
+    const stage = task.stage || {};
+    if(stage.funds) {
+        let fundsIn = txnData.in.find((input: any) => {
+            return input.e.v == stage.funds && input.e.a == stage.payee
+        });
+        if(!fundsIn) return State.Status.Error;
+    }
     if (task.stage && task.stage.validationScriptTxn) {
         const { script } = await getScript(task.stage.validationScriptTxn);
         const vm = new NodeVM();
@@ -241,6 +247,14 @@ async function processSubmit(
 
     const task = State.Task.fromObject(taskDoc.data() || {});
     const data = JSON.parse(opRet.ls3 || opRet.s3);
+
+    const stage = task.stage || {};
+    if(stage.funds) {
+        let fundsIn = txnData.in.find((input: any) => {
+            return input.e.v == stage.funds && input.e.a == stage.payee
+        });
+        if(!fundsIn) return State.Status.Error;
+    }
 
     if (task.stage && task.stage.validationScriptTxn) {
         const { script } = await getScript(task.stage.validationScriptTxn);
@@ -318,9 +332,9 @@ async function processTask(
         if (nextStage) {
             txn.addData = [
                 ASSIGN,
-                state.txid,
-                task.txid,
-                handler.createTaskStageIdx
+                Buffer.from(state.txid),
+                Buffer.from(task.txid),
+                Buffer.from((handler.createTaskStageIdx || 0).toString(16), 'hex')
             ];
 
             newTask = State.Task.fromObject({
@@ -333,6 +347,10 @@ async function processTask(
                 .filter((field) => field.type == Field.Type.Image || field.type == Field.Type.File)
                 .forEach(() => txn.to(handler.assignee, UPLOAD));
         }
+        txn.change(address);
+        txn.sign(key);
+
+        await sendTxn(txn.toString());
 
         if (newTask) {
             newTask.utxos = [];
@@ -345,23 +363,17 @@ async function processTask(
                     })
                 ));
             }
-        }
-        txn.change(address);
-        txn.sign(key);
 
-        await sendTxn(txn.toString());
-
-        if (newTask) {
             t.set(
                 db.collection('pendingTasks').doc(txn.hash),
                 newTask.toJSON()
             );
-        }
-        if (!state.txid) throw new Error('Missing txid');
-        if(newTask) {
+            state.tasks.push(newTask);
             rtDb.ref(`tasks/${newTask.address}/${state.txid}/${txn.hash}`)
                 .set(newTask.toJSON());
         }
+        if (!state.txid) throw new Error('Missing txid');
+
         t.set(db.collection('states').doc(state.txid), state.toJSON());
         return txn;
     });
@@ -369,7 +381,3 @@ async function processTask(
     rtDb.ref(`state/${state.txid}`).set(state.toJSON());
     return task.status || State.Status.Error;
 }
-
-// initialize().catch((err) => {
-//     console.error(`Init error: ${err.message}`);
-// })

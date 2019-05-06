@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WalletComponent } from './wallet/wallet.component';
 import { environment } from 'src/environments/environment';
@@ -26,6 +27,7 @@ import { CreateComponent } from './workflows/create/create.component';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AppRoutingModule
   ],

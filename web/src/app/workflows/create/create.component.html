@@ -3,7 +3,12 @@
 </p>
 
 <div *ngIf="workflow">
-  <!-- <div *ngFor="let stage of (workflow | async)?.stages[0]">
-
-  </div> -->
+  <form>
+    <div class="form-group"
+      *ngFor="let field of (workflow | async)?.stages[0].schema.fields">
+      <label>{{field.label}}</label>
+      <input type="text" [(ngModel)]="data[field.key]">
+    </div>
+    <div id="create-money-button"></div>
+  </form>
 </div>

@@ -26,7 +26,7 @@ export class WorkflowsComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.mbdiv = document.getElementById('money-button');
+    this.mbdiv = document.getElementById('workflow-money-button');
     this.updateMoneybutton();
   }
 
