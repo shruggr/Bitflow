@@ -93,7 +93,7 @@ The Admin creates a workflow that requests:
  * A photograph of the product
  * Lighting conditions and other notes for postprocessing
 
-Customer request a new Photo
+Customer request a new Photo<br>
 <img src="/docs/images/create-task.png" width="500" />
 
 The Photographer uses Bitflow's task management mobile app where a wallet address is generated, and he/she takes a photograph of the product. That transaction is submitted so a Reviewer can review the photo and details at a later time. It is not necessary for the Photographer to have funds on his address for the workflow to work.
