@@ -58,7 +58,7 @@ Here we have two distinct roles, Photographer and Reviewer. The Admin creates a 
 
 The Photographer uses Bitflow's task management mobile app where a wallet address is generated, and he/she takes a photograph of the product. That transaction is submitted so a Reviewer can review the photo and details at a later time. It is not necessary for the Photographer to have funds on his address for the workflow to work.
 
-![](docs/images/screenshot0.png=250x250)
+<img src="docs/images/screenshot0.png"/>
 
 When the Reviewer validates the photo, signs and broadcasts his transaction - potentially unbeknown to him since he may be a bitcoin layman - the Photographer receives the payout.
 
