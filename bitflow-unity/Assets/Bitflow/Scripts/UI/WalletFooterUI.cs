@@ -14,7 +14,7 @@ public class WalletFooterUI : MonoBehaviour
             await Task.Delay( 200 );
         }
 
-        WalletAddress.text = $"Addr: {Authenticator.Instance.Identity.Address}";
+        WalletAddress.text = $"Address: {Authenticator.Instance.Identity.Address}";
         BitIndexUtils.QueryAddressDetails( Authenticator.Instance.Identity.Address,
             details => { WalletFunds.text = $"Funds: {details.Balance.ToString()} BSV"; } );
     }

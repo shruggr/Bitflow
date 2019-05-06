@@ -7,10 +7,11 @@ public class Authenticator : MonoBehaviour
 {
     public static Authenticator Instance;
     public static bool Initialized;
-    public Identity Identity;
+    public Identity Identity => Identities[PlayerPrefs.GetInt( "identity-index" )];
 
-    [UsedImplicitly]
-    void Start()
+    [SerializeField] Identity[] Identities;
+
+    [UsedImplicitly] void Start()
     {
         Authenticate();
         Instance = this;
@@ -18,30 +19,31 @@ public class Authenticator : MonoBehaviour
 
     public void Authenticate()
     {
-        if ( /*Application.platform == RuntimePlatform.WindowsEditor && */Identity != null && Identity.IsValid)
+        if ( /*Application.platform == RuntimePlatform.WindowsEditor && */Identity != null && Identity.IsValid )
         {
             OnIdentityLoaded();
         }
         else
         {
-            if (Identity == null)
+            if ( Identity == null )
             {
-                Identity = ScriptableObject.CreateInstance<Identity>();
+                Debug.LogError( "Error" );
+                //Identity = ScriptableObject.CreateInstance<Identity>();
             }
 
-            if (!Identity.Exists)
+            if ( !Identity.Exists )
             {
-                Debug.Log("Creating new identity");
+                Debug.Log( "Creating new identity" );
                 Identity.Create();
             }
 
-            Identity.Load(OnIdentityLoaded);
+            Identity.Load( OnIdentityLoaded );
         }
     }
 
     void OnIdentityLoaded()
     {
-        Debug.Log("Authenticated as player with address " + Identity.Address);
+        Debug.Log( "Authenticated as player with address " + Identity.Address );
         Initialized = true;
     }
 }

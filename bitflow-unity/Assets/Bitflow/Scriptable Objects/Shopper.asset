@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6436c4db86a271b4da71be15866ccada, type: 3}
-  m_Name: Test Identity
+  m_Name: Shopper
   m_EditorClassIdentifier: 
-  Secret: Kxxx2ZHoUwooC5bMgLansR5vmbwutDuE8fLdfagY15qeHwewQnLp
-  Address: 1Mz9ojrnfpiSJ3BkoRo5S6uBnDJ6igNtSF
+  Alias: Shopper
+  Secret: L1m9eSgoZm1TiPGZJGVCgiVnwXocN9za567qc5RZZxTCnMHJK7V5
+  Address: 13uXrk7pxJA1D9zsr3draQ4YiEBbwLbwQm

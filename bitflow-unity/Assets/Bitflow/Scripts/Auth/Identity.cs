@@ -17,6 +17,7 @@ public class Identity : ScriptableObject
         public string Address;
     }
 
+    public string Alias;
     public string Secret;
     public string Address;
 
