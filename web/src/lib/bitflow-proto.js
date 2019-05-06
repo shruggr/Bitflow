@@ -2023,6 +2023,7 @@ $root.State = (function() {
          * @property {State.Status|null} [status] Task status
          * @property {string|null} [address] Task address
          * @property {Array.<IUTXO>|null} [utxos] Task utxos
+         * @property {string|null} [assignTxn] Task assignTxn
          * @property {string|null} [txid] Task txid
          */
 
@@ -2075,6 +2076,14 @@ $root.State = (function() {
         Task.prototype.utxos = $util.emptyArray;
 
         /**
+         * Task assignTxn.
+         * @member {string} assignTxn
+         * @memberof State.Task
+         * @instance
+         */
+        Task.prototype.assignTxn = "";
+
+        /**
          * Task txid.
          * @member {string} txid
          * @memberof State.Task
@@ -2115,8 +2124,10 @@ $root.State = (function() {
             if (message.utxos != null && message.utxos.length)
                 for (var i = 0; i < message.utxos.length; ++i)
                     $root.UTXO.encode(message.utxos[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.assignTxn != null && message.hasOwnProperty("assignTxn"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.assignTxn);
             if (message.txid != null && message.hasOwnProperty("txid"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.txid);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.txid);
             return writer;
         };
 
@@ -2166,6 +2177,9 @@ $root.State = (function() {
                     message.utxos.push($root.UTXO.decode(reader, reader.uint32()));
                     break;
                 case 5:
+                    message.assignTxn = reader.string();
+                    break;
+                case 6:
                     message.txid = reader.string();
                     break;
                 default:
@@ -2229,6 +2243,9 @@ $root.State = (function() {
                         return "utxos." + error;
                 }
             }
+            if (message.assignTxn != null && message.hasOwnProperty("assignTxn"))
+                if (!$util.isString(message.assignTxn))
+                    return "assignTxn: string expected";
             if (message.txid != null && message.hasOwnProperty("txid"))
                 if (!$util.isString(message.txid))
                     return "txid: string expected";
@@ -2278,6 +2295,8 @@ $root.State = (function() {
                     message.utxos[i] = $root.UTXO.fromObject(object.utxos[i]);
                 }
             }
+            if (object.assignTxn != null)
+                message.assignTxn = String(object.assignTxn);
             if (object.txid != null)
                 message.txid = String(object.txid);
             return message;
@@ -2302,6 +2321,7 @@ $root.State = (function() {
                 object.stage = null;
                 object.status = options.enums === String ? "Open" : 0;
                 object.address = "";
+                object.assignTxn = "";
                 object.txid = "";
             }
             if (message.stage != null && message.hasOwnProperty("stage"))
@@ -2315,6 +2335,8 @@ $root.State = (function() {
                 for (var j = 0; j < message.utxos.length; ++j)
                     object.utxos[j] = $root.UTXO.toObject(message.utxos[j], options);
             }
+            if (message.assignTxn != null && message.hasOwnProperty("assignTxn"))
+                object.assignTxn = message.assignTxn;
             if (message.txid != null && message.hasOwnProperty("txid"))
                 object.txid = message.txid;
             return object;

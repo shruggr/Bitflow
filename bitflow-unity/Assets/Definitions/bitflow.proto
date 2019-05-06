@@ -64,7 +64,8 @@ message State {
         Status status = 2;
         string address = 3;
         repeated UTXO utxos = 4;
-        string txid = 5;
+        string assignTxn = 5;
+        string txid = 6;
     }
 
     string txid = 1;

@@ -15,6 +15,7 @@ import { ScriptsComponent } from './scripts/scripts.component';
 import { CreateComponent } from './workflows/create/create.component';
 import { ManageComponent } from './workflows/manage/manage.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewComponent } from './workflows/view/view.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     WorkflowsComponent,
     ScriptsComponent,
     CreateComponent,
-    ManageComponent
+    ManageComponent,
+    ViewComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -39,6 +41,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateComponent]
+  entryComponents: [
+    CreateComponent,
+    ViewComponent
+  ]
 })
 export class AppModule { }
