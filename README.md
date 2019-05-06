@@ -66,7 +66,7 @@ When the Reviewer validates the photo, signs and broadcasts his transaction - po
 <img src="/docs/images/screenshot2.png" height="500" width="500" />
 <img src="/docs/images/screenshot3.png" height="500" width="500" />
 
-The workflow admin specifies the Photographer's payout when he first created the workflow - this can be an administrative working on this online retailer company. The workflow admin is using blockchain technology without getting nitty gritty with its technical aspects or even any specific technical knowledge.
+The workflow admin specifies the Photographer's payout when he first creates the workflow - this can be an administrative working on this online retailer company. The workflow admin is using blockchain technology without getting nitty gritty with its technical aspects or even any specific technical knowledge.
 
 The Photographer is happy to receive his dividends in BSV.
 
