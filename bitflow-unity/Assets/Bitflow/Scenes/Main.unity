@@ -1110,7 +1110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntryParent: {fileID: 1072273899}
-  EntryPrefab: {fileID: 5499539173651264775, guid: f864dd847f3732c4089c1638fa90bba9,
+  OpenEntryPrefab: {fileID: 5499539173651264775, guid: f864dd847f3732c4089c1638fa90bba9,
+    type: 3}
+  CompletedEntryPrefab: {fileID: 5499539173651264775, guid: a7549cd622467524aab47b7211a35e31,
     type: 3}
 --- !u!1 &986491644
 GameObject:

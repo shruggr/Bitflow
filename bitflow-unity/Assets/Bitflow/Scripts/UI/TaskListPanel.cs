@@ -7,7 +7,8 @@ using UnityEngine;
 public class TaskListPanel : MonoBehaviour
 {
     [SerializeField] Transform EntryParent;
-    [SerializeField] GameObject EntryPrefab;
+    [SerializeField] GameObject OpenEntryPrefab;
+    [SerializeField] GameObject CompletedEntryPrefab;
 
     [UsedImplicitly] void OnEnable()
     {
@@ -31,7 +32,6 @@ public class TaskListPanel : MonoBehaviour
         //    .Child( "691061d64b2d272b17011a58ae8e3020fe276ab843774413893e0abfa3c445a7" ) );
         //Debug.LogError( t.Stage.Name );
 
-
         var tasksKeyList = await FirebaseHelper.GetTaskList( FirebaseManager.Instance.Ref.Child( "tasks" )
             .Child( Authenticator.Instance.Identity.Address ) );
         if ( tasksKeyList.Count > 0 )
@@ -42,15 +42,25 @@ public class TaskListPanel : MonoBehaviour
             {
                 foreach ( var task in stateTxnToTask.Value )
                 {
-                    var go = Instantiate( EntryPrefab, EntryParent );
+                    var go = Instantiate(
+                        task.Status == State.Types.Status.Complete ? CompletedEntryPrefab : OpenEntryPrefab,
+                        EntryParent );
                     var entry = go.GetComponent<TaskEntry>();
                     entry.Title.text = $"{task.Stage.Name} - {task.Stage.Funds} BSV sat";
+                    
                     entry.Description.text = task.Stage.Schema.Name;
-                    entry.OnClick.onClick.AddListener( () =>
+                    if ( task.Status == State.Types.Status.Complete )
                     {
-                        UIManager.Instance.ShowSchemaController( stateTxnToTask.Key, task.Stage.Schema,
-                            task.Utxos.ToList(), task.Stage );
-                    } );
+                        entry.Title.text += " - DONE";
+                    }
+                    else
+                    {
+                        entry.OnClick.onClick.AddListener( () =>
+                        {
+                            UIManager.Instance.ShowSchemaController( stateTxnToTask.Key, task.Stage.Schema,
+                                task.Utxos.ToList(), task.Stage );
+                        } );
+                    }
                 }
             }
         }

@@ -85,6 +85,7 @@ public class TakePicture : MonoBehaviour
                         ModalDialog.Instance.Hide();
                         ModalDialog.Instance.Show( "Image successfully uploaded",
                             $"Check it out at: {value}", "View Online", "Ok" );
+                        ModalDialog.Instance.CallbackYes.RemoveAllListeners();
                         ModalDialog.Instance.CallbackYes.AddListener( () =>
                         {
                             //UniClipboard.SetText( $"https://bico.media/{txn}" );

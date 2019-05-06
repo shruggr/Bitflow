@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
                     "You txn was broadcast and this task is completed. " +
                     $"{funds} BSV sat have been delivered to the payee ({payeeAddr}). " +
                     "Txn: " + s, "Ok" );
+                ModalDialog.Instance.CallbackYes.RemoveAllListeners();
                 ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
             } );
         }
