@@ -89,10 +89,10 @@ public class TakePicture : MonoBehaviour
                         ModalDialog.Instance.CallbackYes.AddListener( () =>
                         {
                             //UniClipboard.SetText( $"https://bico.media/{txn}" );
-                            Application.OpenURL( value );
+                            Application.OpenURL( $"https://bico.media/{txn}");
                         } );
 
-                        InputField.text = value;
+                        InputField.text = txn;
                         var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, 200, 200 ), new Vector2( 0.5f, 0.5f ),
                             100.0f );
                         Image.sprite = sprite;

@@ -46,20 +46,32 @@ public class TaskListPanel : MonoBehaviour
                         task.Status == State.Types.Status.Complete ? CompletedEntryPrefab : OpenEntryPrefab,
                         EntryParent );
                     var entry = go.GetComponent<TaskEntry>();
-                    entry.Title.text = $"{task.Stage.Name} - {task.Stage.Funds} BSV sat";
-                    
+                    var state = await FirebaseHelper.Get<State>( FirebaseManager.Instance.Ref.Child( "state" )
+                        .Child( stateTxnToTask.Key ) );
+                    entry.Title.text = $"{GetDescription( state, task.Stage.Name )} - {task.Stage.Funds} BSV sat";
+
                     entry.Description.text = task.Stage.Schema.Name;
                     if ( task.Status == State.Types.Status.Complete )
                     {
                         entry.Title.text += " - DONE";
+                        entry.OnClick.onClick.AddListener( () =>
+                        {
+                            UIManager.Instance.ShowSchemaController();
+
+                            UIManager.Instance.AddSummary( state.Values.ToList() );
+                        } );
                     }
                     else
                     {
-                        entry.OnClick.onClick.AddListener( () =>
-                        {
-                            UIManager.Instance.ShowSchemaController( stateTxnToTask.Key, task.Stage.Schema,
-                                task.Utxos.ToList(), task.Stage );
-                        } );
+                        entry.OnClick.onClick.AddListener(
+                            () =>
+                            {
+                                UIManager.Instance.ShowSchemaController();
+
+                                UIManager.Instance.AddSummary( state.Values.ToList() );
+                                UIManager.Instance.AddForm( stateTxnToTask.Key, task.Stage.Schema,
+                                    task.Utxos.ToList(), task.Stage );
+                            } );
                     }
                 }
             }
@@ -70,6 +82,19 @@ public class TaskListPanel : MonoBehaviour
                 $"You don't have any tasks assign to your wallet address:{Authenticator.Instance.Identity.Address}",
                 "Ok" );
         }
+    }
+
+    string GetDescription( State state, string fallback )
+    {
+        foreach ( var field in state.Values )
+        {
+            if ( field.Key == "description" )
+            {
+                return field.Value;
+            }
+        }
+
+        return fallback;
     }
 
     async void ProcessWorkflows()

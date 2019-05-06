@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -24,7 +26,61 @@ public class SchemaUIController : MonoBehaviour
 
     Dictionary<string, ISchemaFieldGetter> FieldGetterMap = new Dictionary<string, ISchemaFieldGetter>();
 
-    public void Build( Stage.Types.Schema schema, UTXO[] utxos )
+    [Space( 10 )] [SerializeField] GameObject Panel;
+    [SerializeField] GameObject Title;
+    [SerializeField] GameObject Description;
+    [SerializeField] GameObject Spacer;
+    [SerializeField] GameObject Image;
+    [SerializeField] GameObject Separator;
+
+    public void AddSummary( List<Field> fields )
+    {
+        var parent = Instantiate( Panel, Parent ).transform;
+        var schemaName = Instantiate( SchemaNameTextPrefab, parent );
+        schemaName.GetComponent<Text>().text = "SUMMARY";
+
+        foreach ( var field in fields )
+        {
+            //Debug.Log( JsonConvert.SerializeObject( field ) );
+            var go = Instantiate( Title, parent );
+            go.GetComponentInChildren<Text>().text = field.Label;
+            go = Instantiate( Description, parent );
+            go.GetComponentInChildren<Text>().text = field.Value;
+            switch ( (Field.Types.Type)field.Type )
+            {
+                case Field.Types.Type.Image:
+                    go = Instantiate( Image, parent );
+                    StartCoroutine( ReplaceSprite( field.Value, go.GetComponent<Image>() ) );
+                    break;
+                default:
+                    break;
+            }
+
+            Instantiate( Spacer, parent );
+        }
+
+        Instantiate(Separator, Parent);
+
+    }
+
+    IEnumerator ReplaceSprite( string txn, Image img )
+    {
+        var www = new WWW( "https://bico.media/ " + txn + ".jpg" );
+        yield return www;
+        // Create a texture in DXT1 format
+        Texture2D texture = new Texture2D( www.texture.width, www.texture.height, TextureFormat.DXT1, false );
+
+        // assign the downloaded image to sprite
+        www.LoadImageIntoTexture( texture );
+        Rect rec = new Rect( 0, 0, texture.width, texture.height );
+        Sprite spriteToUse = Sprite.Create( texture, rec, new Vector2( 0.5f, 0.5f ), 100 );
+        img.sprite = spriteToUse;
+
+        www.Dispose();
+        www = null;
+    }
+
+    public void BuildForm( Stage.Types.Schema schema, UTXO[] utxos )
     {
         var utxoIndex = 0;
         var schemaName = Instantiate( SchemaNameTextPrefab, Parent );

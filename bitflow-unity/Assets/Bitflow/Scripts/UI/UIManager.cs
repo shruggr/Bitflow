@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -26,7 +27,18 @@ public class UIManager : MonoBehaviour
     string payeeAddr;
     long funds;
 
-    public void ShowSchemaController( string stateTxn, Stage.Types.Schema schema, List<UTXO> utxos, Stage stage )
+    public void ShowSchemaController()
+    {
+        TaskList.gameObject.SetActive( false );
+        SchemaController.gameObject.SetActive( true );
+    }
+
+    public void AddSummary( List<Field> fields )
+    {
+        SchemaController.AddSummary( fields );
+    }
+
+    public void AddForm( string stateTxn, Stage.Types.Schema schema, List<UTXO> utxos, Stage stage )
     {
         Assert.IsTrue( !string.IsNullOrEmpty( stateTxn ) );
 
@@ -35,8 +47,6 @@ public class UIManager : MonoBehaviour
         Assert.IsTrue( !string.IsNullOrEmpty( payeeAddr ) );
 
         stateId = stateTxn;
-        TaskList.gameObject.SetActive( false );
-        SchemaController.gameObject.SetActive( true );
 
         foreach ( var utxo in utxos )
         {
@@ -50,12 +60,13 @@ public class UIManager : MonoBehaviour
             break;
         }
 
-        SchemaController.Build( schema, utxos.ToArray() );
+        SchemaController.BuildForm( schema, utxos.ToArray() );
         SchemaController.OnSubmit.AddListener( SubmitForm );
     }
 
     void SubmitForm( Dictionary<string, string> data )
     {
+        Debug.Log( JsonConvert.SerializeObject( data ) );
         foreach ( var item in data )
         {
             if ( string.IsNullOrEmpty( item.Value ) )

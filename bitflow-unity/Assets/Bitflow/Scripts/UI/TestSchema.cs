@@ -9,7 +9,7 @@ public class TestSchema : MonoBehaviour
 
     public void Start()
     {
-        Controller.Build( new Stage.Types.Schema
+        Controller.BuildForm( new Stage.Types.Schema
         {
             Txid = "0",
             Name = "Collect Name",
