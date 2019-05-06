@@ -69,35 +69,31 @@ public class TakePicture : MonoBehaviour
             var buffer = tex.EncodeToJPG();
             Debug.Log( buffer.Length );
 
-            BitIndexUtils.QueryUtxos( Authenticator.Instance.Identity.Address, utxos =>
-            {
-                var utxo = utxos.First();
-                Debug.Log( JsonConvert.SerializeObject( utxo ) );
+            Debug.Log( JsonConvert.SerializeObject( UTXO ) );
 
-                UtxoUtils.BuildTxnFromUtxo(
-                        Authenticator.Instance.Identity.PrivateKey,
-                        utxo.ToUTXO(),
-                        OpReturns.MakeImg( buffer ) )
-                    .Spend( txn =>
+            UtxoUtils.BuildTxnFromUtxo(
+                    Authenticator.Instance.Identity.PrivateKey,
+                    UTXO,
+                    OpReturns.MakeImg( buffer ) )
+                .Spend( txn =>
+                {
+                    var value = $"https://bico.media/{txn}";
+                    Debug.Log( value );
+                    ModalDialog.Instance.Hide();
+                    ModalDialog.Instance.Show( "Image successfully uploaded",
+                        $"Check it out at: {value}", "View Online", "Ok" );
+                    ModalDialog.Instance.CallbackYes.RemoveAllListeners();
+                    ModalDialog.Instance.CallbackYes.AddListener( () =>
                     {
-                        var value = $"https://bico.media/{txn}";
-                        Debug.Log( value );
-                        ModalDialog.Instance.Hide();
-                        ModalDialog.Instance.Show( "Image successfully uploaded",
-                            $"Check it out at: {value}", "View Online", "Ok" );
-                        ModalDialog.Instance.CallbackYes.RemoveAllListeners();
-                        ModalDialog.Instance.CallbackYes.AddListener( () =>
-                        {
-                            //UniClipboard.SetText( $"https://bico.media/{txn}" );
-                            Application.OpenURL( $"https://bico.media/{txn}");
-                        } );
-
-                        InputField.text = txn;
-                        var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, 200, 200 ), new Vector2( 0.5f, 0.5f ),
-                            100.0f );
-                        Image.sprite = sprite;
+                        //UniClipboard.SetText( $"https://bico.media/{txn}" );
+                        Application.OpenURL( $"https://bico.media/{txn}" );
                     } );
-            } );
+
+                    InputField.text = txn;
+                    var sprite = Sprite.Create( tex, new Rect( 0.0f, 0.0f, 200, 200 ), new Vector2( 0.5f, 0.5f ),
+                        100.0f );
+                    Image.sprite = sprite;
+                } );
         }
         catch ( Exception e )
         {
