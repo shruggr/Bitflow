@@ -14,8 +14,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject TaskList;
     [SerializeField] SchemaUIController SchemaController;
 
-    [SerializeField] Button BackButton;
-
     [UsedImplicitly] void Awake()
     {
         Instance = this;
@@ -54,7 +52,6 @@ public class UIManager : MonoBehaviour
 
         SchemaController.Build( schema, utxos.ToArray() );
         SchemaController.OnSubmit.AddListener( SubmitForm );
-        BackButton.gameObject.SetActive( true );
     }
 
     void SubmitForm( Dictionary<string, string> data )

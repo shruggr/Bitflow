@@ -25,9 +25,15 @@ public class TaskListPanel : MonoBehaviour
 
     async void ProcessTasks()
     {
+        //var t = await FirebaseHelper.Get<State.Types.Task>( FirebaseManager.Instance.Ref.Child( "tasks" )
+        //    .Child( Authenticator.Instance.Identity.Address )
+        //    .Child( "0da098a081e7b94d6821159098c1c912818e82ee66d5afefc27ce7da69499a18" )
+        //    .Child( "691061d64b2d272b17011a58ae8e3020fe276ab843774413893e0abfa3c445a7" ) );
+        //Debug.LogError( t.Stage.Name );
+
+
         var tasksKeyList = await FirebaseHelper.GetTaskList( FirebaseManager.Instance.Ref.Child( "tasks" )
             .Child( Authenticator.Instance.Identity.Address ) );
-
         if ( tasksKeyList.Count > 0 )
         {
             Debug.Log( $"Display {tasksKeyList.Count} tasks" );

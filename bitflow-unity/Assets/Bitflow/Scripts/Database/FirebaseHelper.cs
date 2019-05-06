@@ -66,6 +66,7 @@ public class FirebaseHelper : MonoBehaviour
         }
         catch ( FirebaseDataException e )
         {
+            Debug.LogError( $"{e.GetType()}:{e.Message}" );
         }
 
         return d;

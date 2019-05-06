@@ -25,7 +25,7 @@ public static partial class BitflowReflection {
           "Cg1iaXRmbG93LnByb3RvIo0BCgVGaWVsZBILCgNrZXkYASABKAkSDQoFbGFi",
           "ZWwYAiABKAkSGQoEdHlwZRgDIAEoDjILLkZpZWxkLlR5cGUSDQoFdmFsdWUY",
           "BCABKAkiPgoEVHlwZRIICgRUZXh0EAASCQoFSW1hZ2UQARIICgRGaWxlEAIS",
-          "CgoGTnVtYmVyEAMSCwoHQm9vbGVhbhAEIkQKBFVUWE8SDAoEdHhJZBgBIAEo",
+          "CgoGTnVtYmVyEAMSCwoHQm9vbGVhbhAEIkQKBFVUWE8SDAoEdHhpZBgBIAEo",
           "CRIMCgR2b3V0GAIgASgFEg4KBnNjcmlwdBgEIAEoCRIQCghzYXRvc2hpcxgF",
           "IAEoBSKzAgoFU3RhZ2USDAoEbmFtZRgBIAEoCRIdCgZzY2hlbWEYAiABKAsy",
           "DS5TdGFnZS5TY2hlbWESDQoFZnVuZHMYAyABKAUSDQoFcGF5ZWUYBCABKAkS",
@@ -47,7 +47,7 @@ public static partial class BitflowReflection {
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::Field), global::Field.Parser, new[]{ "Key", "Label", "Type", "Value" }, null, new[]{ typeof(global::Field.Types.Type) }, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::UTXO), global::UTXO.Parser, new[]{ "TxId", "Vout", "Script", "Satoshis" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::UTXO), global::UTXO.Parser, new[]{ "Txid", "Vout", "Script", "Satoshis" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Stage), global::Stage.Parser, new[]{ "Name", "Schema", "Funds", "Payee", "ValidationScriptTxn", "OnComplete" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Schema), global::Stage.Types.Schema.Parser, new[]{ "Txid", "Name", "Fields" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Stage.Types.Handler), global::Stage.Types.Handler.Parser, new[]{ "ProcessScriptTxn", "CreateTaskStageIdx", "Assignee", "Funds" }, null, null, null)}),
           new pbr::GeneratedClrTypeInfo(typeof(global::Workflow), global::Workflow.Parser, new[]{ "Name", "Txid", "Owner", "Stages" }, null, null, null),
@@ -311,7 +311,7 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public UTXO(UTXO other) : this() {
-    txId_ = other.txId_;
+    txid_ = other.txid_;
     vout_ = other.vout_;
     script_ = other.script_;
     satoshis_ = other.satoshis_;
@@ -323,14 +323,14 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
     return new UTXO(this);
   }
 
-  /// <summary>Field number for the "txId" field.</summary>
-  public const int TxIdFieldNumber = 1;
-  private string txId_ = "";
+  /// <summary>Field number for the "txid" field.</summary>
+  public const int TxidFieldNumber = 1;
+  private string txid_ = "";
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public string TxId {
-    get { return txId_; }
+  public string Txid {
+    get { return txid_; }
     set {
-      txId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      txid_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
     }
   }
 
@@ -380,7 +380,7 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (TxId != other.TxId) return false;
+    if (Txid != other.Txid) return false;
     if (Vout != other.Vout) return false;
     if (Script != other.Script) return false;
     if (Satoshis != other.Satoshis) return false;
@@ -390,7 +390,7 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (TxId.Length != 0) hash ^= TxId.GetHashCode();
+    if (Txid.Length != 0) hash ^= Txid.GetHashCode();
     if (Vout != 0) hash ^= Vout.GetHashCode();
     if (Script.Length != 0) hash ^= Script.GetHashCode();
     if (Satoshis != 0) hash ^= Satoshis.GetHashCode();
@@ -407,9 +407,9 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (TxId.Length != 0) {
+    if (Txid.Length != 0) {
       output.WriteRawTag(10);
-      output.WriteString(TxId);
+      output.WriteString(Txid);
     }
     if (Vout != 0) {
       output.WriteRawTag(16);
@@ -431,8 +431,8 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (TxId.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(TxId);
+    if (Txid.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Txid);
     }
     if (Vout != 0) {
       size += 1 + pb::CodedOutputStream.ComputeInt32Size(Vout);
@@ -454,8 +454,8 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
     if (other == null) {
       return;
     }
-    if (other.TxId.Length != 0) {
-      TxId = other.TxId;
+    if (other.Txid.Length != 0) {
+      Txid = other.Txid;
     }
     if (other.Vout != 0) {
       Vout = other.Vout;
@@ -478,7 +478,7 @@ public sealed partial class UTXO : pb::IMessage<UTXO> {
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          TxId = input.ReadString();
+          Txid = input.ReadString();
           break;
         }
         case 16: {
