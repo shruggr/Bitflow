@@ -62,7 +62,7 @@ The Photographer uses Bitflow's task management mobile app where a wallet addres
 
 When the Reviewer validates the photo, signs and broadcasts his transaction - potentially unbeknown to him since he may be a bitcoin layman - the Photographer receives the payout.
 
-![](docs/images/screenshot1.png=250x250) ![](docs/images/screenshot2.png=250x250) ![](docs/images/screenshot3.png=250x250)
+![](docs/images/screenshot1.png=250x250) ![](docs/images/screenshot2.png){:height="36px" width="36px"}. ![](docs/images/screenshot3.png =250x250)
 
 
 The workflow admin specifies the Photographer's payout when he first created the workflow - this can be an administrative working on this online retailer company. The workflow admin is using blockchain technology without getting nitty gritty with its technical aspects or even any specific technical knowledge.
