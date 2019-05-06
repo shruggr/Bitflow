@@ -9,11 +9,11 @@ public class OpenValidUrl : MonoBehaviour
     {
         if ( !string.IsNullOrEmpty( ImageUrl.text ) )
         {
-            Application.OpenURL(ImageUrl.text);
+            Application.OpenURL( $"https://bico.media/{ImageUrl.text}" );
         }
         else
         {
-            ModalDialog.Instance.Show("Invalid URL","Could not display this resource","Ok");
+            ModalDialog.Instance.Show( "Invalid URL", "Could not display this resource", "Ok" );
         }
     }
 }
