@@ -1,12 +1,10 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -92,7 +90,10 @@ public class UIManager : MonoBehaviour
                     $"{funds} BSV sat have been delivered to the payee ({payeeAddr}). " +
                     "Txn: " + s, "Ok" );
                 ModalDialog.Instance.CallbackYes.RemoveAllListeners();
-                ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
+                ModalDialog.Instance.CallbackYes.AddListener( () =>
+                {
+                    StartCoroutine( DelayedGoToMenu() );
+                } );
             } );
         }
         catch
@@ -100,5 +101,13 @@ public class UIManager : MonoBehaviour
             ModalDialog.Instance.Show( "Fatal Error", "Please try again", "Ok" );
             ModalDialog.Instance.CallbackYes.AddListener( () => { SceneManager.LoadScene( "Main" ); } );
         }
+    }
+
+    public IEnumerator DelayedGoToMenu()
+    {
+        yield return new WaitForSeconds( 0.25f );
+        ModalDialog.Instance.Show("Please Wait", "Waiting for confirmation");
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Main");
     }
 }
