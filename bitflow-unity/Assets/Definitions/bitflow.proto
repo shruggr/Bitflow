@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-
 message Field {
     enum Type {
         Text = 0;
@@ -31,7 +30,7 @@ message Stage {
     }
 
     message Handler {
-        string processScriptTxn = 1;
+        string processScriptTxn = 1; // Script which
         int32 createTaskStageIdx = 2;
         string assignee = 3;
         int32 funds = 4;
@@ -39,12 +38,16 @@ message Stage {
 
     string name = 1;
     Schema schema = 2;
-    int32 funds= 3;
-    string payee = 4;
-    string validationScriptTxn = 5;
+    int32 funds= 3; // Funds required to complete.
+    string payee = 4; // Address to which funds are paid.
+    string validationScriptTxn = 5; // Script which will validate data
     Handler onComplete = 6;
 }
 
+
+// Top-level Workflow definition.
+// txid and owner fields are state vairables only and
+// will be ignored if included in Bitcoin transaction
 message Workflow {
     string name = 1;
     string txid = 2;
