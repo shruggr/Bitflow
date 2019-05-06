@@ -25,7 +25,9 @@ for (let i = 0; i < 25; i++) {
 }
 
 export const tx = functions.https.onRequest(async (req, res) => {
+    console.log(`TX: ${req.body.tx}`);
     const txnData = await fromTx(req.body.tx);
+    console.log(JSON.stringify(txnData, null, 2));
     const opRet = txnData.out.find((out: any) => out.b0.op == 106);
     try {
         let txid;
@@ -168,11 +170,20 @@ async function bitQuery(filter: any = {}): Promise<any> {
     return (r.data.c || []).concat(r.data.u || []);
 }
 
-async function getWorkflow(workflowTxn: string): Promise<any> {
+async function getWorkflow(workflowTxn: string): Promise<Workflow> {
     return new Promise((resolve, reject) => {
         rtDb.ref(`workflows/${workflowTxn}`).once('value', (snap) => {
             if (!snap.exists) return reject(new Error(`Invalid Workflow`));
             resolve(Workflow.fromObject(snap.val()));
+        })
+    });
+}
+
+async function getState(stateTxn: string): Promise<State> {
+    return new Promise((resolve, reject) => {
+        rtDb.ref(`state/${stateTxn}`).once('value', (snap) => {
+            if (!snap.exists) return reject(new Error(`Invalid State`));
+            resolve(State.fromObject(snap.val()));
         })
     });
 }
@@ -248,14 +259,17 @@ async function processSubmit(
     validateOnly: boolean = false
 ): Promise<State.Status> {
     const opRet = txnData.out.find((out: any) => out.b0.op == 106);
-    const stateDoc = await db.collection('states').doc(opRet.s2).get();
-    if (!stateDoc.exists) throw new Error(`Missing State: ${opRet.s2}`);
-    const state = State.fromObject(stateDoc.data() || {});
+    const state = await getState(opRet.s2);
 
     const taskDoc = await db.collection('pendingTasks').doc(txnData.in[0].e.h).get();
     if (!taskDoc.exists) throw new Error(`Missing Task: ${txnData.tx.h}`);
 
-    const task = State.Task.fromObject(taskDoc.data() || {});
+    const assignTxn = (taskDoc.data() || {}).assignTxn;
+    const task = State.Task.create(state.tasks.find((task) => task.assignTxn == assignTxn));
+    if(!task) {
+        throw new Error(`Missing Task: ${txnData.tx.h}`)
+    }
+    task.txid = txnData.tx.h;
     const data = JSON.parse(opRet.ls3 || opRet.s3);
 
     const stage = task.stage || {};
@@ -289,8 +303,10 @@ async function processSubmit(
     }
 
     rtDb.ref(`pendingTasks/${taskDoc.id}`).remove();
+    rtDb.ref(`state/${state.txid}`).set(state.toJSON());
     rtDb.ref(`tasks/${task.address}/${state.txid}/${txnData.in[0].e.h}`)
         .set(task.toJSON());
+
     return processTask(
         state,
         task,
@@ -344,17 +360,21 @@ async function processTask(
         const txn = new bsv.Transaction()
             .from(utxos)
 
+        const outUTXOs = [];
+        let outCount = 0;
         if (handler.funds) {
             txn.to(handler.assignee, handler.funds);
+            outUTXOs.push(outCount++);
         }
 
         if (nextStage) {
-            txn.addData = [
+            txn.addData([
                 ASSIGN,
                 Buffer.from(state.txid),
                 Buffer.from(task.txid),
                 Buffer.from((handler.createTaskStageIdx || 0).toString(16), 'hex')
-            ];
+            ]);
+            outCount++;
 
             newTask = State.Task.fromObject({
                 stage: nextStage,
@@ -364,7 +384,10 @@ async function processTask(
 
             ((nextStage.schema && nextStage.schema.fields) || [])
                 .filter((field) => field.type == Field.Type.Image || field.type == Field.Type.File)
-                .forEach(() => txn.to(handler.assignee, UPLOAD));
+                .forEach(() => {
+                    txn.to(handler.assignee, UPLOAD)
+                    outUTXOs.push(outCount++);
+                });
         }
         txn.change(address);
         txn.sign(key);
@@ -372,11 +395,11 @@ async function processTask(
         await sendTxn(txn.toString());
 
         if (newTask) {
+            newTask.assignTxn = txn.hash;
             newTask.utxos = [];
-            for (let i = 0; i < txn.outputs.length; i++) {
-                let out = txn.outputs[i];
+            for(let i of outUTXOs) {
                 newTask.utxos.push(UTXO.fromObject(
-                    Object.assign(out.toObject(), {
+                    Object.assign(txn.outputs[i].toObject(), {
                         txid: txn.hash,
                         vout: i
                     })
@@ -391,9 +414,7 @@ async function processTask(
             rtDb.ref(`tasks/${newTask.address}/${state.txid}/${txn.hash}`)
                 .set(newTask.toJSON());
         }
-        if (!state.txid) throw new Error('Missing txid');
 
-        t.set(db.collection('states').doc(state.txid), state.toJSON());
         return txn;
     });
 

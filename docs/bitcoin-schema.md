@@ -3,8 +3,8 @@
 ## Requst Job
 ### Output - OP_RETURN
 1. 1F5zgLnSvS6px1QJnZkJpALJpEoGyWm4vC
-2. Workflow Txn
-3. Schema data
+2. Workflow Txn Id
+3. Schema data JSON
 ### Output Payment
 If Step.fundsRequired > 0, pay Step.fundsRequired to Step.payee
 
@@ -14,8 +14,8 @@ If completing a task assigned to user, spend UTXO from WorkflowState.Task
 For a Create task, spend from requestor's funds.
 ### Output - OP_RETURN
 1. 183u2ms8jZ79pNhghxMhebYqheyZwLCSYt
-2. Workflow State Txn
-3. Schema data
+2. Request Txn Id
+3. Schema data JSON
 ### Output Payment
 If Stage.funds > 0, pay Stage.funds to Stage.payee
 
@@ -23,13 +23,20 @@ If Stage.funds > 0, pay Stage.funds to Stage.payee
 ### Output - OP_RETURN
 1. 179jCPdUp1vTndNHa57RUQNghU8CYtX8aZ
 2. Workflow State Txn
-3. Task Txn
+3. Task Txn Id
 4. Step Index
 ### Output Payment
 If Handler.funds, pay Handler.funds to Handler.assignee
 
 ## Upload Script
+### Output - OP_RETURN
+1. 12XSVdqWw8rUGapcwRE7jtGCS7oeMEAtHn
+2. Script text
+3. Name
 
 ## Upload Workflow
+### Output - OP_RETURN
+1. 1A5fCKDgdhdgJp8u9q9nAQSy8z69yNaFat
+2. Workflow definition JSON
 
 

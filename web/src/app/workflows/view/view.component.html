@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{ state.workflow.name}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" class="container">
+  <h5>Data</h5>
+  <div *ngFor="let field of state.values" [ngSwitch]="field.type" class="row list-row">
+    <div class="col-6">
+      {{ field.label }}
+    </div>
+    <div *ngSwitchCase="'Image'">
+      <img *ngIf="field.value" src="https://bico.media/{{field.value}}" class="preview-img">
+      <div>
+          <a href="https://bico.media/{{field.value}}" target="_blank">Download</a>
+      </div>
+
+    </div>
+    <div *ngSwitchCase="'File'" class="col-6">
+      <a href="https://bico.media/{{field.value}}" target="_blank">Download</a>
+    </div>
+    <div *ngSwitchDefault class="col-6">
+      {{ field.value }}
+    </div>
+  </div><br>
+  <h5>Transactions</h5>
+  <div *ngFor="let task of state.tasks" class="row">
+    <div class="list-row" *ngIf="task.assignTxn">{{task.assignTxn}}</div>
+    <div class="list-row" *ngIf="task.txid">{{task.txid}}</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div id="create-moneybutton"></div>
+</div>

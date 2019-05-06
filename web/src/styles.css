@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.modal-dialog {
+    max-width: 900px;
+}
+
+.preview-img {
+    width: 200px;
+}
+
+.list-row {
+    border-bottom: 1px solid black;
+}

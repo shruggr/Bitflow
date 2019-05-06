@@ -806,6 +806,9 @@ export namespace State {
         /** Task utxos */
         utxos?: (IUTXO[]|null);
 
+        /** Task assignTxn */
+        assignTxn?: (string|null);
+
         /** Task txid */
         txid?: (string|null);
     }
@@ -830,6 +833,9 @@ export namespace State {
 
         /** Task utxos. */
         public utxos: IUTXO[];
+
+        /** Task assignTxn. */
+        public assignTxn: string;
 
         /** Task txid. */
         public txid: string;

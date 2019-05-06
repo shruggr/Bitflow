@@ -3,7 +3,7 @@
 <ul>
   <li *ngFor="let workflow of workflows | async">
       {{ workflow.name }}
-      <a href="javascript:void(0)" (click)="openModal(workflow)">
+      <a href="javascript:void(0)" (click)="openCreateModal(workflow)">
         Create Task
       </a>
   </li>
@@ -14,13 +14,17 @@
   <table class="col-12">
     <tr>
       <th>Workflow</th>
+      <th>Description</th>
       <th>Status</th>
       <th>Open Task</th>
+      <th></th>
     </tr>
     <tr *ngFor="let state of states | async">
-      <td>{{state.workflow.name}}</td>
-      <td>{{state.status}}</td>
+      <td>{{ state.workflow.name }}</td>
+      <td>{{ getDescription(state) }}</td>
+      <td>{{ state.status }}</td>
       <td>{{ getOpenTask(state) }}</td>
+      <td><a href="javascript:void(0)" (click)="openViewModal(state)">View</a></td>
     </tr>
   </table>
 </div>

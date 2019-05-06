@@ -1,11 +1,10 @@
+require('dotenv').config()
 const axios = require('axios');
 const admin = require('firebase-admin');
 const bsv = require('bsv');
 const btoa = require('btoa');
 
-const { Workflow, Schema } = require('../web/src/lib/bitflow-proto');
-
-const {BITINDEX_KEY, SCRIPT, SCHEMA, WORKFLOW} = require('./constants');
+const {BITINDEX_KEY, SCRIPT, WORKFLOW} = require('./constants');
 admin.initializeApp({
     credential: admin.credential.cert('/Users/davidcase/.ssh/bitflow-a5e50-firebase-adminsdk-dvwmk-04c1d5edad.json'),
     databaseURL: "https://bitflow-a5e50.firebaseio.com"
@@ -13,7 +12,7 @@ admin.initializeApp({
 var db = admin.firestore();
 const rtDb = admin.database();
 
-const hdPriv = new bsv.HDPrivateKey.fromString('xprv9s21ZrQH143K4GvUA4ntwsBRswNRyXUgbdf1FK2dzEvzz5ctU1rgTbUsvcN5hcXoxDamQNW5APvtuedfZjwfhSnunzygeDpHohZPdPbvN8U');
+const hdPub = new datapay.bsv.HDPrivateKey.fromString(process.env.HDPRIV);
 const privateKeys = [];
 const addresses = [];
 for (let i = 0; i < 25; i++) {
@@ -42,7 +41,7 @@ Promise.resolve().then(async () => {
 
     const [scripts, schemas, workflows] = await Promise.all([
         bitQuery({ "out.s1": SCRIPT }),
-        // bitQuery({ "out.s1": WORKFLOW }),
+        bitQuery({ "out.s1": WORKFLOW }),
     ])
     for (let data of scripts) {
         const opRet = data.out.find((out) => out.b0.op == 106);
@@ -53,18 +52,18 @@ Promise.resolve().then(async () => {
         });
     }
 
-    // for (let data of workflows) {
-    //     try {
-    //         const opRet = data.out.find((out) => out.b0.op == 106);
-    //         const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
-    //         workflow.txid = data.tx.h;
-    //         workflow.owner = data.in[0].e.a,
-    //         await rtDb.ref(`workflows/${data.tx.h}`).set(workflow);
-    //     }
-    //     catch (e) {
-    //         console.error(e);
-    //     }
-    // }
+    for (let data of workflows) {
+        try {
+            const opRet = data.out.find((out) => out.b0.op == 106);
+            const workflow = Workflow.fromObject(JSON.parse(opRet.ls2 || opRet.s2));
+            workflow.txid = data.tx.h;
+            workflow.owner = data.in[0].e.a,
+            await rtDb.ref(`workflows/${data.tx.h}`).set(workflow);
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
 })
 .catch(console.error)
 .then(() => process.exit());
