@@ -84,12 +84,12 @@ A State is created by submitting a REQUEST transaction which provides a pointer 
 6. Repeat steps 2-5 until workflow complete
 
 ## Photo Capture Use-case
-We've chosen to focus on use cases of Photo Capture to showcase Bitflow.
-
-The roles for these simplified use cases are available in the provided [Android APK](bitflow.apk).
-[Example](samples) scripts and workflow definitions are provided and are running on mainnet Bitcoin SV.
+We've chosen to focus on the use cases of Photo Capture to showcase Bitflow.
 
 An online retailer needs curated photographs of their products. Influencers are sent products and receive BSV in exchange for taking pictures with the products. These pictures need to be reviewed and later made available on the company's online catalog.
+
+The roles required are available in the provided [Android APK](bitflow.apk).
+[Example](samples) scripts and workflow definitions are provided and are running on mainnet Bitcoin SV.
 
 ### Workflow
 
