@@ -23,6 +23,9 @@ Bitflow workflows can collect payments and make payouts of any amount of Bitcoin
 ## Artifacts
 * [Management Website](https://bitflow.shruggr.cloud)
 * [Android Task Wallet](bitflow.apk)
+* [Mobile Source - Unity](bitflow-unity)
+* [Web Source - Angular](web)
+* [Bot Source - Firebase](functions)
 * [Protobuf Schemas](bitflow-unity/Assets/Definitions/bitflow.proto)
 * [Bitcoin Protocols](docs/bitcoin-schema.md)
 * [Examples](samples)
