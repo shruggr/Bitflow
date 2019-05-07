@@ -77,12 +77,11 @@ A State is created by submitting a REQUEST transaction which provides a pointer 
 
 ## Process Flow
 1. Customer submits REQUEST transaction data to server
-2. Server validates submitted data against Workflow
-3. If valid, server broadcasts transaction
-4. Bot reacts to transaction by processing workflow logic and submitting ASSIGN transaction and appropriate payments and a micropayment to facilitate flow control and allow assignee to respond without charge.
-5. Task Wallet shows assignee open task
-6. Asignee performs task and sends SUBMIT transaction to server with micropayment (5) as input.
-7. Repeat steps 2-6 until workflow complete
+2. Server validates submitted data against Workflow and broadcasts if valid
+3. Bot reacts to transaction by processing workflow logic and submitting ASSIGN transaction and appropriate payments and a micropayment to facilitate flow control and allow assignee to respond without charge.
+4. Task Wallet shows assignee open task
+5. Asignee performs task and sends SUBMIT transaction to server with micropayment (5) as input.
+6. Repeat steps 2-5 until workflow complete
 
 ## Photo Capture Use-case
 We've chosen to focus on use cases of Photo Capture to showcase Bitflow.
