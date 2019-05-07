@@ -6,7 +6,7 @@
 2. Workflow Txn Id
 3. Schema data JSON
 ### Output Payment
-If Step.fundsRequired > 0, pay Step.fundsRequired to Step.payee
+If Stage.funds > 0, pay Stage.funds to Stage.payee
 
 ## SUBMIT transaction
 ### Input UTXO
