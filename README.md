@@ -5,6 +5,10 @@
 ## Explanation
 Rather than solving a single onboarding problem, we decided to focus on building a platform which allows for many different solutions to be built.
 
+Bitflow is a task-based workflow engine which allows custom workflows to be easily built and run on top of Bitcoin SV with every action immutably.
+
+There are endless possibilities for workflows: a production line, a supply chain, mystery shoppers, a list of household chores or even an Easter egg hunt.
+
 ## Onboarding Goals
 Bitflow allows developers (and with UI refinements, administrative users with limited technical expertise) to build powerful task-based workflows, where progress and payments are recorded to Bitcoin, without needing to understand Bitcoin.
 
@@ -71,20 +75,24 @@ A Workflow is a definition of a process, A State is an instance of the Workflow.
 
 A State is created by submitting a REQUEST transaction which provides a pointer to a Workflow and the data required by the Schema of the first Stage of that Workflow.
 
+## Process Flow
+1. Customer submits REQUEST transaction data to server
+2. Server validates submitted data against Workflow
+3. If valid, server broadcasts transaction
+4. Bot reacts to transaction by processing workflow logic and submitting ASSIGN transaction and appropriate payments and a micropayment to facilitate flow control and allow assignee to respond without charge.
+5. Task Wallet shows assignee open task
+6. Asignee performs task and sends SUBMIT transaction to server with micropayment (5) as input.
+7. Repeat steps 2-6 until workflow complete
 
-## Example Use-cases
-There are endless possibilities for workflows: a production line, a supply chain, mystery shoppers, a list of household chores or even an Easter egg hunt.
-
+## Photo Capture Use-case
 We've chosen to focus on use cases of Photo Capture to showcase Bitflow.
 
 The roles for these simplified use cases are available in the provided [Android APK](bitflow.apk).
 [Example](samples) scripts and workflow definitions are provided and are running on mainnet Bitcoin SV.
 
-
-### Photo Capture
 An online retailer needs curated photographs of their products. Influencers are sent products and receive BSV in exchange for taking pictures with the products. These pictures need to be reviewed and later made available on the company's online catalog.
 
-#### Workflow
+### Workflow
 
 There are 3 distint role for this Workflow:
 * Customer - Request the capture of a specific photo.
@@ -113,7 +121,6 @@ The workflow admin specifies the Photographer's payout when he first creates the
 
 The Photographer is happy to receive his dividends in BSV.
 
-### Mystery Shopper
 
 
 
